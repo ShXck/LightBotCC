@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <ImageView fx:id="fondo" fitHeight="616.0" fitWidth="800.0" layoutX="2.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/wallpaper/smooth.jpg" />
+         </image></ImageView>
+      <Label layoutX="455.0" layoutY="256.0" prefHeight="21.0" prefWidth="80.0" text="PROC1" textFill="#574545">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font></Label>
+      <Label layoutX="462.0" layoutY="25.0" text="MAIN" textFill="#574545">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font></Label>
+      <Button layoutX="446.0" layoutY="493.0" mnemonicParsing="false" onAction="#B_TURN_LEFT" prefHeight="68.0" prefWidth="68.0">
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/control/turn_left.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="650.0" layoutY="493.0" mnemonicParsing="false" onAction="#B_SUSPEN" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/control/suspen.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="718.0" layoutY="493.0" mnemonicParsing="false" onAction="#B_P1" prefHeight="68.0" prefWidth="68.0">
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/control/p1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="378.0" layoutY="493.0" mnemonicParsing="false" onAction="#B_UP" prefHeight="68.0" prefWidth="68.0">
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/control/up.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="582.0" layoutY="493.0" mnemonicParsing="false" onAction="#B_LIGHT" prefHeight="68.0" prefWidth="68.0">
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/control/light.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="514.0" layoutY="493.0" mnemonicParsing="false" onAction="#B_TURN_RIGHT" prefHeight="68.0" prefWidth="68.0">
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/control/turn_right.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="player_walle" layoutX="40.0" layoutY="61.0" mnemonicParsing="false" onAction="#Wallpaper_Walle" prefHeight="68.0" prefWidth="68.0">
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/users/if_my_computer_23180.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="player_Eva" layoutX="40.0" layoutY="139.0" mnemonicParsing="false" onAction="#Wallpaper_Eva" prefHeight="68.0" prefWidth="68.0">
+         <graphic>
+            <ImageView fitHeight="67.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/users/eve_icon_by_proffessorsodaman-d9ht6ad.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="player_mo" layoutX="40.0" layoutY="217.0" mnemonicParsing="false" onAction="#Wallpaper_Mo" prefHeight="68.0" prefWidth="68.0">
+         <graphic>
+            <ImageView fx:id="player3" fitHeight="67.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/users/m-o-icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Separator layoutX="148.0" layoutY="7.0" orientation="VERTICAL" prefHeight="499.0" prefWidth="0.0" />
+      <Label layoutX="43.0" layoutY="30.0" text="STYLE" textFill="#574545">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="music" layoutX="41.0" layoutY="413.0" mnemonicParsing="false" onAction="#play_music" text="MUSIC" textFill="#574545" />
+      <Button layoutX="455.0" layoutY="345.0" mnemonicParsing="false" onAction="#E_P_5" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="p5" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="523.0" layoutY="345.0" mnemonicParsing="false" onAction="#E_P_6" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="p6" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="591.0" layoutY="345.0" mnemonicParsing="false" onAction="#E_P_7" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="p7" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="659.0" layoutY="345.0" mnemonicParsing="false" onAction="#E_P_8" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="p8" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="455.0" layoutY="183.0" mnemonicParsing="false" onAction="#E_M_9" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="m9" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="523.0" layoutY="183.0" mnemonicParsing="false" onAction="#E_M_10" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="m10" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="591.0" layoutY="183.0" mnemonicParsing="false" onAction="#E_M_11" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="m11" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="659.0" layoutY="183.0" mnemonicParsing="false" onAction="#E_M_12" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="m12" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="455.0" layoutY="277.0" mnemonicParsing="false" onAction="#E_P_1" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="p1" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="523.0" layoutY="277.0" mnemonicParsing="false" onAction="#E_P_2" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="p2" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="591.0" layoutY="277.0" mnemonicParsing="false" onAction="#E_P_3" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="p3" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="659.0" layoutY="277.0" mnemonicParsing="false" onAction="#E_P_4" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="p4" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="455.0" layoutY="114.0" mnemonicParsing="false" onAction="#E_M_5" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="m5" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="523.0" layoutY="114.0" mnemonicParsing="false" onAction="#E_M_6" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="m6" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="591.0" layoutY="114.0" mnemonicParsing="false" onAction="#E_M_7" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="m7" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="659.0" layoutY="114.0" mnemonicParsing="false" onAction="#E_M_8" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="m8" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="455.0" layoutY="46.0" mnemonicParsing="false" onAction="#E_M_1" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="m1" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="523.0" layoutY="46.0" mnemonicParsing="false" onAction="#E_M_2" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="m2" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="591.0" layoutY="46.0" mnemonicParsing="false" onAction="#E_M_3" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="m3" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Button layoutX="659.0" layoutY="46.0" mnemonicParsing="false" onAction="#E_M_4" prefHeight="68.0" prefWidth="68.0" textFill="#0d0d0d" underline="true">
+         <graphic>
+            <ImageView fx:id="m4" fitHeight="53.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </Button>
+      <Label layoutX="28.0" layoutY="433.0" text="Level: 00" textFill="#6b5555eb">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="player_mo1" layoutX="40.0" layoutY="300.0" mnemonicParsing="false" onAction="#Wallpaper_Null" prefHeight="68.0" prefWidth="68.0">
+         <graphic>
+            <ImageView fx:id="player31" fitHeight="67.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resource/wallpaper/smooth.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <CheckBox fx:id="main10" layoutX="450.0" layoutY="450.0" mnemonicParsing="false" onAction="#control_MAIN" text="MAIN" textFill="#574545" />
+      <CheckBox fx:id="proc10" layoutX="660.0" layoutY="450.0" mnemonicParsing="false" onAction="#control_PROC1" text="PROC1" textFill="#574545" />
+      <Button layoutX="15.0" layoutY="571.0" mnemonicParsing="false" onAction="#PLAY_Send" prefHeight="26.0" prefWidth="770.0" style="-fx-background-color: #574545;" text="PLAY" textOverrun="LEADING_ELLIPSIS" />
+   </children>
+</Pane>
