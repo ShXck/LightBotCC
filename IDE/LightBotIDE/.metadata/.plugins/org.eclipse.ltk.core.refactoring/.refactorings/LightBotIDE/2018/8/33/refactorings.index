@@ -1,0 +1,25 @@
+1534523318533	Copy package
+1534523324008	Delete elements
+1534523335165	Move compilation unit
+1534526032220	Delete element
+1534560126022	Rename type 'SA_Handler'
+1534560283985	Rename type 'pair'
+1534560631993	Rename type 'Syntax_Handler'
+1534560766350	Rename type 'Semantic_Handler'
+1534564098055	Delete element
+1534567750048	Delete element
+1534570293870	Delete element
+1534652290811	Move compilation units
+1534658581673	Rename local variable 'addNew'
+1534661743757	Rename local variable 'gui'
+1534661757591	Rename local variable 'plafComponents'
+1534661768839	Rename local variable 'plaf_components'
+1534661782696	Rename local variable 'plafChooser'
+1534661792948	Rename local variable 'dynamicLabels'
+1534661812410	Rename local variable 'tableScroll'
+1534661821096	Rename local variable 'imagePanel'
+1534661831860	Rename local variable 'splitPane'
+1534662199252	Rename field 'error_lbl'
+1534663503532	Delete element
+1534663507411	Delete element
+1534663527458	Delete element

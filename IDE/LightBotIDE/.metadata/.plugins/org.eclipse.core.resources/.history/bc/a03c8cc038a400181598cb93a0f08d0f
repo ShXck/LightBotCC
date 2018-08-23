@@ -1,0 +1,34 @@
+package gui;
+
+import java.util.ArrayList;
+
+import javax.swing.SwingUtilities;
+
+import interpreter.Lexical_Handler;
+import interpreter.Variable;
+import org.tec.comp.utilities.Stream_Handler;
+
+public class LightBotMain {
+
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new IDE_Window());
+		Lexical_Handler l = new Lexical_Handler();
+		
+		ArrayList<String> s = new ArrayList<String>();
+		ArrayList<Variable> vars;
+		
+		vars = l.search_vars(Stream_Handler.get_lines_as_list("mycode.txt"), s);
+		
+		l.search_operators(Stream_Handler.get_lines_as_list("mycode.txt"), vars, s); // Stream_Handler.get_lines_as_list("mycode.txt"), s
+		
+		for(String str : s) {
+			System.out.println(str);
+		}
+		
+		/*ArrayList<String> a = new ArrayList<String>(); // 
+		a.add("Var myV;");
+		a.add("Var b = 5;");
+		
+		l.search_vars(a);*/
+	}
+}

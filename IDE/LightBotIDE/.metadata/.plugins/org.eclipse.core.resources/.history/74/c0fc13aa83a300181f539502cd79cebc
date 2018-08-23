@@ -1,0 +1,20 @@
+package interpreter;
+
+public class LightBot_Lang {
+	
+	private Lexical_Handler lex_handler;
+	private Parser parser;
+	
+	public LightBot_Lang() {
+		lex_handler = new Lexical_Handler();
+		parser = new Parser();
+	}
+	
+	public void start_lexical_analysis() {
+		
+	}
+	
+	private int check_word(String word) {
+		return lex_handler.check_word(word);
+	}
+}

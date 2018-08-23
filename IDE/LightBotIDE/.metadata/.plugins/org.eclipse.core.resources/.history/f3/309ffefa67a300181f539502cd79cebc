@@ -1,0 +1,7 @@
+package game;
+
+public class Game_Board {
+	
+	private final int BOARD_WIDTH = 7;
+	private final int BOARD_HEIGHT = 7;
+}

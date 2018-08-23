@@ -1,0 +1,19 @@
+package interpreter;
+
+public class Variable {
+	
+	private int var_value;
+	
+	public Variable(int val) {
+		var_value = val;
+	}
+	
+	public void set_var_value(int val) {
+		var_value = val;
+	}
+	
+	public int get_var_value() {
+		return var_value;
+	}
+
+}

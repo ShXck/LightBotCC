@@ -1,0 +1,9 @@
+package interpreter;
+
+import java.util.LinkedList;
+
+public class Lexical_Analysis {
+	
+	private LinkedList<Variable> var_list;
+	private LinkedList<Procedure> proc_list;
+}

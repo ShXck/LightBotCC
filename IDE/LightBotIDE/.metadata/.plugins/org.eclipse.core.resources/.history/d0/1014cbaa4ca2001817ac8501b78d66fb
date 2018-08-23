@@ -1,0 +1,23 @@
+package misc;
+
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+
+public class Stream_Handler {
+	
+	private static final String ENCODE = "utf-8";
+	private static final String FILE_EXT = ".txt";
+	
+	public static void write_file(String content, String file_name) {
+		try {
+			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file_name + FILE_EXT), ENCODE));
+			writer.write(content);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}	
+}
