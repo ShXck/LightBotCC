@@ -1,0 +1,14 @@
+package gui;
+
+import javax.swing.SwingUtilities;
+
+import interpreter.Lexical_Handler;
+
+public class LightBotMain {
+
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new IDE_Window());
+		Lexical_Handler l = new Lexical_Handler();
+		System.out.println(l.is_valid_id("abc21"));
+	}
+}

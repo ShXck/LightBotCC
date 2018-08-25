@@ -1,0 +1,15 @@
+package gui;
+
+import javax.swing.SwingUtilities;
+
+import interpreter.Lexical_Handler;
+
+public class LightBotMain {
+
+	public static void main(String[] args) {
+		Lexical_Handler l = new Lexical_Handler();
+		System.out.println(l.check_word("Var"));
+		System.out.println(l.check_word("var"));
+		//SwingUtilities.invokeLater(new IDE_Window());
+	}
+}

@@ -1,0 +1,179 @@
+package gui;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
+import interpreter.LightBot_Lang;
+import org.tec.comp.utilities.Stream_Handler;
+
+public class IDE_Window implements Runnable, ActionListener {
+	
+	private JFrame frame;
+	private JMenuBar menu_bar;
+	private JMenu file_menu;
+	private JMenu code_menu;
+	private JMenuItem open_file_item;
+	private JMenuItem save_file_item;
+	private JMenuItem build_code_item;
+	private JLabel error_lbl;
+	
+	private JTextPane coding_field;
+	private JScrollPane scroll_pane;
+	private JPanel no_wrap_panel;
+	
+	private final String WINDOW_TITLE = "LightBot IDE";
+	private final String THEME_BOX_TITLE = "Lighbot IDE Theme";
+	private final String MENU_BOX_TITLE = "Menu";
+	private final String OPEN_FILE_LBL = "Open File";
+	private final String SAVE_FILE_LBL = "Save File";
+	private final String BUILD_CODE_LBL = "Build Code";
+	
+	private final int WINDOW_HEIGHT = 600;
+	private final int WINDOW_WIDTH = 1024;
+	
+	LightBot_Lang lang;
+
+	@Override
+	public void run() {
+		lang = new LightBot_Lang();
+		set_components();
+		//set_frame();
+	}
+	
+	private void set_components() {
+        final JFrame frame = new JFrame(WINDOW_TITLE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        final JPanel gui = new JPanel(new BorderLayout(5,5));
+
+        //JToolBar tb = new JToolBar();
+        JPanel plafComponents = new JPanel(
+            new FlowLayout(FlowLayout.RIGHT, 3,3));
+        plafComponents.setBorder(
+            new TitledBorder(THEME_BOX_TITLE));
+
+        final UIManager.LookAndFeelInfo[] plafInfos =
+            UIManager.getInstalledLookAndFeels();
+        String[] plafNames = new String[plafInfos.length];
+        for (int ii=0; ii<plafInfos.length; ii++) {
+            plafNames[ii] = plafInfos[ii].getName();
+        }
+        final JComboBox plafChooser = new JComboBox(plafNames);
+        plafComponents.add(plafChooser);
+
+        plafChooser.addActionListener( new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                int index = plafChooser.getSelectedIndex();
+                try {
+                    UIManager.setLookAndFeel(
+                        plafInfos[index].getClassName() );
+                    SwingUtilities.updateComponentTreeUI(frame);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } );
+
+        gui.add(plafComponents, BorderLayout.NORTH);
+
+        JPanel dynamicLabels = new JPanel();
+        dynamicLabels.setBorder(
+            new TitledBorder(MENU_BOX_TITLE));
+        dynamicLabels.setLayout(new BoxLayout(dynamicLabels, BoxLayout.PAGE_AXIS));
+        gui.add(dynamicLabels, BorderLayout.WEST);
+
+        JButton save_file_button = new JButton(SAVE_FILE_LBL);
+        JButton open_file_button = new JButton(OPEN_FILE_LBL);
+        JButton build_code_button = new JButton(BUILD_CODE_LBL);
+        dynamicLabels.add(save_file_button);
+        dynamicLabels.add(open_file_button);
+        dynamicLabels.add(build_code_button);
+
+        /*String[] header = {"Name", "Value"};
+        String[] a = new String[0];
+        String[] names = System.getProperties().
+            stringPropertyNames().toArray(a);
+        String[][] data = new String[names.length][2];
+        for (int ii=0; ii<names.length; ii++) {
+            data[ii][0] = names[ii];
+            data[ii][1] = System.getProperty(names[ii]);
+        }
+        DefaultTableModel model = new DefaultTableModel(data, header);
+        JTable table = new JTable(model);
+        try {
+            // 1.6+
+            table.setAutoCreateRowSorter(true);
+        } catch(Exception continuewithNoSort) {
+        }*/
+        JScrollPane tableScroll = new JScrollPane(coding_field);
+        Dimension tablePreferred = tableScroll.getPreferredSize();
+        tableScroll.setPreferredSize(
+            new Dimension(1000, 300) );
+
+        JPanel imagePanel = new JPanel(new GridBagLayout());
+        imagePanel.setBorder(
+            new TitledBorder("GridBagLayout()") );
+
+        BufferedImage bi = new BufferedImage(
+            200,200,BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = bi.createGraphics();
+        GradientPaint gp = new GradientPaint(
+            20f,20f,Color.red, 180f,180f,Color.yellow);
+        g.setPaint(gp);
+        g.fillRect(0,0,200,200);
+        ImageIcon ii = new ImageIcon(bi);
+        JLabel imageLabel = new JLabel(ii);
+        imagePanel.add( imageLabel, null );
+
+        JSplitPane splitPane = new JSplitPane(
+            JSplitPane.VERTICAL_SPLIT,
+            tableScroll,
+            new JScrollPane(imagePanel));
+        gui.add( splitPane, BorderLayout.CENTER );
+
+        frame.setContentPane(gui);
+
+        frame.pack();
+
+        frame.setLocationRelativeTo(null);
+        try {
+            // 1.6+
+            frame.setLocationByPlatform(true);
+            frame.setMinimumSize(frame.getSize());
+        } catch(Throwable ignoreAndContinue) {
+        }
+
+        frame.setVisible(true);
+    }
+	
+	private void set_frame() {
+		frame.setJMenuBar(menu_bar);
+		frame.add(coding_field);
+		frame.add(error_lbl);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setLayout(new FlowLayout(FlowLayout.LEFT));
+		frame.setVisible(true);
+	}
+	
+	private void open_file_explorer() {
+		JFileChooser file_exp = new JFileChooser();
+		if(file_exp.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+			coding_field.setText(Stream_Handler.get_file_content(file_exp.getSelectedFile()));
+		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		open_file_explorer();
+	}
+}

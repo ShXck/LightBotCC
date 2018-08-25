@@ -1,0 +1,21 @@
+package gui;
+
+import java.util.ArrayList;
+
+import javax.swing.SwingUtilities;
+
+import interpreter.Lexical_Handler;
+
+public class LightBotMain {
+
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new IDE_Window());
+		/*Lexical_Handler l = new Lexical_Handler();
+		
+		ArrayList<String> a = new ArrayList<String>(); // TODO: fix this func
+		a.add("Var myV;");
+		a.add("Var b = 5;");
+		
+		l.search_vars(a);*/
+	}
+}

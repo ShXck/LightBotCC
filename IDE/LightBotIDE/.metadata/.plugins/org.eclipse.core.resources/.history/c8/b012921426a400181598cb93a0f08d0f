@@ -1,0 +1,76 @@
+package interpreter;
+
+import java.util.ArrayList;
+
+import misc.Stream_Handler;
+import misc.Util;
+
+/**
+ * Analizador Léxico
+ *
+ */
+public class Lexical_Handler {
+	
+	private ArrayList<String> lang_keywords;
+	private final int id_length = 10;
+	
+	public Lexical_Handler() {
+		lang_keywords = Stream_Handler.get_lines_as_list("keywords.txt");
+	}
+	
+	public void validate_code(String scode, String file_name) {
+		ArrayList<String> error_msgs = new ArrayList<String>();
+		ArrayList<String> code_lines = Stream_Handler.get_lines_as_list(file_name); // TODO: separarlas por ; en caso de haber mas una instr en una linea.
+		ArrayList<Variable> vars = search_vars(code_lines, error_msgs);
+	}
+	
+	public ArrayList<Variable> search_vars(ArrayList<String> code_lines, ArrayList<String> error_arr) {
+		ArrayList<Variable> vars = new ArrayList<Variable>();
+		String var_id = "Var";
+		for(String s : code_lines) {  // loop que recorre cada linea del código.
+			String[] curr_line = s.split("\\s+"); // separa cada línea en palabras individuales.
+			for(int i = 0; i < curr_line.length; i++) { // itera por el array de palabras individuales.
+				String curr_word = curr_line[i]; // la palabra en uso.
+				if(curr_word.equals(var_id)) { // busca si es una variable al comparar con Var.
+					if(curr_line[i + 1].contains(";")) {
+						vars.add(new Variable(Util.remove_last_char(curr_line[i + 1])));
+					} else if(curr_line[i + 2].equals("=")) {
+						vars.add(new Variable(curr_line[i + 1], Integer.parseInt(Util.remove_last_char(curr_line[i + 3]))));
+					}
+				}
+			}
+		}
+		if(vars.isEmpty()) error_arr.add(Error_Msg_Handler.build_no_var_msg());
+		return vars;
+	}
+	
+	public boolean is_valid_id(String identifier) { //TODO: is private
+		char[] id_arr = identifier.toCharArray();
+		
+		if(is_lowercase(id_arr[0]) && identifier.length() <= id_length && !identifier.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+	
+	public int check_word(String word) {
+		if(lang_keywords.contains(word)) {
+			return 1; // 1 means valid keyword.
+		} else {
+			if(is_keyw_misspelled(word)) return 2; // 2 means keyword misspelled *error*
+		}
+		return -1; // -1 means is not a keyword
+	} 
+	
+	private boolean is_keyw_misspelled(String word) {
+		String lc_word = word.toLowerCase();
+		for(String s : lang_keywords) {
+			if(s.toLowerCase().equals(lc_word)) return true;
+		}
+		return false;
+	}
+	
+	private boolean is_lowercase(char c) {
+		return Character.isLowerCase(c);
+	}
+}

@@ -1,0 +1,26 @@
+package interpreter;
+
+import java.util.ArrayList;
+
+import misc.Stream_Handler;
+
+/**
+ * Analizador Léxico
+ * @author dell-pc
+ *
+ */
+public class Lexical_Handler {
+	
+	private ArrayList<String> lang_keywords;
+	private final String KEYWORDS_FILE = "keywords.txt";
+	
+	public Lexical_Handler() {
+		lang_keywords = Stream_Handler.get_lines_as_list(KEYWORDS_FILE);
+		
+		for(String s : lang_keywords) {
+			System.out.println(s);
+		}
+	}
+
+
+}

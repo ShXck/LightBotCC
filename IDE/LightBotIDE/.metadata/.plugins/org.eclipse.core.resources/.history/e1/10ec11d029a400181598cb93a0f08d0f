@@ -1,0 +1,40 @@
+package interpreter;
+
+public class Operator {
+	
+	private Variable act_var; // variable sobre la que actúa el operador.
+	private int op_type; // tipo de operador.
+	private int var_data; // en caso de set, este es el valor de la variable.
+	
+	public Operator(int type, Variable var) {
+		act_var = var;
+		op_type = type;
+	}
+	
+	public Operator(int type, Variable var, int data) {
+		act_var = var;
+		op_type = type;
+		var_data = data;
+	} 
+	
+	public int get_op_type() {
+		return op_type;
+	}
+	
+	public void apply() {
+		switch(op_type) {
+			case 1: { // asignación de valor a variable.
+				act_var.set_var_value(var_data);
+				break;
+			}
+			case 2: {  // adición a variable.
+				act_var.set_var_value(act_var.get_var_value() + 1);
+				break;
+			}
+			case 3: { //disminución de variable.
+				act_var.set_var_value(act_var.get_var_value() - 1);
+				break;
+			}
+		}
+	}
+}
