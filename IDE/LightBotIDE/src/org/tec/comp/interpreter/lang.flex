@@ -1,67 +1,48 @@
+package interpreter;
 
-//clase de los token devueltos
-class Token {
-    Token (int token_num, String token, String type, int code_line, int column){
-        //Contador para el número de tokens reconocidos
-        this.token_num = token_num;
-        //String del token reconocido
-        this.token = new String(token);
-        //Tipo de componente léxico encontrado
-        this.type = type;
-        //Número de linea
-        this.code_line = code_line;
-        //Columna donde empieza el primer carácter del token
-        this.column = column;
-    }
-    //Métodos de los atributos de la clase
-    public int token_num;
-    public String token;
-    public String type;
-    public int code_line;
-    public int column;
 
-    //Metodo que devuelve los datos necesarios que escribiremos en un archive de salida
-    public String toString() {
-        return "(" + type + "," + token + ")";
-    }
-}
-
-/* Declaraciones de JFlex */
 %%
-//Función para obtener el siguiente token.
-%function next_token
+%class Lexer
+%type Token
 
-%public
-
-%class Lexical_Analyzer
-
-%unicode
+LOWERCASELETTER = [a-z]
+UPPERCASELETTER = [A-Z]
+DIGIT = [0-9]
+NUMBER = {DIGIT}+
+SPECIAL = [_,@,*]
+IDENTIFIER = {LOWERCASELETTER}({LOWERCASELETTER}|{UPPERCASELETTER}|{DIGIT}|{SPECIAL})*
+WHITESPACE      = [ \t\r\n]
 
 %{
-
-    private int counter = 0;
-    private ArrayList<Token> tokens = new ArrayList<Token>();
-
-	private void writeOutputFile() throws IOException{
-			String file_name = "file.out";
-			BufferedWriter out = new BufferedWriter(
-				new FileWriter(file_name));
-            System.out.println("\n*** TOKENS SAVED ***\n");
-			for(Yytoken t: this.tokens){
-				System.out.println(t);
-				out.write(t + "\n");
-			}
-			out.close();
-	}
+ public String lexeme;
 %}
 
-%eof{
-	try{
-		this.writeOutputFile();
-        System.exit(0);
-	} catch(IOException ioe){
-		ioe.printStackTrace();
-	}
-%eof}
+%%
+{WHITESPACE} {/*ignore*/}
+"=" {return ASSIGN;}
+{IDENTIFIER} {lexeme = yylex(); return ID;}
+{NUMBER} {lexeme = yylex(); return NUMBER;}
+"Var" {lexeme = yylex(); return KEYWORD;}
+"Set" {lexeme = yylex(); return KEYWORD;}
+"Add+" {lexeme = yylex(); return KEYWORD;}
+"Less-" {lexeme = yylex(); return KEYWORD;}
+"(" {return LEFT_BRACKET;}
+")" {return RIGHT_BRACKET;}
+"place-block" {lexeme = yylex(); return KEYWORD;}
+"Place-Block" {lexeme = yylex(); return KEYWORD;}
+"high-block" {lexeme = yylex(); return KEYWORD;}
+"put-light" {lexeme = yylex(); return KEYWORD;}
+"Keep" {lexeme = yylex(); return KEYWORD;}
+"Kend" {lexeme = yylex(); return KEYWORD;}
+"For" {lexeme = yylex(); return KEYWORD;}
+"Fend" {lexeme = yylex(); return KEYWORD;}
+"Id" {lexeme = yylex(); return KEYWORD;}
+"Times" {lexeme = yylex(); return KEYWORD;}
+"When" {lexeme = yylex(); return KEYWORD;}
+"Whend" {lexeme = yylex(); return KEYWORD;}
+"Then" {lexeme = yylex(); return KEYWORD;}
+"Call" {lexeme = yylex(); return KEYWORD;}
+"Skip" {lexeme = yylex(); return KEYWORD;}
+. {return ERROR;}
 
-//NO ESTA TERMINADO
+

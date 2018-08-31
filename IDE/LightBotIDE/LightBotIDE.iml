@@ -7,10 +7,28 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://E:/Libraries/MQTT/org.eclipse.paho.client.mqttv3-1.2.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/Libraries/Java Compiler/jflex/jflex-1.6.1/lib/jflex-1.6.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://E:/Libraries/Java Compiler/jflex/jflex-1.6.1/lib/java-cup-11a.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
