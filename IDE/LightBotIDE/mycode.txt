@@ -1,8 +1,0 @@
-Var myVa*r = 10
-Set myVa*r = 666
-For Id = 5 Then 
-When put-light Times 
-Call Keep Kend
-high-block 10 Add+ Less- Fend
-Skip
-Add+myVa*r

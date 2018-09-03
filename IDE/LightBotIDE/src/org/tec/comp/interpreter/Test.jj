@@ -1,0 +1,186 @@
+PARSER_BEGIN(Test)
+
+class Test {
+    public static void main(String[] args) throws ParseException {
+        try{
+            Test analyser = new Test(System.in);
+            analyser.Program();
+            System.out.println("Successful compilation");
+        } catch(ParseException pe) {
+            System.out.println(pe.getMessage());
+            System.out.println("ERRORES");
+        }
+    }
+}
+PARSER_END(Test)
+
+TOKEN: {
+        <MAIN: "public static void Main()">{System.out.println("MAIN ->"+image);}
+    |   <PROGRAM: "Program">{System.out.println("PROGRAM ->"+image);}
+}
+
+TOKEN: {
+        <LBRACKET: "(">{System.out.println("LBRACKET ->"+image);}
+    |   <RBRACKET: ")">{System.out.println("RBRACKET ->"+image);}
+    |   <SLBRACKET: "[">{System.out.println("SLBRACKET ->"+image);}
+    |   <SRBRACKET: "]">{System.out.println("SRBRACKET ->"+image);}
+    |   <CLBRACKET: "{">{System.out.println("CLBRACKET ->"+image);}
+    |   <CRBRACKET: "}">{System.out.println("CRBRACKET ->"+image);}
+    |   <EQUAL: "=">{System.out.println("EQUAL ->"+image);}
+    |   <SEMICOLON: ";">{System.out.println("SEMICOLON ->"+image);}
+    |   <COMMA: ",">{System.out.println("COMMA ->"+image);}
+}
+
+TOKEN: {
+        <VARIABLE: "Var">{System.out.println("VARIABLE ->"+image);}
+    |   <SET: "Set">{System.out.println("SET ->"+image);}
+    |   <INCREMENT: "Add+">{System.out.println("INCREMENT ->"+image);}
+    |   <DECREMENT: "Less-">{System.out.println("DECREMENT ->"+image);}
+    |   <BEGIN: "Begin">{System.out.println("BEGIN ->"+image);}
+    |   <END: "End">{System.out.println("END ->"+image);}
+    |   <PROC: "Proc">{System.out.println("PROC ->"+image);}
+    |   <ENDPROC: "End-Proc">{System.out.println("ENDPROC ->"+image);}
+    |   <PLACEBLOCK: "place-block">{System.out.println("PLACEBLOCK ->"+image);}
+    |   <HIGHBLOCK: "high-block">{System.out.println("HIGHBLOCK ->"+image);}
+    |   <POSFUNC: "Pos">{System.out.println("POSFUNC ->"+image);}
+    |   <PUTLIGHT: "put-light">{System.out.println("PUTLIGHT ->"+image);}
+    |   <KEEP: "Keep">{System.out.println("KEEP ->"+image);}
+    |   <KEND: "Kend">{System.out.println("KEND ->"+image);}
+    |   <TIMES: "Times">{System.out.println("TIMES ->"+image);}
+    |   <SKP: "Skip">{System.out.println("Skip ->"+image);}
+    |   <FOR: "For">{System.out.println("FOR ->"+image);}
+    |   <FEND: "FEnd">{System.out.println("FEND ->"+image);}
+    |   <WHEN: "When">{System.out.println("WHEN ->"+image);}
+    |   <WHEND: "Whend">{System.out.println("WHEND ->"+image);}
+    |   <THEN: "Then">{System.out.println("THEN ->"+image);}
+    |   <POSSTARTFUNC: "PosStart">{System.out.println("POSSTARTFUNC ->"+image);}
+    |   <CALL: "Call">{System.out.println("CALL ->"+image);}
+    |   <CHANGEDIR: "ChangeDir">{System.out.println("CHANGEDIR ->"+image);}
+    |   <RIGHT: "Right">{System.out.println("RIGHT ->"+image);}
+    |   <LEFT: "Left">{System.out.println("LEFT ->"+image);}
+    |   <BACK: "Back">{System.out.println("BACK ->"+image);}
+    |   <SAME: "Same">{System.out.println("SAME ->"+image);}
+
+}
+
+TOKEN: {
+        <INTEGER: (["0"-"9"])+>{System.out.println("INTEGER ->"+image);}
+    |   <PROCNAME: ["A"-"Z"](["A"-"Z","a"-"z","0"-"9"])*>{System.out.println("PROCNAME ->"+image);}
+    |   <IDENTIFIER: ["a"-"z"](["A"-"Z","a"-"z","0"-"9","_","@","*"])*>{System.out.println("IDENTIFIER ->"+image);}
+}
+
+SKIP: {
+        " " | "\r\n" | "\t"
+}
+
+void Program() : {}
+{
+    IdField()
+    Main()
+    Procedures()
+    <EOF>
+}
+
+void Main() : {}
+{
+    <BEGIN><LBRACKET>Expressions()<RBRACKET><END>
+}
+
+void VarDeclaration() : {}
+{
+    <VARIABLE><IDENTIFIER>(<SEMICOLON> | <EQUAL><INTEGER><SEMICOLON>)
+}
+
+void VarSet() : {}
+{
+    <SET><IDENTIFIER><EQUAL><INTEGER><SEMICOLON>
+}
+
+void VarIncrement() : {}
+{
+    <INCREMENT><IDENTIFIER><SEMICOLON>
+}
+
+void VarDecrement() : {}
+{
+    <DECREMENT><IDENTIFIER><SEMICOLON>
+}
+
+void PlaceBlock() : {}
+{
+    <PLACEBLOCK>(<INTEGER><SEMICOLON> | <SEMICOLON>)
+}
+
+void HighBlock() : {}
+{
+    <HIGHBLOCK>(<INTEGER><SEMICOLON> | <SEMICOLON>)
+}
+
+void PosFunc() : {}
+{
+    <POSFUNC><LBRACKET><IDENTIFIER><COMMA><IDENTIFIER><RBRACKET><SEMICOLON>
+}
+
+void PutLight() : {}
+{
+    <PUTLIGHT><SEMICOLON>
+}
+
+void KeepStatement() : {}
+{
+    <KEEP>Expressions()<SKP><KEND><SEMICOLON>
+}
+
+void ForStatement() : {}
+{
+    <FOR><IDENTIFIER><EQUAL><INTEGER><TIMES>Expressions()<FEND><SEMICOLON>
+}
+
+void WhenStatement() : {}
+{
+    <WHEN><IDENTIFIER><EQUAL><INTEGER><THEN>Expressions()<WHEND><SEMICOLON>
+}
+
+void PosStartFunc() : {}
+{
+    <POSSTARTFUNC><LBRACKET><IDENTIFIER><COMMA><IDENTIFIER><RBRACKET><SEMICOLON>
+}
+
+void CallProc() : {}
+{
+    <CALL><PROCNAME><SEMICOLON>
+}
+
+void ChangeDirFunc() : {}
+{
+    <CHANGEDIR><LBRACKET><SLBRACKET>(<LEFT>|<RIGHT>|<BACK>|<SAME>)<SRBRACKET><RBRACKET><SEMICOLON>
+}
+
+void IdField() : {}
+{
+    (VarDeclaration())*
+}
+
+void Procedures() : {}
+{
+    (<PROC><PROCNAME>Expressions()<ENDPROC>)*
+}
+
+void Expressions() : {}
+{
+    ( 	VarDeclaration()
+        | 	VarSet()
+        | 	VarIncrement()
+        | 	VarDecrement()
+        |   PlaceBlock()
+        |   HighBlock()
+        |   PosFunc()
+        |   PutLight()
+        |   KeepStatement()
+        |   ForStatement()
+        |   WhenStatement()
+        |   PosStartFunc()
+        |   CallProc()
+        |   ChangeDirFunc()
+    )*
+}
