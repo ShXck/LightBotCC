@@ -1,0 +1,32 @@
+package interpreter;
+
+import java.util.Queue;
+
+public class LightBot_Lang {
+	
+	private Lexical_Handler lex_handler;
+	private Parser parser;
+	private Queue<String> word_q;
+	
+	public LightBot_Lang() {
+		lex_handler = new Lexical_Handler();
+		parser = new Parser();
+	}
+	
+	public int check_word(String word) {
+		return lex_handler.check_word(word);
+	}
+	
+	public void queue_letter(String let) {
+		word_q.add(let);
+	}
+	
+	public String get_queued_word() {
+		StringBuilder sb = new StringBuilder();
+		for(String s : word_q) {
+			sb.append(s);
+		}
+		word_q.clear();
+		return sb.toString();
+	}
+}

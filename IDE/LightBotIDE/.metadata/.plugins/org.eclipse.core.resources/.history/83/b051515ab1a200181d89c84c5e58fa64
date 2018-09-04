@@ -1,0 +1,53 @@
+package interpreter;
+
+import java.util.ArrayList;
+
+import misc.Stream_Handler;
+
+/**
+ * Analizador Léxico
+ *
+ */
+public class Lexical_Handler {
+	
+	private ArrayList<String> lang_keywords;
+	private final String KEYWORDS_FILE = "keywords.txt";
+	
+	public Lexical_Handler() {
+		lang_keywords = Stream_Handler.get_lines_as_list(KEYWORDS_FILE);
+	}
+	
+	public void validate_code(String scode) { //TODO: When the BUILD button is pressed save the document, because the code from the file is the one taken in this function
+		
+	}
+	
+	public boolean is_valid_id(String identifier) { //TODO: is private
+		char[] id_arr = identifier.toCharArray();
+		
+		if(is_lowercase(id_arr[0]) && identifier.length() <= 10 && !identifier.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+	
+	public int check_word(String word) {
+		if(lang_keywords.contains(word)) {
+			return 1; // 1 means valid keyword.
+		} else {
+			if(is_keyw_misspelled(word)) return 2; // 2 means keyword misspelled *error*
+		}
+		return -1; // -1 means is not a keyword
+	} 
+	
+	private boolean is_keyw_misspelled(String word) {
+		String lc_word = word.toLowerCase();
+		for(String s : lang_keywords) {
+			if(s.toLowerCase().equals(lc_word)) return true;
+		}
+		return false;
+	}
+	
+	private boolean is_lowercase(char c) {
+		return Character.isLowerCase(c);
+	}
+}

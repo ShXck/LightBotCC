@@ -1,0 +1,8 @@
+package gui;
+
+public class LightBotMain {
+
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new IDE_Window());
+	}
+}

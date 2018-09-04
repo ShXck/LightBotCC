@@ -1,0 +1,16 @@
+package interpreter;
+
+public class Error_Msg_Handler {
+	
+	public static String build_no_code_err() {
+		return "You haven't loaded any source code file, please load your code file.";
+	}
+	
+	public static String build_code_saved_msg() {
+		return "Code successfully saved";
+	}
+	
+	public static String build_no_var_msg() {
+		return "Invalid code. Your code doesn't contain any variables";
+	}
+}

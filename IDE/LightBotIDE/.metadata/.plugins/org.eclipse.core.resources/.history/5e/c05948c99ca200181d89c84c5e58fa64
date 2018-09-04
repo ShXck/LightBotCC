@@ -1,0 +1,22 @@
+package gui;
+
+import javax.swing.SwingUtilities;
+import interpreter.LightBot_Lang;
+
+public class LightBotMain {
+	
+	private IDE_Window ide_window;
+	private LightBot_Lang lang;
+	
+	public LightBotMain() {
+		lang = new LightBot_Lang();
+	}
+	
+	public static void start_window() {
+		SwingUtilities.invokeLater(new IDE_Window());
+	}
+
+	public static void main(String[] args) {
+		start_window();
+	}
+}

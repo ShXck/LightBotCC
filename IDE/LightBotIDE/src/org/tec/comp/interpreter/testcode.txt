@@ -1,0 +1,41 @@
+Var init = 0;
+Var some = 233;
+
+Begin
+	(
+	Var s;
+	Var x = 33;
+	Set s = 1;
+	Add+s;
+	Less-s;
+	place-block 5;
+	place-block;
+	high-block 10;
+	high-block;
+	put-light;
+	Pos(s,x);
+
+	Keep
+		Add+s;
+		Less-x;
+		Skip
+	Kend;
+
+	For i = 10 Times
+		high-block 2;
+	FEnd;
+
+	When j = 5 Then
+		put-light;
+	Whend;
+
+	PosStart(x,s);
+
+	Call MyProc;
+	)
+End
+
+Proc MyProc 
+	Add+some;
+	Less-init;
+End-Proc

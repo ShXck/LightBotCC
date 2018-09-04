@@ -1,0 +1,21 @@
+package interpreter;
+
+public class Variable {
+	
+	private int var_value;
+	private String var_id;
+	
+	public Variable(String id, int val) {
+		var_value = val;
+		var_id = id;
+	}
+	
+	public void set_var_value(int val) {
+		var_value = val;
+	}
+	
+	public int get_var_value() {
+		return var_value;
+	}
+
+}
