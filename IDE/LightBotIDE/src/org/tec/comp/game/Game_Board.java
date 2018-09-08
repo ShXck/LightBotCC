@@ -8,18 +8,15 @@ public class Game_Board {
 
     private final int BOARD_SIZE = 9;
     private Block[][] game_board;
-    private Pathfinder pathfinder;
-    private Pair<Integer, Integer> start_position;
 
     public Game_Board() {
         game_board = new Block[BOARD_SIZE][BOARD_SIZE];
         set_initial_board();
-        build_random_board();
+        //build_random_board();
     }
 
     public void set_robot_initial_pos(Pair<Integer, Integer> pos) {
         if(is_valid_pos(pos)) game_board[pos.first()][pos.second()] = new Block(Block_Type.ROBOT, 0);
-        start_position = pos;
     }
 
     public void add_block(Pair<Integer, Integer> pos, Block_Type type, int bheight) {

@@ -3,8 +3,12 @@ package org.tec.comp;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+
+import org.tec.comp.interpreter.LangParser;
+import org.tec.comp.interpreter.ParseException;
 import org.tec.comp.utilities.Stream_Handler;
 
 public class IDE_Window implements Runnable, ActionListener {
@@ -92,7 +96,7 @@ public class IDE_Window implements Runnable, ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				save_file();
-				set_console_msg(Error_Msg_Handler.build_code_saved_msg(), Color.BLUE);
+				set_console_msg(Message_Handler.build_code_saved_msg(), Color.BLUE);
 			}
         	
         });
@@ -101,11 +105,15 @@ public class IDE_Window implements Runnable, ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(coding_field.getText().isEmpty()) {
-					set_console_msg(Error_Msg_Handler.build_no_code_err(), Color.RED);
+					set_console_msg(Message_Handler.build_no_code_err(), Color.RED);
 				} else {
 					save_file();
-					// Start code analysis/parsing/semantic, etc.
-				}
+                    LangParser.parse("testcode.txt");
+                    if(!LangParser.msg_list.isEmpty()) {
+                        set_console_msg(build_console_msg(LangParser.msg_list), Color.RED);
+                        LangParser.clean_compilation_data();
+                    } else set_console_msg(Message_Handler.success_build_code(), Color.BLUE);
+                }
 			}      	
         });
         
@@ -146,6 +154,15 @@ public class IDE_Window implements Runnable, ActionListener {
         }
 
         frame.setVisible(true);
+    }
+
+    private String build_console_msg(ArrayList<String> msgs) {
+	    String result = "<html>";
+	    for(String s : msgs) {
+	        result += s + "<br>";
+        }
+        result += "</html>";
+        return result;
     }
 
     /**

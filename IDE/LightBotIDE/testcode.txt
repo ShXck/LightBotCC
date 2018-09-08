@@ -1,4 +1,4 @@
-Var init = 0;
+Var init = 0
 Var some = 233;
 
 Begin
@@ -14,6 +14,9 @@ Begin
 	high-block;
 	put-light;
 	Pos(s,x);
+
+	Set hh = 0;
+	Add+v;
 
 	Keep
 		Add+s;

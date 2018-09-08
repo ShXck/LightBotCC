@@ -1,13 +1,17 @@
 package org.tec.comp.game;
 
+import org.tec.comp.interpreter.Pair;
+
 public class Block {
 
     private int id;
     private int height;
     private Block_Type block_type;
+    private Pair<Integer, Integer> block_pos;
 
     public Block(Block_Type type, int bheight) {
         set_block(type, bheight);
+        block_pos = new Pair<>(-1,-1);
     }
 
     public void set_block(Block_Type type, int bheight) {
@@ -37,6 +41,14 @@ public class Block {
                 break;
             }
         }
+    }
+
+    public void set_block_pos(Pair<Integer,Integer> pos) {
+        block_pos = pos;
+    }
+
+    public void set_block_pos(int x, int y) {
+        block_pos.update_values(x, y);
     }
 
     public void set_height(int bheight) {
