@@ -32,29 +32,7 @@ public class Interface extends Application {
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
 
-       // showButton.setOnAction(event -> primaryStage.show());
        }
-
-        //primaryStage.show();
-
-
-/**
- *         Button showButton = new Button("show");
- *         showButton.setOnAction(new EventHandler<ActionEvent>() {
- *             @Override
- *             public void handle(ActionEvent event) {
- *                 window.show();
- *             }
- *         });
- *         Button hideButton = new Button("hide");
- *         hideButton.setOnAction(new EventHandler<ActionEvent>() {
- *             @Override
- *             public void handle(ActionEvent event) {
- *                 window.hide();
- *             }
- *         });
- */
-
 
     public void passWindow() throws IOException {
 

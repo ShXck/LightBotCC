@@ -5,11 +5,11 @@ import java.util.List;
 public class Process {
 
     private List<String> process;
-    private String iD;
+    private String id;
 
     public Process() {
         process = null;
-        iD = "App";
+        id = "App";
     }
 
     public List<String> getProcess() {
@@ -20,12 +20,13 @@ public class Process {
         this.process = process;
     }
 
-    public String getiD() {
-        return iD;
+    public String getId() {
+        return id;
     }
 
-    public void setiD(String iD) {
-        this.iD = iD;
+    public void setId(String id) {
+        this.id = id;
     }
+
 }
 

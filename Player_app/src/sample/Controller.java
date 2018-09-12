@@ -9,11 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.json.simple.JSONArray;
 
 import java.nio.file.Paths;
@@ -79,6 +75,16 @@ public class Controller {
     private Image playMusic = new Image(getClass().getResourceAsStream("/resource/control/play.png"));
     private Image pauseMusic = new Image(getClass().getResourceAsStream("/resource/control/pause.png"));
 
+    static Subscriber s;
+
+    static {
+        try {
+            s = new Subscriber("m12.cloudmqtt.com:16115","nnsmxwti","37KKt6sf8N6L","java_app","esp/test");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
+
     //Lista para seleccion del imagen de control
     private List<String> listMAIN = new ArrayList<>();
     private List<String> listPROC1 = new ArrayList<>();
@@ -94,6 +100,9 @@ public class Controller {
 
     //Control
     private String listCONTROL[] = {"UP","TURN_LEFT","TURN_RIGHT","LIGHT","JUMP","P1","P2"};
+
+    public Controller() throws MqttException {
+    }
 
 
     /**
@@ -504,7 +513,7 @@ public class Controller {
     /**
      * Metodo para el envio del procedimiento a seguir segun el "Robot"
      */
-    public void PLAY_Send(){
+    public void PLAY_Send() throws MqttException {
         JSONArray array = new JSONArray();
         for(int rF=0;rF<listMAIN.size();rF++){
             if (listMAIN.get(rF).equals("P1")){
@@ -529,10 +538,11 @@ public class Controller {
         ObjectMapper mapper = new ObjectMapper();//Para poder hacer operaciones JSON
         Process process = new Process();
         process.setProcess(array);
-        process.setiD("App");
+        process.setId("App");
 
+        String jsonInString = null;
         try {
-            String jsonInString = mapper.writeValueAsString(process);
+            jsonInString = mapper.writeValueAsString(process);
             System.out.println(jsonInString);//aquí se ve impreso, es lo que eventualmente se envia.
             System.out.println(jsonInString.length());
 
@@ -542,8 +552,9 @@ public class Controller {
             e.printStackTrace();
         }
 
-       // Subscriber s = new Subscriber();
 
+
+        s.sendMessage(jsonInString);
 
     }
 
