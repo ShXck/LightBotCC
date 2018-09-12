@@ -1,9 +1,13 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -16,19 +20,44 @@ import java.io.IOException;
 
 public class Interface extends Application {
 
+    @FXML
+    Button showButton = new Button("show");
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-         Parent root = FXMLLoader.load(getClass().getResource("Interface.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Interface.fxml"));
         primaryStage.setTitle("LightBotCC");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
-        primaryStage.show();
 
-    }
+       // showButton.setOnAction(event -> primaryStage.show());
+       }
+
+        //primaryStage.show();
+
+
+/**
+ *         Button showButton = new Button("show");
+ *         showButton.setOnAction(new EventHandler<ActionEvent>() {
+ *             @Override
+ *             public void handle(ActionEvent event) {
+ *                 window.show();
+ *             }
+ *         });
+ *         Button hideButton = new Button("hide");
+ *         hideButton.setOnAction(new EventHandler<ActionEvent>() {
+ *             @Override
+ *             public void handle(ActionEvent event) {
+ *                 window.hide();
+ *             }
+ *         });
+ */
+
 
     public void passWindow() throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 900, 689);
@@ -39,6 +68,7 @@ public class Interface extends Application {
     }
 
     public void passInstructions() throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("Instructions.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);

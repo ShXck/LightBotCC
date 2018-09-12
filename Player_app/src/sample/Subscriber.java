@@ -75,9 +75,5 @@ public class Subscriber implements MqttCallback {
         System.out.println(String.format("[%s] %s", topic, new String(message.getPayload())));
     }
 
-    public static void main(String[] args) throws MqttException, URISyntaxException {
-        Subscriber s = new Subscriber(System.getenv("CLOUDMQTT_URL"));
-        s.sendMessage("Hello");
-        s.sendMessage("Hello 2");
-    }
+
 }

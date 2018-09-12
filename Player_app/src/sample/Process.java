@@ -4,20 +4,20 @@ import java.util.List;
 
 public class Process {
 
-    private List<String> proceS;
+    private List<String> process;
     private String iD;
 
     public Process() {
-        proceS = null;
+        process = null;
         iD = "App";
     }
 
-    public List<String> getProceS() {
-        return proceS;
+    public List<String> getProcess() {
+        return process;
     }
 
-    public void setProceS(List<String> proceS) {
-        this.proceS = proceS;
+    public void setProcess(List<String> process) {
+        this.process = process;
     }
 
     public String getiD() {

@@ -1,5 +1,7 @@
 package sample;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
@@ -13,8 +15,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -524,17 +525,26 @@ public class Controller {
                 array.add(convertString_int(listMAIN.get(rF)));
             }
         }
-
+        //JACKSON
+        ObjectMapper mapper = new ObjectMapper();//Para poder hacer operaciones JSON
         Process process = new Process();
-        process.setProceS(array);
-        System.out.println(process.getProceS());
+        process.setProcess(array);
+        process.setiD("App");
 
-        JSONObject param = new JSONObject();
-        JSONParser parser = new JSONParser();
+        try {
+            String jsonInString = mapper.writeValueAsString(process);
+            System.out.println(jsonInString);//aquí se ve impreso, es lo que eventualmente se envia.
+            System.out.println(jsonInString.length());
 
-        param.put("Process",process);
-        System.out.println(">>>>> "+param.get("Process") );
-        //hacer clase Process
+
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+       // Subscriber s = new Subscriber();
+
+
     }
 
     /**
@@ -826,43 +836,5 @@ public class Controller {
         }
     }
 
-    /**
-     * Envio de datos a Broker-MQTT
-     */
-    private void mqtt(){
-        String topic        = "MQTT Examples";
-        String content      = "Message from MqttPublishSample";
-        int qos             = 2;
-        String broker       = "m20.cloudmqtt.com:12525";
-        String clientId     = "JavaSample";
-        MemoryPersistence persistence = new MemoryPersistence();
 
-        try {
-            MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
-            MqttConnectOptions connOpts = new MqttConnectOptions();
-            connOpts.setUserName("fckzxtel");
-            connOpts.setPassword("R3Rs1bph3H4R".toCharArray());
-
-
-            connOpts.setCleanSession(true);
-            System.out.println("Connecting to broker: "+broker);
-            sampleClient.connect(connOpts);
-            System.out.println("Connected");
-            System.out.println("Publishing message: "+content);
-            MqttMessage message = new MqttMessage(content.getBytes());
-            message.setQos(qos);
-            sampleClient.publish(topic, message);
-            System.out.println("Message published");
-            sampleClient.disconnect();
-            System.out.println("Disconnected");
-            //  System.exit(0);
-        } catch(MqttException me) {
-            System.out.println("reason "+me.getReasonCode());
-            System.out.println("msg "+me.getMessage());
-            System.out.println("loc "+me.getLocalizedMessage());
-            System.out.println("cause "+me.getCause());
-            System.out.println("excep "+me);
-            me.printStackTrace();
-        }
-    }
 }
