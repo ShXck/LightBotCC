@@ -1,0 +1,123 @@
+\hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception}{}\section{org.\+tec.\+comp.\+interpreter.\+Parse\+Exception Class Reference}
+\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception}\index{org.\+tec.\+comp.\+interpreter.\+Parse\+Exception@{org.\+tec.\+comp.\+interpreter.\+Parse\+Exception}}
+
+
+Inheritance diagram for org.\+tec.\+comp.\+interpreter.\+Parse\+Exception\+:
+% FIG 0
+
+
+Collaboration diagram for org.\+tec.\+comp.\+interpreter.\+Parse\+Exception\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a1866dd3d0d8c136c15f29c1d8f7577bc}{Parse\+Exception}} (\mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} current\+Token\+Val, int\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} expected\+Token\+Sequences\+Val, String\mbox{[}$\,$\mbox{]} token\+Image\+Val)
+\item 
+\mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a81773d0467bb91c84f4f221cba2222c6}{Parse\+Exception}} ()
+\item 
+\mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_ae1452449f018cf55d1f2865ea5cb4037}{Parse\+Exception}} (String message)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_aa924715148660d033e7af99dd80c85d9}{current\+Token}}
+\item 
+int \mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a8cf72289f91938ae2faa2a001b8c3ae3}{expected\+Token\+Sequences}}
+\item 
+String \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a13a85a0e7a0e560a3191ed4f6be1c127}{token\+Image}}
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+String \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a18e94211451c840a115611e78ebff392}{eol}} = System.\+get\+Property(\char`\"{}line.\+separator\char`\"{}, \char`\"{}\textbackslash{}n\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This exception is thrown when parse errors are encountered. You can explicitly create objects of this exception type by calling the method generate\+Parse\+Exception in the generated parser.
+
+You can modify this class to customize your error reporting mechanisms so long as you retain the public fields. 
+
+Definition at line 12 of file Parse\+Exception.\+java.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a1866dd3d0d8c136c15f29c1d8f7577bc}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a1866dd3d0d8c136c15f29c1d8f7577bc}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}!Parse\+Exception@{Parse\+Exception}}
+\index{Parse\+Exception@{Parse\+Exception}!org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}}
+\subsubsection{\texorpdfstring{Parse\+Exception()}{ParseException()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily org.\+tec.\+comp.\+interpreter.\+Parse\+Exception.\+Parse\+Exception (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}}}]{current\+Token\+Val,  }\item[{int}]{expected\+Token\+Sequences\+Val\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]},  }\item[{String \mbox{[}$\,$\mbox{]}}]{token\+Image\+Val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This constructor is used by the method \char`\"{}generate\+Parse\+Exception\char`\"{} in the generated parser. Calling this constructor generates a new object of this type with the fields \char`\"{}current\+Token\char`\"{}, \char`\"{}expected\+Token\+Sequences\char`\"{}, and \char`\"{}token\+Image\char`\"{} set. 
+
+Definition at line 27 of file Parse\+Exception.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a81773d0467bb91c84f4f221cba2222c6}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a81773d0467bb91c84f4f221cba2222c6}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}!Parse\+Exception@{Parse\+Exception}}
+\index{Parse\+Exception@{Parse\+Exception}!org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}}
+\subsubsection{\texorpdfstring{Parse\+Exception()}{ParseException()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily org.\+tec.\+comp.\+interpreter.\+Parse\+Exception.\+Parse\+Exception (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The following constructors are for use by you for whatever purpose you can think of. Constructing the exception in this manner makes the exception behave in the normal way -\/ i.\+e., as documented in the class \char`\"{}\+Throwable\char`\"{}. The fields \char`\"{}error\+Token\char`\"{}, \char`\"{}expected\+Token\+Sequences\char`\"{}, and \char`\"{}token\+Image\char`\"{} do not contain relevant information. The Java\+CC generated code does not use these constructors. 
+
+Definition at line 48 of file Parse\+Exception.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_ae1452449f018cf55d1f2865ea5cb4037}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_ae1452449f018cf55d1f2865ea5cb4037}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}!Parse\+Exception@{Parse\+Exception}}
+\index{Parse\+Exception@{Parse\+Exception}!org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}}
+\subsubsection{\texorpdfstring{Parse\+Exception()}{ParseException()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily org.\+tec.\+comp.\+interpreter.\+Parse\+Exception.\+Parse\+Exception (\begin{DoxyParamCaption}\item[{String}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor with message. 
+
+Definition at line 53 of file Parse\+Exception.\+java.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_aa924715148660d033e7af99dd80c85d9}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_aa924715148660d033e7af99dd80c85d9}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}!current\+Token@{current\+Token}}
+\index{current\+Token@{current\+Token}!org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}}
+\subsubsection{\texorpdfstring{current\+Token}{currentToken}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} org.\+tec.\+comp.\+interpreter.\+Parse\+Exception.\+current\+Token}
+
+This is the last token that has been consumed successfully. If this object has been created due to a parse error, the token followng this token will (therefore) be the first error token. 
+
+Definition at line 63 of file Parse\+Exception.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a18e94211451c840a115611e78ebff392}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a18e94211451c840a115611e78ebff392}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}!eol@{eol}}
+\index{eol@{eol}!org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}}
+\subsubsection{\texorpdfstring{eol}{eol}}
+{\footnotesize\ttfamily String org.\+tec.\+comp.\+interpreter.\+Parse\+Exception.\+eol = System.\+get\+Property(\char`\"{}line.\+separator\char`\"{}, \char`\"{}\textbackslash{}n\char`\"{})\hspace{0.3cm}{\ttfamily [protected]}}
+
+The end of line string for this machine. 
+
+Definition at line 132 of file Parse\+Exception.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a8cf72289f91938ae2faa2a001b8c3ae3}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a8cf72289f91938ae2faa2a001b8c3ae3}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}!expected\+Token\+Sequences@{expected\+Token\+Sequences}}
+\index{expected\+Token\+Sequences@{expected\+Token\+Sequences}!org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}}
+\subsubsection{\texorpdfstring{expected\+Token\+Sequences}{expectedTokenSequences}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} org.\+tec.\+comp.\+interpreter.\+Parse\+Exception.\+expected\+Token\+Sequences}
+
+Each entry in this array is an array of integers. Each array of integers represents a sequence of tokens (by their ordinal values) that is expected at this point of the parse. 
+
+Definition at line 70 of file Parse\+Exception.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a13a85a0e7a0e560a3191ed4f6be1c127}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_parse_exception_a13a85a0e7a0e560a3191ed4f6be1c127}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}!token\+Image@{token\+Image}}
+\index{token\+Image@{token\+Image}!org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception@{org\+::tec\+::comp\+::interpreter\+::\+Parse\+Exception}}
+\subsubsection{\texorpdfstring{token\+Image}{tokenImage}}
+{\footnotesize\ttfamily String \mbox{[}$\,$\mbox{]} org.\+tec.\+comp.\+interpreter.\+Parse\+Exception.\+token\+Image}
+
+This is a reference to the \char`\"{}token\+Image\char`\"{} array of the generated parser within which the parse error occurred. This array is defined in the generated ...Constants interface. 
+
+Definition at line 77 of file Parse\+Exception.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sebas97012/\+Documents/\+Development/\+Light\+Bot\+C\+C/\+I\+D\+E/\+Light\+Bot\+I\+D\+E/src/org/tec/comp/interpreter/\mbox{\hyperlink{_parse_exception_8java}{Parse\+Exception.\+java}}\end{DoxyCompactItemize}

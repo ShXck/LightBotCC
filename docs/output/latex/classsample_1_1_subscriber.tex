@@ -1,0 +1,127 @@
+\hypertarget{classsample_1_1_subscriber}{}\section{sample.\+Subscriber Class Reference}
+\label{classsample_1_1_subscriber}\index{sample.\+Subscriber@{sample.\+Subscriber}}
+
+
+Inheritance diagram for sample.\+Subscriber\+:
+% FIG 0
+
+
+Collaboration diagram for sample.\+Subscriber\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsample_1_1_subscriber_ab8237e28d40bcc69a73ad35407e557a1}{Subscriber}} (String uri)  throws Mqtt\+Exception, U\+R\+I\+Syntax\+Exception 
+\item 
+\mbox{\hyperlink{classsample_1_1_subscriber_a7f50c2706746360646405ae3469ca374}{Subscriber}} (U\+RI uri)  throws Mqtt\+Exception 
+\item 
+void \mbox{\hyperlink{classsample_1_1_subscriber_ac15365eaf8f4d15cf8c8263629d186c4}{send\+Message}} (String payload)  throws Mqtt\+Exception 
+\item 
+void \mbox{\hyperlink{classsample_1_1_subscriber_a9f39d5a464ae51c85400004c6f0b32ed}{connection\+Lost}} (Throwable cause)
+\item 
+void \mbox{\hyperlink{classsample_1_1_subscriber_a3eb4c82798dcb29cc581c3aabab34107}{delivery\+Complete}} (I\+Mqtt\+Delivery\+Token token)
+\item 
+void \mbox{\hyperlink{classsample_1_1_subscriber_a3060c3fd5b9078142a96dc2cd9beb7b9}{message\+Arrived}} (String topic, Mqtt\+Message message)  throws Mqtt\+Exception 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classsample_1_1_subscriber_a08afc10c181a3245ba83ed84f3317d1b}{main}} (String\mbox{[}$\,$\mbox{]} args)  throws Mqtt\+Exception, U\+R\+I\+Syntax\+Exception 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A sample application that demonstrates how to use the Paho M\+Q\+TT v3.\+1 Client blocking A\+PI. 
+
+Definition at line 13 of file Subscriber.\+java.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsample_1_1_subscriber_ab8237e28d40bcc69a73ad35407e557a1}\label{classsample_1_1_subscriber_ab8237e28d40bcc69a73ad35407e557a1}} 
+\index{sample\+::\+Subscriber@{sample\+::\+Subscriber}!Subscriber@{Subscriber}}
+\index{Subscriber@{Subscriber}!sample\+::\+Subscriber@{sample\+::\+Subscriber}}
+\subsubsection{\texorpdfstring{Subscriber()}{Subscriber()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily sample.\+Subscriber.\+Subscriber (\begin{DoxyParamCaption}\item[{String}]{uri }\end{DoxyParamCaption}) throws Mqtt\+Exception, U\+R\+I\+Syntax\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 19 of file Subscriber.\+java.
+
+\mbox{\Hypertarget{classsample_1_1_subscriber_a7f50c2706746360646405ae3469ca374}\label{classsample_1_1_subscriber_a7f50c2706746360646405ae3469ca374}} 
+\index{sample\+::\+Subscriber@{sample\+::\+Subscriber}!Subscriber@{Subscriber}}
+\index{Subscriber@{Subscriber}!sample\+::\+Subscriber@{sample\+::\+Subscriber}}
+\subsubsection{\texorpdfstring{Subscriber()}{Subscriber()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily sample.\+Subscriber.\+Subscriber (\begin{DoxyParamCaption}\item[{U\+RI}]{uri }\end{DoxyParamCaption}) throws Mqtt\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 23 of file Subscriber.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classsample_1_1_subscriber_a9f39d5a464ae51c85400004c6f0b32ed}\label{classsample_1_1_subscriber_a9f39d5a464ae51c85400004c6f0b32ed}} 
+\index{sample\+::\+Subscriber@{sample\+::\+Subscriber}!connection\+Lost@{connection\+Lost}}
+\index{connection\+Lost@{connection\+Lost}!sample\+::\+Subscriber@{sample\+::\+Subscriber}}
+\subsubsection{\texorpdfstring{connection\+Lost()}{connectionLost()}}
+{\footnotesize\ttfamily void sample.\+Subscriber.\+connection\+Lost (\begin{DoxyParamCaption}\item[{Throwable}]{cause }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxySeeAlso}{See also}
+Mqtt\+Callback\+::connection\+Lost(\+Throwable) 
+\end{DoxySeeAlso}
+
+
+Definition at line 60 of file Subscriber.\+java.
+
+\mbox{\Hypertarget{classsample_1_1_subscriber_a3eb4c82798dcb29cc581c3aabab34107}\label{classsample_1_1_subscriber_a3eb4c82798dcb29cc581c3aabab34107}} 
+\index{sample\+::\+Subscriber@{sample\+::\+Subscriber}!delivery\+Complete@{delivery\+Complete}}
+\index{delivery\+Complete@{delivery\+Complete}!sample\+::\+Subscriber@{sample\+::\+Subscriber}}
+\subsubsection{\texorpdfstring{delivery\+Complete()}{deliveryComplete()}}
+{\footnotesize\ttfamily void sample.\+Subscriber.\+delivery\+Complete (\begin{DoxyParamCaption}\item[{I\+Mqtt\+Delivery\+Token}]{token }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxySeeAlso}{See also}
+Mqtt\+Callback\+::delivery\+Complete(\+I\+Mqtt\+Delivery\+Token) 
+\end{DoxySeeAlso}
+
+
+Definition at line 68 of file Subscriber.\+java.
+
+\mbox{\Hypertarget{classsample_1_1_subscriber_a08afc10c181a3245ba83ed84f3317d1b}\label{classsample_1_1_subscriber_a08afc10c181a3245ba83ed84f3317d1b}} 
+\index{sample\+::\+Subscriber@{sample\+::\+Subscriber}!main@{main}}
+\index{main@{main}!sample\+::\+Subscriber@{sample\+::\+Subscriber}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily static void sample.\+Subscriber.\+main (\begin{DoxyParamCaption}\item[{String \mbox{[}$\,$\mbox{]}}]{args }\end{DoxyParamCaption}) throws Mqtt\+Exception, U\+R\+I\+Syntax\+Exception\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 78 of file Subscriber.\+java.
+
+\mbox{\Hypertarget{classsample_1_1_subscriber_a3060c3fd5b9078142a96dc2cd9beb7b9}\label{classsample_1_1_subscriber_a3060c3fd5b9078142a96dc2cd9beb7b9}} 
+\index{sample\+::\+Subscriber@{sample\+::\+Subscriber}!message\+Arrived@{message\+Arrived}}
+\index{message\+Arrived@{message\+Arrived}!sample\+::\+Subscriber@{sample\+::\+Subscriber}}
+\subsubsection{\texorpdfstring{message\+Arrived()}{messageArrived()}}
+{\footnotesize\ttfamily void sample.\+Subscriber.\+message\+Arrived (\begin{DoxyParamCaption}\item[{String}]{topic,  }\item[{Mqtt\+Message}]{message }\end{DoxyParamCaption}) throws Mqtt\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxySeeAlso}{See also}
+Mqtt\+Callback\+::message\+Arrived(\+String, Mqtt\+Message) 
+\end{DoxySeeAlso}
+
+
+Definition at line 74 of file Subscriber.\+java.
+
+\mbox{\Hypertarget{classsample_1_1_subscriber_ac15365eaf8f4d15cf8c8263629d186c4}\label{classsample_1_1_subscriber_ac15365eaf8f4d15cf8c8263629d186c4}} 
+\index{sample\+::\+Subscriber@{sample\+::\+Subscriber}!send\+Message@{send\+Message}}
+\index{send\+Message@{send\+Message}!sample\+::\+Subscriber@{sample\+::\+Subscriber}}
+\subsubsection{\texorpdfstring{send\+Message()}{sendMessage()}}
+{\footnotesize\ttfamily void sample.\+Subscriber.\+send\+Message (\begin{DoxyParamCaption}\item[{String}]{payload }\end{DoxyParamCaption}) throws Mqtt\+Exception\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 51 of file Subscriber.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sebas97012/\+Documents/\+Development/\+Light\+Bot\+C\+C/\+Player\+\_\+app/src/sample/\mbox{\hyperlink{_player__app_2src_2sample_2_subscriber_8java}{Subscriber.\+java}}\end{DoxyCompactItemize}

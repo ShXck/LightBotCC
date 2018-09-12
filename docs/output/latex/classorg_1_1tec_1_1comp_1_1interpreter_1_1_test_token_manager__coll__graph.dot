@@ -1,0 +1,11 @@
+digraph "org.tec.comp.interpreter.TestTokenManager"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node2 [label="org.tec.comp.interpreter.\lTestTokenManager",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="org.tec.comp.interpreter.\lTestConstants",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interfaceorg_1_1tec_1_1comp_1_1interpreter_1_1_test_constants.html",tooltip=" "];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" input_stream" ];
+  Node4 [label="org.tec.comp.interpreter.\lSimpleCharStream",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classorg_1_1tec_1_1comp_1_1interpreter_1_1_simple_char_stream.html",tooltip=" "];
+}

@@ -1,0 +1,21 @@
+digraph "org.tec.comp.interpreter.LangParser"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node2 [label="org.tec.comp.interpreter.\lLangParser",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="org.tec.comp.interpreter.\lTestConstants",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$interfaceorg_1_1tec_1_1comp_1_1interpreter_1_1_test_constants.html",tooltip=" "];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" jj_input_stream" ,fontname="Helvetica"];
+  Node4 [label="org.tec.comp.interpreter.\lSimpleCharStream",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classorg_1_1tec_1_1comp_1_1interpreter_1_1_simple_char_stream.html",tooltip=" "];
+  Node5 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" token_source" ,fontname="Helvetica"];
+  Node5 [label="org.tec.comp.interpreter.\lTestTokenManager",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classorg_1_1tec_1_1comp_1_1interpreter_1_1_test_token_manager.html",tooltip=" "];
+  Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 -> Node5 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" input_stream" ,fontname="Helvetica"];
+  Node6 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" token\njj_nt" ,fontname="Helvetica"];
+  Node6 [label="org.tec.comp.interpreter.\lToken",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classorg_1_1tec_1_1comp_1_1interpreter_1_1_token.html",tooltip=" "];
+  Node7 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="java::io::Serializable",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node6 -> Node6 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" next\nspecialToken" ,fontname="Helvetica"];
+}

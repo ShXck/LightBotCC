@@ -1,0 +1,224 @@
+\hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{}\section{org.\+tec.\+comp.\+interpreter.\+Token Class Reference}
+\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}\index{org.\+tec.\+comp.\+interpreter.\+Token@{org.\+tec.\+comp.\+interpreter.\+Token}}
+
+
+Inheritance diagram for org.\+tec.\+comp.\+interpreter.\+Token\+:
+% FIG 0
+
+
+Collaboration diagram for org.\+tec.\+comp.\+interpreter.\+Token\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Object \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_adda9288eca7f330e9f34ddf78ee3d612}{get\+Value}} ()
+\item 
+\mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a14d0d767b5afa4ac4b55e2fbed415ded}{Token}} ()
+\item 
+\mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a3c4142753b4493ff86b2b466bc10e821}{Token}} (int \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a94909210d1760411e4901243abdb4fc2}{kind}})
+\item 
+\mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a7214177c568cccfbeb98f456ddf49580}{Token}} (int \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a94909210d1760411e4901243abdb4fc2}{kind}}, String \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a19f4df05af50682f05314b00c906a0ff}{image}})
+\item 
+String \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_af3fcfaa2b6ae489ce87fe6674cfa6cff}{to\+String}} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a50b3408b27556c1a3958c71bc8b219ff}{new\+Token}} (int of\+Kind, String \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a19f4df05af50682f05314b00c906a0ff}{image}})
+\item 
+static \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a7e062a84523ba6b2ee404699c3d15403}{new\+Token}} (int of\+Kind)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a94909210d1760411e4901243abdb4fc2}{kind}}
+\item 
+int \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a0bc93f1911779e85bcd851a086d16c61}{begin\+Line}}
+\item 
+int \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a4477915d17fec02b320c93fb1ca5dc8c}{begin\+Column}}
+\item 
+int \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a455acf1cd797bc6ea234f69ac00ad271}{end\+Line}}
+\item 
+int \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_ae7942e283d41456d4f803e1334d7c9a7}{end\+Column}}
+\item 
+String \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a19f4df05af50682f05314b00c906a0ff}{image}}
+\item 
+\mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a44b635649771157f9cbc2a2481b1279a}{next}}
+\item 
+\mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_afdd78d6313c00d7ed575e368db5e10aa}{special\+Token}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Describes the input token stream. 
+
+Definition at line 7 of file Token.\+java.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a14d0d767b5afa4ac4b55e2fbed415ded}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a14d0d767b5afa4ac4b55e2fbed415ded}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!Token@{Token}}
+\index{Token@{Token}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily org.\+tec.\+comp.\+interpreter.\+Token.\+Token (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+No-\/argument constructor 
+
+Definition at line 76 of file Token.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a3c4142753b4493ff86b2b466bc10e821}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a3c4142753b4493ff86b2b466bc10e821}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!Token@{Token}}
+\index{Token@{Token}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily org.\+tec.\+comp.\+interpreter.\+Token.\+Token (\begin{DoxyParamCaption}\item[{int}]{kind }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructs a new token for the specified Image. 
+
+Definition at line 81 of file Token.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a7214177c568cccfbeb98f456ddf49580}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a7214177c568cccfbeb98f456ddf49580}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!Token@{Token}}
+\index{Token@{Token}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily org.\+tec.\+comp.\+interpreter.\+Token.\+Token (\begin{DoxyParamCaption}\item[{int}]{kind,  }\item[{String}]{image }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructs a new token for the specified Image and Kind. 
+
+Definition at line 89 of file Token.\+java.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_adda9288eca7f330e9f34ddf78ee3d612}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_adda9288eca7f330e9f34ddf78ee3d612}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!get\+Value@{get\+Value}}
+\index{get\+Value@{get\+Value}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{get\+Value()}{getValue()}}
+{\footnotesize\ttfamily Object org.\+tec.\+comp.\+interpreter.\+Token.\+get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+An optional attribute value of the \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}}. Tokens which are not used as syntactic sugar will often contain meaningful values that will be used later on by the compiler or interpreter. This attribute value is often different from the image. Any subclass of \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} that actually wants to return a non-\/null value can override this method as appropriate. 
+
+Definition at line 69 of file Token.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a50b3408b27556c1a3958c71bc8b219ff}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a50b3408b27556c1a3958c71bc8b219ff}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!new\+Token@{new\+Token}}
+\index{new\+Token@{new\+Token}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{new\+Token()}{newToken()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} org.\+tec.\+comp.\+interpreter.\+Token.\+new\+Token (\begin{DoxyParamCaption}\item[{int}]{of\+Kind,  }\item[{String}]{image }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Returns a new \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} object, by default. However, if you want, you can create and return subclass objects based on the value of of\+Kind. Simply add the cases to the switch for all those special cases. For example, if you have a subclass of \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} called I\+D\+Token that you want to create if of\+Kind is ID, simply add something like \+:
+
+case My\+Parser\+Constants.\+ID \+: return new I\+D\+Token(of\+Kind, image);
+
+to the following switch statement. Then you can cast matched\+Token variable to the appropriate type and use sit in your lexical actions. 
+
+Definition at line 115 of file Token.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a7e062a84523ba6b2ee404699c3d15403}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a7e062a84523ba6b2ee404699c3d15403}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!new\+Token@{new\+Token}}
+\index{new\+Token@{new\+Token}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{new\+Token()}{newToken()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} org.\+tec.\+comp.\+interpreter.\+Token.\+new\+Token (\begin{DoxyParamCaption}\item[{int}]{of\+Kind }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 123 of file Token.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_af3fcfaa2b6ae489ce87fe6674cfa6cff}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_af3fcfaa2b6ae489ce87fe6674cfa6cff}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{to\+String()}{toString()}}
+{\footnotesize\ttfamily String org.\+tec.\+comp.\+interpreter.\+Token.\+to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the image. 
+
+Definition at line 98 of file Token.\+java.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a4477915d17fec02b320c93fb1ca5dc8c}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a4477915d17fec02b320c93fb1ca5dc8c}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!begin\+Column@{begin\+Column}}
+\index{begin\+Column@{begin\+Column}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{begin\+Column}{beginColumn}}
+{\footnotesize\ttfamily int org.\+tec.\+comp.\+interpreter.\+Token.\+begin\+Column}
+
+The column number of the first character of this \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}}. 
+
+Definition at line 26 of file Token.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a0bc93f1911779e85bcd851a086d16c61}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a0bc93f1911779e85bcd851a086d16c61}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!begin\+Line@{begin\+Line}}
+\index{begin\+Line@{begin\+Line}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{begin\+Line}{beginLine}}
+{\footnotesize\ttfamily int org.\+tec.\+comp.\+interpreter.\+Token.\+begin\+Line}
+
+The line number of the first character of this \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}}. 
+
+Definition at line 24 of file Token.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_ae7942e283d41456d4f803e1334d7c9a7}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_ae7942e283d41456d4f803e1334d7c9a7}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!end\+Column@{end\+Column}}
+\index{end\+Column@{end\+Column}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{end\+Column}{endColumn}}
+{\footnotesize\ttfamily int org.\+tec.\+comp.\+interpreter.\+Token.\+end\+Column}
+
+The column number of the last character of this \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}}. 
+
+Definition at line 30 of file Token.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a455acf1cd797bc6ea234f69ac00ad271}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a455acf1cd797bc6ea234f69ac00ad271}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!end\+Line@{end\+Line}}
+\index{end\+Line@{end\+Line}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{end\+Line}{endLine}}
+{\footnotesize\ttfamily int org.\+tec.\+comp.\+interpreter.\+Token.\+end\+Line}
+
+The line number of the last character of this \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}}. 
+
+Definition at line 28 of file Token.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a19f4df05af50682f05314b00c906a0ff}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a19f4df05af50682f05314b00c906a0ff}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!image@{image}}
+\index{image@{image}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{image}{image}}
+{\footnotesize\ttfamily String org.\+tec.\+comp.\+interpreter.\+Token.\+image}
+
+The string image of the token. 
+
+Definition at line 35 of file Token.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a94909210d1760411e4901243abdb4fc2}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a94909210d1760411e4901243abdb4fc2}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!kind@{kind}}
+\index{kind@{kind}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{kind}{kind}}
+{\footnotesize\ttfamily int org.\+tec.\+comp.\+interpreter.\+Token.\+kind}
+
+An integer that describes the kind of this token. This numbering system is determined by Java\+C\+C\+Parser, and a table of these numbers is stored in the file ...Constants.\+java. 
+
+Definition at line 21 of file Token.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a44b635649771157f9cbc2a2481b1279a}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_a44b635649771157f9cbc2a2481b1279a}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!next@{next}}
+\index{next@{next}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} org.\+tec.\+comp.\+interpreter.\+Token.\+next}
+
+A reference to the next regular (non-\/special) token from the input stream. If this is the last token from the input stream, or if the token manager has not read tokens beyond this one, this field is set to null. This is true only if this token is also a regular token. Otherwise, see below for a description of the contents of this field. 
+
+Definition at line 45 of file Token.\+java.
+
+\mbox{\Hypertarget{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_afdd78d6313c00d7ed575e368db5e10aa}\label{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token_afdd78d6313c00d7ed575e368db5e10aa}} 
+\index{org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}!special\+Token@{special\+Token}}
+\index{special\+Token@{special\+Token}!org\+::tec\+::comp\+::interpreter\+::\+Token@{org\+::tec\+::comp\+::interpreter\+::\+Token}}
+\subsubsection{\texorpdfstring{special\+Token}{specialToken}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classorg_1_1tec_1_1comp_1_1interpreter_1_1_token}{Token}} org.\+tec.\+comp.\+interpreter.\+Token.\+special\+Token}
+
+This field is used to access special tokens that occur prior to this token, but after the immediately preceding regular (non-\/special) token. If there are no such special tokens, this field is set to null. When there are more than one such special token, this field refers to the last of these special tokens, which in turn refers to the next previous special token through its special\+Token field, and so on until the first special token (whose special\+Token field is null). The next fields of special tokens refer to other special tokens that immediately follow it (without an intervening regular token). If there is no such token, this field is null. 
+
+Definition at line 59 of file Token.\+java.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/sebas97012/\+Documents/\+Development/\+Light\+Bot\+C\+C/\+I\+D\+E/\+Light\+Bot\+I\+D\+E/src/org/tec/comp/interpreter/\mbox{\hyperlink{_token_8java}{Token.\+java}}\end{DoxyCompactItemize}
