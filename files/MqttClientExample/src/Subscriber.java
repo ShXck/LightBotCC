@@ -11,6 +11,16 @@ public class Subscriber implements MqttCallback {
     private String topic;
     private MqttClient client;
 
+
+    /**
+     * @brief Constructor de la clase subs
+     * @param server
+     * @param username
+     * @param password
+     * @param clientId
+     * @param topic
+     * @throws MqttException
+     */
     public Subscriber(String server,String username,String password,String clientId,String topic) throws MqttException {
         this.topic=topic;
         server="tcp://"+server;

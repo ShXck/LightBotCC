@@ -9,8 +9,8 @@
 
 //Global variables, can be simplified to reduce static memory use
 #define PIN D11
-const char* ssid = "OnePlus 3";
-const char* password =  "sebasmora";
+const char* ssid = "Familia-Mora-Ramirez";
+const char* password =  "tekila2013";
 const char* mqttServer = "m12.cloudmqtt.com";
 const int mqttPort = 16115;
 const char* mqttUser = "nnsmxwti";
@@ -30,11 +30,10 @@ const uint16_t colors[] = {
 
 
 
-
 void setup() {
   matrix.begin();
   matrix.setTextWrap(false);
-  matrix.setBrightness(40);
+  matrix.setBrightness(100);
   matrix.setTextColor(colors[0]);
 
 
@@ -76,25 +75,36 @@ void setup() {
 //Function that processes incoming message
 void callback(char* topic, byte* payload, unsigned int length) {
 
-  Serial.print("Message arrived in topic: ");
-  Serial.println(topic);
-  std::string message="";
-
-  Serial.print("Message:");
+  char char_array[length];
   for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
-    message+=(char)payload[i];
+    char_array[i]=(char)payload[i];
   }
 
-  //echo del mensaje
-  const char* m = message.c_str();
-  client.publish(publish_topic1, m);
+  //The buffer size does not match with the size of the incomming string, it's calculated by the utility found in https://arduinojson.org/assistant/
+  const size_t bufferSize = JSON_ARRAY_SIZE(768) + JSON_OBJECT_SIZE(2) + 1730;
+  DynamicJsonBuffer jsonBuffer(bufferSize);
+  JsonObject& root = jsonBuffer.parseObject(char_array);
+  jsonBuffer.clear();
+ if (!root.success()) {
+   Serial.println("parseObject() failed");
+ }
 
 
-  Serial.println();
+JsonArray& jsonArray = root["process"];
+Serial.println(jsonArray.get<int>(0));
+Serial.println(jsonArray.size());
+Serial.println(root["iD"].asString());
+
+  // //echo del mensaje
+  // const char* m = message.c_str();
+  // //Serial.println(m);
+  // client.publish(publish_topic1, m);
   Serial.println("-----------------------");
 
 }
+/**
+@brief Function for reconnecting to mqtt broker if connection is lost.
+*/
 
 void reconnect() {
   // Loop until we're reconnected

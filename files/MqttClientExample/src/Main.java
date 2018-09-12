@@ -8,6 +8,8 @@ import java.io.IOException;
 //Si hay que recibir datos, hay que editar el método Subscriber.messageArrived, la biblioteca se encarga de escucharlo constantemente
 /*OJO el topic es jerarquico, tiene estructura de directorio, ejemplo:  test_topic/topic_1/topic_2, si alguien se subscribe a "test_topic" le llegaran
 todos los mensajes de "topic_1" y "topic_2", si alguien se subscribe a "topic_1" solo le llegan los mensajes de ese topic*/
+
+
 public class Main {
     public static void main(String[] args) throws MqttException {
         //Basta con instanciar un Subscriber para iniciar la conexión con el broker

@@ -2,163 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba960db6-b40e-420f-875d-d2035480905d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Player_app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/json_simple_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/control/Jump.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/control/Light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/control/P1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/control/P2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/control/Tleft.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/control/Tright.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/control/Up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/control/pLAY.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/control/pause.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/control/play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/library/json-simple-1.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/music/LBots.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/music/WaLLe_Music.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/users/dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/users/girl9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/users/men.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/wallpaper/celeste.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/wallpaper/dark.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/wallpaper/light_bot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/wallpaper/lightbot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/wallpaper/lightbot2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/wallpaper/playLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/resource/wallpaper/roza.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/sample/Controller.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/sample/Instructions.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/sample/Interface.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/sample/Interface.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/sample/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/out/production/LightBotCC/sample/main.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/control/Jump.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/control/Light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/control/P1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/control/P2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/control/Tleft.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/control/Tright.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/control/Up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/control/pLAY.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/control/pause.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/control/play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/library/json-simple-1.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/music/LBots.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/users/dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/users/girl9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/users/men.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/wallpaper/celeste.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/wallpaper/dark.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/wallpaper/light_bot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/wallpaper/lightbot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/wallpaper/lightbot2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/wallpaper/playLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/resource/wallpaper/roza.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/sample/Instructions.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/sample/Interface.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LightBotC/src/sample/Interface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Player_app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/allclasses-frame.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/allclasses-noframe.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/constant-values.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deprecated-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/help-doc.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-10.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-11.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-12.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-13.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-14.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-4.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-5.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-6.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-7.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-8.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-files/index-9.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/control/Jump.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/control/Light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/control/P1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/control/P2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/control/Tleft.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/control/Tright.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/control/Up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/control/instr.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/control/pLAY.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/control/pause.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/control/play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/library/json-simple-1.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/library/org.eclipse.paho.client.mqttv3-1.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/music/LBots.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/music/WaLLe_Music.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/users/dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/users/girl9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/users/men.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/wallpaper/celeste.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/wallpaper/dark.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/wallpaper/light_bot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/wallpaper/lightbot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/wallpaper/lightbot2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/wallpaper/playLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/resource/wallpaper/roza.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/sample/Controller.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/sample/Instructions.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/sample/Interface.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/sample/Interface.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/sample/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/sample/Subscriber.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Player_app/sample/main.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/overview-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-list" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sample/Controller.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sample/Interface.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sample/Main.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sample/package-frame.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sample/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sample/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/control/Jump.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/control/Light.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/control/P1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/control/P2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/control/Tleft.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/control/Tright.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/control/Up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/control/instr.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/control/pLAY.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/control/pause.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/control/play.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/library/json-simple-1.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/library/org.eclipse.paho.client.mqttv3-1.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/music/LBots.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/music/WaLLe_Music.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/users/dark.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/users/girl9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/users/men.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/wallpaper/celeste.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/wallpaper/dark.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/wallpaper/light_bot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/wallpaper/lightbot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/wallpaper/lightbot2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/wallpaper/playLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/wallpaper/roza.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Instructions.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Interface.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Interface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Process.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/main.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LightBotC/src/resource/users/inst.png" beforeDir="false" afterPath="$PROJECT_DIR$/LightBotC/src/resource/control/instr.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Player_app/sample/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Player_app/sample/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../files/MqttClientExample/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../files/MqttClientExample/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -201,78 +52,40 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
+            <state relative-caret-position="2469">
               <caret line="447" column="18" selection-start-line="447" selection-start-column="18" selection-end-line="447" selection-end-column="18" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#4436#4437#0" expanded="true" />
-                <element signature="e#4475#4476#0" expanded="true" />
-                <element signature="e#4508#4509#0" expanded="true" />
-                <element signature="e#4544#4545#0" expanded="true" />
-                <element signature="e#4576#4577#0" expanded="true" />
-                <element signature="e#4612#4613#0" expanded="true" />
-                <element signature="e#13666#13930#0" />
-                <element signature="e#14068#14399#0" />
-                <element signature="e#14405#14920#0" />
-                <element signature="e#15931#16132#0" />
-                <element signature="e#16137#16338#0" />
-                <element signature="e#16343#16544#0" />
-                <element signature="e#16549#16750#0" />
-                <element signature="e#16755#16956#0" />
-                <element signature="e#16961#17162#0" />
-                <element signature="e#17167#17368#0" />
-                <element signature="e#17373#17574#0" />
-                <element signature="e#17579#17780#0" />
-                <element signature="e#17785#17988#0" />
-                <element signature="e#17993#18197#0" />
-                <element signature="e#18202#18406#0" />
-                <element signature="e#18413#18619#0" />
-                <element signature="e#18624#18830#0" />
-                <element signature="e#18835#19041#0" />
-                <element signature="e#19046#19252#0" />
-                <element signature="e#19257#19463#0" />
-                <element signature="e#19468#19674#0" />
-                <element signature="e#19679#19885#0" />
-                <element signature="e#19890#20096#0" />
-                <element signature="e#20102#20337#0" />
-                <element signature="e#20342#20553#0" />
-                <element signature="e#20558#20769#0" />
-                <element signature="e#20774#20985#0" />
-                <element signature="e#20990#21201#0" />
-                <element signature="e#21206#21417#0" />
-                <element signature="e#21422#21633#0" />
-                <element signature="e#21638#21849#0" />
-                <element signature="e#21856#23424#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="Interface.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Interface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
+            <state relative-caret-position="68">
               <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="Instructions.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Instructions.fxml">
-          <provider selected="true" editor-type-id="text-editor" />
           <provider editor-type-id="JavaFX-Scene-Builder" />
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="Subscriber.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Subscriber.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="82" column="1" lean-forward="true" selection-start-line="82" selection-start-column="1" selection-end-line="82" selection-end-column="1" />
+            <state relative-caret-position="1326">
+              <caret line="82" column="1" selection-start-line="82" selection-start-column="1" selection-end-line="82" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -280,30 +93,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="Process.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Process.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="187">
               <caret line="11" column="17" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="17" />
-              <folding>
-                <element signature="e#228#229#0" expanded="true" />
-                <element signature="e#257#258#0" expanded="true" />
-                <element signature="e#307#308#0" expanded="true" />
-                <element signature="e#343#344#0" expanded="true" />
-                <element signature="e#372#373#0" expanded="true" />
-                <element signature="e#397#398#0" expanded="true" />
-                <element signature="e#433#434#0" expanded="true" />
-                <element signature="e#461#462#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+            <state relative-caret-position="238">
+              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
               <folding>
                 <element signature="e#898#899#0" expanded="true" />
                 <element signature="e#926#927#0" expanded="true" />
@@ -312,10 +115,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/main.fxml">
-          <provider selected="true" editor-type-id="text-editor" />
           <provider editor-type-id="JavaFX-Scene-Builder" />
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -341,6 +144,15 @@
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="1366" />
     <option name="height" value="742" />
@@ -353,6 +165,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -375,15 +189,15 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536107824166" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/resource/library/org.eclipse.paho.client.mqttv3-1.2.0.jar!/" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
@@ -404,9 +218,6 @@
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="sample.Main" />
       <module name="Player_app" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
   </component>
   <component name="SvnConfiguration">
@@ -419,6 +230,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1536099162872</updated>
+      <workItem from="1536113092592" duration="127000" />
     </task>
     <task id="LOCAL-00001" summary="Add class Subscriber and library MQTT">
       <created>1536103818488</created>
@@ -430,37 +242,45 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="127000" />
+  </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-1" width="1366" height="741" extended-state="6" />
+    <frame x="0" y="-1" width="1920" height="1049" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.32847896" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32847896" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Maven Projects" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32847896" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32821077" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2529412" />
+      <window_info anchor="right" id="Database" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -470,20 +290,31 @@
     <option name="LAST_COMMIT_MESSAGE" value="Add class Subscriber and library MQTT" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7106">
+          <caret line="447" column="18" selection-start-line="447" selection-start-column="18" selection-end-line="447" selection-end-column="18" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Interface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Instructions.fxml">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/main.fxml">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Subscriber.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
+        <state relative-caret-position="1326">
           <caret line="82" column="1" lean-forward="true" selection-start-line="82" selection-start-column="1" selection-end-line="82" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -493,32 +324,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Process.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="187">
           <caret line="11" column="17" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
           <folding>
-            <element signature="e#228#229#0" expanded="true" />
-            <element signature="e#257#258#0" expanded="true" />
-            <element signature="e#307#308#0" expanded="true" />
-            <element signature="e#343#344#0" expanded="true" />
-            <element signature="e#372#373#0" expanded="true" />
-            <element signature="e#397#398#0" expanded="true" />
-            <element signature="e#433#434#0" expanded="true" />
-            <element signature="e#461#462#0" expanded="true" />
+            <element signature="e#898#899#0" expanded="true" />
+            <element signature="e#926#927#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/main.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Instructions.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/main.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Subscriber.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1326">
+          <caret line="82" column="1" selection-start-line="82" selection-start-column="1" selection-end-line="82" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Process.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Interface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
+        <state relative-caret-position="68">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+        <state relative-caret-position="238">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
           <folding>
             <element signature="e#898#899#0" expanded="true" />
             <element signature="e#926#927#0" expanded="true" />
@@ -528,49 +392,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
+        <state relative-caret-position="2469">
           <caret line="447" column="18" selection-start-line="447" selection-start-column="18" selection-end-line="447" selection-end-column="18" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#4436#4437#0" expanded="true" />
-            <element signature="e#4475#4476#0" expanded="true" />
-            <element signature="e#4508#4509#0" expanded="true" />
-            <element signature="e#4544#4545#0" expanded="true" />
-            <element signature="e#4576#4577#0" expanded="true" />
-            <element signature="e#4612#4613#0" expanded="true" />
-            <element signature="e#13666#13930#0" />
-            <element signature="e#14068#14399#0" />
-            <element signature="e#14405#14920#0" />
-            <element signature="e#15931#16132#0" />
-            <element signature="e#16137#16338#0" />
-            <element signature="e#16343#16544#0" />
-            <element signature="e#16549#16750#0" />
-            <element signature="e#16755#16956#0" />
-            <element signature="e#16961#17162#0" />
-            <element signature="e#17167#17368#0" />
-            <element signature="e#17373#17574#0" />
-            <element signature="e#17579#17780#0" />
-            <element signature="e#17785#17988#0" />
-            <element signature="e#17993#18197#0" />
-            <element signature="e#18202#18406#0" />
-            <element signature="e#18413#18619#0" />
-            <element signature="e#18624#18830#0" />
-            <element signature="e#18835#19041#0" />
-            <element signature="e#19046#19252#0" />
-            <element signature="e#19257#19463#0" />
-            <element signature="e#19468#19674#0" />
-            <element signature="e#19679#19885#0" />
-            <element signature="e#19890#20096#0" />
-            <element signature="e#20102#20337#0" />
-            <element signature="e#20342#20553#0" />
-            <element signature="e#20558#20769#0" />
-            <element signature="e#20774#20985#0" />
-            <element signature="e#20990#21201#0" />
-            <element signature="e#21206#21417#0" />
-            <element signature="e#21422#21633#0" />
-            <element signature="e#21638#21849#0" />
-            <element signature="e#21856#23424#0" />
           </folding>
         </state>
       </provider>
@@ -615,7 +441,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8 (1)</last-edited>
+          <last-edited>1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

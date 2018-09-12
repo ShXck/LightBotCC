@@ -1,0 +1,282 @@
+\hypertarget{mqtt__esp8266_8cpp}{}\section{/home/sebas97012/\+Documents/\+Development/\+Light\+Bot\+C\+C/\+Board/src/mqtt\+\_\+esp8266.cpp File Reference}
+\label{mqtt__esp8266_8cpp}\index{/home/sebas97012/\+Documents/\+Development/\+Light\+Bot\+C\+C/\+Board/src/mqtt\+\_\+esp8266.\+cpp@{/home/sebas97012/\+Documents/\+Development/\+Light\+Bot\+C\+C/\+Board/src/mqtt\+\_\+esp8266.\+cpp}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$E\+S\+P8266\+Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include $<$Pub\+Sub\+Client.\+h$>$}\newline
+{\ttfamily \#include $<$Adafruit\+\_\+\+G\+F\+X.\+h$>$}\newline
+{\ttfamily \#include $<$Adafruit\+\_\+\+Neo\+Matrix.\+h$>$}\newline
+{\ttfamily \#include $<$Adafruit\+\_\+\+Neo\+Pixel.\+h$>$}\newline
+{\ttfamily \#include $<$S\+P\+I.\+h$>$}\newline
+{\ttfamily \#include $<$Arduino\+Json.\+h$>$}\newline
+Include dependency graph for mqtt\+\_\+esp8266.\+cpp\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{mqtt__esp8266_8cpp_ae1a27401b7fb01ccb9a82dbddbb54eea}{P\+IN}}~D11
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Pub\+Sub\+Client \mbox{\hyperlink{mqtt__esp8266_8cpp_aee63e84c606cfaefce454689113c636c}{client}} (\mbox{\hyperlink{mqtt__esp8266_8cpp_abd77e757e4b3bb6f1e4b42b21ea9e040}{esp\+Client}})
+\item 
+void \mbox{\hyperlink{mqtt__esp8266_8cpp_ac3a129f66dc859e2b7279565f4e1de78}{callback}} (char $\ast$topic, byte $\ast$payload, unsigned int length)
+\item 
+void \mbox{\hyperlink{mqtt__esp8266_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{mqtt__esp8266_8cpp_a4bcd6ce7d04c38f8c4ff908d1fc50f86}{reconnect}} ()
+\begin{DoxyCompactList}\small\item\em Function for reconnecting to mqtt broker if connection is lost. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{mqtt__esp8266_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{mqtt__esp8266_8cpp_a587ba0cb07f02913598610049a3bbb79}{ssid}} = \char`\"{}One\+Plus 3\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{mqtt__esp8266_8cpp_aa4a2ebcb494493f648ae1e6975672575}{password}} = \char`\"{}sebasmora\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{mqtt__esp8266_8cpp_a5c3a4fd5ba9caa71fbbf780cf3f454fa}{mqtt\+Server}} = \char`\"{}m12.\+cloudmqtt.\+com\char`\"{}
+\item 
+const int \mbox{\hyperlink{mqtt__esp8266_8cpp_ab0e976d2d404b48fc6943d0eff7a5995}{mqtt\+Port}} = 16115
+\item 
+const char $\ast$ \mbox{\hyperlink{mqtt__esp8266_8cpp_a7d012d8689a06650286105a11fe38024}{mqtt\+User}} = \char`\"{}nnsmxwti\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{mqtt__esp8266_8cpp_a6670f1bf8a46e53e0cb698faccd68b0c}{mqtt\+Password}} = \char`\"{}37\+K\+Kt6sf8\+N6\+L\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{mqtt__esp8266_8cpp_a6c86d8922f568b320744038b01df7568}{listen\+\_\+topic1}} = \char`\"{}esp/test\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{mqtt__esp8266_8cpp_a1e3ff6cdb496f2f76b91fa90d3b790a8}{publish\+\_\+topic1}} = \char`\"{}esp/echo\char`\"{}
+\item 
+const char $\ast$ \mbox{\hyperlink{mqtt__esp8266_8cpp_a8f49f435adc17c7e890b923379247887}{client\+ID}} = \char`\"{}E\+S\+P8266\+Client\char`\"{}
+\item 
+Wi\+Fi\+Client \mbox{\hyperlink{mqtt__esp8266_8cpp_abd77e757e4b3bb6f1e4b42b21ea9e040}{esp\+Client}}
+\item 
+Adafruit\+\_\+\+Neo\+Matrix \mbox{\hyperlink{mqtt__esp8266_8cpp_a15bfe1fffe2ebd6b777745d50ce33944}{matrix}}
+\item 
+const uint16\+\_\+t \mbox{\hyperlink{mqtt__esp8266_8cpp_a8b2db039186aaccef334b24286527b98}{colors}} \mbox{[}$\,$\mbox{]}
+\item 
+int \mbox{\hyperlink{mqtt__esp8266_8cpp_a6150e0515f7202e2fb518f7206ed97dc}{x}} = matrix.\+width()
+\item 
+int \mbox{\hyperlink{mqtt__esp8266_8cpp_ab2391a688166a14a4af286bcc8a8b072}{pass}} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_ae1a27401b7fb01ccb9a82dbddbb54eea}\label{mqtt__esp8266_8cpp_ae1a27401b7fb01ccb9a82dbddbb54eea}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!P\+IN@{P\+IN}}
+\index{P\+IN@{P\+IN}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{P\+IN}{PIN}}
+{\footnotesize\ttfamily \#define P\+IN~D11}
+
+
+
+Definition at line 11 of file mqtt\+\_\+esp8266.\+cpp.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_ac3a129f66dc859e2b7279565f4e1de78}\label{mqtt__esp8266_8cpp_ac3a129f66dc859e2b7279565f4e1de78}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!callback@{callback}}
+\index{callback@{callback}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{callback()}{callback()}}
+{\footnotesize\ttfamily void callback (\begin{DoxyParamCaption}\item[{char $\ast$}]{topic,  }\item[{byte $\ast$}]{payload,  }\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Definition at line 77 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_aee63e84c606cfaefce454689113c636c}\label{mqtt__esp8266_8cpp_aee63e84c606cfaefce454689113c636c}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!client@{client}}
+\index{client@{client}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{client()}{client()}}
+{\footnotesize\ttfamily Pub\+Sub\+Client client (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{mqtt__esp8266_8cpp_abd77e757e4b3bb6f1e4b42b21ea9e040}{esp\+Client}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{mqtt__esp8266_8cpp_afe461d27b9c48d5921c00d521181f12f}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!loop@{loop}}
+\index{loop@{loop}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 129 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_a4bcd6ce7d04c38f8c4ff908d1fc50f86}\label{mqtt__esp8266_8cpp_a4bcd6ce7d04c38f8c4ff908d1fc50f86}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!reconnect@{reconnect}}
+\index{reconnect@{reconnect}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{reconnect()}{reconnect()}}
+{\footnotesize\ttfamily void reconnect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function for reconnecting to mqtt broker if connection is lost. 
+
+
+
+Definition at line 102 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_a4fc01d736fe50cf5b977f755b675f11d}\label{mqtt__esp8266_8cpp_a4fc01d736fe50cf5b977f755b675f11d}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!setup@{setup}}
+\index{setup@{setup}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 34 of file mqtt\+\_\+esp8266.\+cpp.
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_a8f49f435adc17c7e890b923379247887}\label{mqtt__esp8266_8cpp_a8f49f435adc17c7e890b923379247887}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!client\+ID@{client\+ID}}
+\index{client\+ID@{client\+ID}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{client\+ID}{clientID}}
+{\footnotesize\ttfamily const char$\ast$ client\+ID = \char`\"{}E\+S\+P8266\+Client\char`\"{}}
+
+
+
+Definition at line 20 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_a8b2db039186aaccef334b24286527b98}\label{mqtt__esp8266_8cpp_a8b2db039186aaccef334b24286527b98}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!colors@{colors}}
+\index{colors@{colors}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{colors}{colors}}
+{\footnotesize\ttfamily const uint16\+\_\+t colors\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{  \mbox{\hyperlink{mqtt__esp8266_8cpp_a15bfe1fffe2ebd6b777745d50ce33944}{matrix}}.Color(255, 0, 0), \mbox{\hyperlink{mqtt__esp8266_8cpp_a15bfe1fffe2ebd6b777745d50ce33944}{matrix}}.Color(0, 255, 0), \mbox{\hyperlink{mqtt__esp8266_8cpp_a15bfe1fffe2ebd6b777745d50ce33944}{matrix}}.Color(0, 0, 255) \}}
+\end{DoxyCode}
+
+
+Definition at line 28 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_abd77e757e4b3bb6f1e4b42b21ea9e040}\label{mqtt__esp8266_8cpp_abd77e757e4b3bb6f1e4b42b21ea9e040}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!esp\+Client@{esp\+Client}}
+\index{esp\+Client@{esp\+Client}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{esp\+Client}{espClient}}
+{\footnotesize\ttfamily Wi\+Fi\+Client esp\+Client}
+
+
+
+Definition at line 21 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_a6c86d8922f568b320744038b01df7568}\label{mqtt__esp8266_8cpp_a6c86d8922f568b320744038b01df7568}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!listen\+\_\+topic1@{listen\+\_\+topic1}}
+\index{listen\+\_\+topic1@{listen\+\_\+topic1}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{listen\+\_\+topic1}{listen\_topic1}}
+{\footnotesize\ttfamily const char$\ast$ listen\+\_\+topic1 = \char`\"{}esp/test\char`\"{}}
+
+
+
+Definition at line 18 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_a15bfe1fffe2ebd6b777745d50ce33944}\label{mqtt__esp8266_8cpp_a15bfe1fffe2ebd6b777745d50ce33944}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!matrix@{matrix}}
+\index{matrix@{matrix}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{matrix}{matrix}}
+{\footnotesize\ttfamily Adafruit\+\_\+\+Neo\+Matrix matrix}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= Adafruit\_NeoMatrix(8, 8, \mbox{\hyperlink{mqtt__esp8266_8cpp_ae1a27401b7fb01ccb9a82dbddbb54eea}{PIN}},}
+\DoxyCodeLine{  NEO\_MATRIX\_TOP     + NEO\_MATRIX\_RIGHT +}
+\DoxyCodeLine{  NEO\_MATRIX\_COLUMNS + NEO\_MATRIX\_PROGRESSIVE,}
+\DoxyCodeLine{  NEO\_GRB            + NEO\_KHZ800)}
+\end{DoxyCode}
+
+
+Definition at line 24 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_a6670f1bf8a46e53e0cb698faccd68b0c}\label{mqtt__esp8266_8cpp_a6670f1bf8a46e53e0cb698faccd68b0c}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!mqtt\+Password@{mqtt\+Password}}
+\index{mqtt\+Password@{mqtt\+Password}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{mqtt\+Password}{mqttPassword}}
+{\footnotesize\ttfamily const char$\ast$ mqtt\+Password = \char`\"{}37\+K\+Kt6sf8\+N6\+L\char`\"{}}
+
+
+
+Definition at line 17 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_ab0e976d2d404b48fc6943d0eff7a5995}\label{mqtt__esp8266_8cpp_ab0e976d2d404b48fc6943d0eff7a5995}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!mqtt\+Port@{mqtt\+Port}}
+\index{mqtt\+Port@{mqtt\+Port}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{mqtt\+Port}{mqttPort}}
+{\footnotesize\ttfamily const int mqtt\+Port = 16115}
+
+
+
+Definition at line 15 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_a5c3a4fd5ba9caa71fbbf780cf3f454fa}\label{mqtt__esp8266_8cpp_a5c3a4fd5ba9caa71fbbf780cf3f454fa}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!mqtt\+Server@{mqtt\+Server}}
+\index{mqtt\+Server@{mqtt\+Server}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{mqtt\+Server}{mqttServer}}
+{\footnotesize\ttfamily const char$\ast$ mqtt\+Server = \char`\"{}m12.\+cloudmqtt.\+com\char`\"{}}
+
+
+
+Definition at line 14 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_a7d012d8689a06650286105a11fe38024}\label{mqtt__esp8266_8cpp_a7d012d8689a06650286105a11fe38024}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!mqtt\+User@{mqtt\+User}}
+\index{mqtt\+User@{mqtt\+User}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{mqtt\+User}{mqttUser}}
+{\footnotesize\ttfamily const char$\ast$ mqtt\+User = \char`\"{}nnsmxwti\char`\"{}}
+
+
+
+Definition at line 16 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_ab2391a688166a14a4af286bcc8a8b072}\label{mqtt__esp8266_8cpp_ab2391a688166a14a4af286bcc8a8b072}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!pass@{pass}}
+\index{pass@{pass}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{pass}{pass}}
+{\footnotesize\ttfamily int pass = 0}
+
+
+
+Definition at line 127 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_aa4a2ebcb494493f648ae1e6975672575}\label{mqtt__esp8266_8cpp_aa4a2ebcb494493f648ae1e6975672575}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!password@{password}}
+\index{password@{password}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{password}{password}}
+{\footnotesize\ttfamily const char$\ast$ password = \char`\"{}sebasmora\char`\"{}}
+
+
+
+Definition at line 13 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_a1e3ff6cdb496f2f76b91fa90d3b790a8}\label{mqtt__esp8266_8cpp_a1e3ff6cdb496f2f76b91fa90d3b790a8}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!publish\+\_\+topic1@{publish\+\_\+topic1}}
+\index{publish\+\_\+topic1@{publish\+\_\+topic1}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{publish\+\_\+topic1}{publish\_topic1}}
+{\footnotesize\ttfamily const char$\ast$ publish\+\_\+topic1 = \char`\"{}esp/echo\char`\"{}}
+
+
+
+Definition at line 19 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_a587ba0cb07f02913598610049a3bbb79}\label{mqtt__esp8266_8cpp_a587ba0cb07f02913598610049a3bbb79}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!ssid@{ssid}}
+\index{ssid@{ssid}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{ssid}{ssid}}
+{\footnotesize\ttfamily const char$\ast$ ssid = \char`\"{}One\+Plus 3\char`\"{}}
+
+
+
+Definition at line 12 of file mqtt\+\_\+esp8266.\+cpp.
+
+\mbox{\Hypertarget{mqtt__esp8266_8cpp_a6150e0515f7202e2fb518f7206ed97dc}\label{mqtt__esp8266_8cpp_a6150e0515f7202e2fb518f7206ed97dc}} 
+\index{mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}!x@{x}}
+\index{x@{x}!mqtt\+\_\+esp8266.\+cpp@{mqtt\+\_\+esp8266.\+cpp}}
+\subsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily int x = matrix.\+width()}
+
+
+
+Definition at line 126 of file mqtt\+\_\+esp8266.\+cpp.
+
