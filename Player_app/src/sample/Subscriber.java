@@ -50,6 +50,6 @@ public class Subscriber implements MqttCallback {
      * @see MqttCallback#messageArrived(String, MqttMessage)
      */
     public void messageArrived(String topic, MqttMessage message) throws MqttException {
-        System.out.println(String.format("[%s] %s", topic, new String(message.getPayload())));
+       // System.out.println(String.format("[%s] %s", topic, new String(message.getPayload())));
     }
 }
