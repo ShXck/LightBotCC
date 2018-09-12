@@ -1,6 +1,6 @@
 package org.tec.comp;
 
-public class Error_Msg_Handler {
+public class Message_Handler {
 
     /**
      * Crea un mensaje de error cuando no hay código en el IDE.
@@ -17,4 +17,10 @@ public class Error_Msg_Handler {
 	public static String build_code_saved_msg() {
 		return "Code successfully saved";
 	}
+
+	public static String no_such_var_found(String var) {
+	    return "Variable " + var + " is not defined.";
+    }
+
+    public static String success_build_code() { return "Code Succesfully built. No errors found."; }
 }

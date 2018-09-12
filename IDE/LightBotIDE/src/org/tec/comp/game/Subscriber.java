@@ -1,5 +1,4 @@
-package sample;
-
+package org.tec.comp.game;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
@@ -25,7 +24,7 @@ public class Subscriber implements MqttCallback {
         String[] auth = this.getAuth(uri);
         String username = auth[0];
         String password = auth[1];
-        String clientId = "App_LightBotC";
+        String clientId = "IDE";
         if (!uri.getPath().isEmpty()) {
             this.topic = uri.getPath().substring(1);
         }
@@ -73,11 +72,5 @@ public class Subscriber implements MqttCallback {
      */
     public void messageArrived(String topic, MqttMessage message) throws MqttException {
         System.out.println(String.format("[%s] %s", topic, new String(message.getPayload())));
-    }
-
-    public static void main(String[] args) throws MqttException, URISyntaxException {
-        Subscriber s = new Subscriber(System.getenv("CLOUDMQTT_URL"));
-        s.sendMessage("Hello");
-        s.sendMessage("Hello 2");
     }
 }
