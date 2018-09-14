@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.tec.comp.game.Game_Board;
+import org.tec.comp.game.Subscriber;
+import org.tec.comp.game.TransferObject;
 import org.tec.comp.interpreter.LangParser;
 import org.tec.comp.interpreter.ParseException;
 import org.tec.comp.utilities.Stream_Handler;
@@ -24,8 +28,14 @@ public class IDE_Window implements Runnable, ActionListener {
 	private final String SAVE_FILE_LBL = "Save File";
 	private final String BUILD_CODE_LBL = "Build Code";
 	private final String CONSOLE_LBL = "Console";
+	private final String SEND_CODE_LBL = "Send Code";
 
-	@Override
+	Game_Board game_board = new Game_Board();
+	Subscriber subscriber = new Subscriber("m12.cloudmqtt.com:16115","nnsmxwti","37KKt6sf8N6L","java_app","test_topic");
+
+    public IDE_Window() throws MqttException { }
+
+    @Override
 	public void run() {
 		set_components();
 	}
@@ -87,9 +97,11 @@ public class IDE_Window implements Runnable, ActionListener {
         JButton save_file_button = new JButton(SAVE_FILE_LBL);
         JButton open_file_button = new JButton(OPEN_FILE_LBL);
         JButton build_code_button = new JButton(BUILD_CODE_LBL);
+        JButton send_code_button = new JButton(SEND_CODE_LBL);
         ide_menu.add(save_file_button);
         ide_menu.add(open_file_button);
         ide_menu.add(build_code_button);
+        ide_menu.add(send_code_button);
         
         save_file_button.addActionListener(new ActionListener() {
 
@@ -112,9 +124,25 @@ public class IDE_Window implements Runnable, ActionListener {
                     if(!LangParser.msg_list.isEmpty()) {
                         set_console_msg(build_console_msg(LangParser.msg_list), Color.RED);
                         LangParser.clean_compilation_data();
-                    } else set_console_msg(Message_Handler.success_build_code(), Color.BLUE);
+                    } else {
+                        set_console_msg(Message_Handler.success_build_code(), Color.BLUE);
+                        game_board.build_board(LangParser.code_actions);
+                        //game_board.print_board();
+                    }
                 }
 			}      	
+        });
+
+        send_code_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TransferObject to = new TransferObject(game_board.get_board());
+                try {
+                    subscriber.sendMessage(to.to_json());
+                } catch (MqttException e1) {
+                    e1.printStackTrace();
+                }
+            }
         });
         
         coding_field = new JTextPane();
