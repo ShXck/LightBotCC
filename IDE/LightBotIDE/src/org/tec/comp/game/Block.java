@@ -1,22 +1,18 @@
 package org.tec.comp.game;
 
-import org.tec.comp.interpreter.Pair;
-
 public class Block {
 
     private int id;
     private int height;
     private Block_Type block_type;
-    private Pair<Integer, Integer> block_pos;
 
     public Block(Block_Type type, int bheight) {
         set_block(type, bheight);
-        block_pos = new Pair<>(-1,-1);
     }
 
     public void set_block(Block_Type type, int bheight) {
         block_type = type;
-        height = 0;
+        height = bheight;
 
         switch (type) {
             case NORMAL_BLOCK: {
@@ -25,15 +21,14 @@ public class Block {
             }
             case HIGH_BLOCK: {
                 id = 1;
-                height = bheight;
                 break;
             }
             case BLUE_LIGHT: {
                 id = 2;
                 break;
             }
-            case WALL: {
-                id = 3;
+            case BLANK: {
+                id = 9;
                 break;
             }
             case ROBOT: {
@@ -43,12 +38,59 @@ public class Block {
         }
     }
 
-    public void set_block_pos(Pair<Integer,Integer> pos) {
-        block_pos = pos;
-    }
 
-    public void set_block_pos(int x, int y) {
-        block_pos.update_values(x, y);
+    private String str_repr() {
+        StringBuilder sb = new StringBuilder("XXXX");
+
+        switch (block_type) {
+            case NORMAL_BLOCK: {
+                sb.setCharAt(0, '1');
+                sb.setCharAt(1, '0');
+                sb.setCharAt(3, '0');
+                break;
+            }
+            case HIGH_BLOCK: {
+                if (height == 2) sb.setCharAt(0, '2');
+                else sb.setCharAt(0, '3');
+                sb.setCharAt(1, '0');
+                sb.setCharAt(3, '0');
+                break;
+            }
+            case BLUE_LIGHT:{
+                if (height == 2) {
+                    sb.setCharAt(0, '2');
+                    sb.setCharAt(1, '1');
+                } else if(height > 2) {
+                    sb.setCharAt(0, '3');
+                    sb.setCharAt(1, '1');
+                } else {
+                    sb.setCharAt(1, '1');
+                    sb.setCharAt(0, '1');
+                }
+                sb.setCharAt(3, '0');
+                break;
+            }
+            case ROBOT: {
+                if (height == 2) sb.setCharAt(0, '2');
+                else if(height > 2) {
+                    sb.setCharAt(0, '3');
+                } else {
+                    sb.setCharAt(0, '1');
+                }
+                sb.setCharAt(1,'0');
+                sb.setCharAt(3, '1');
+                break;
+            }
+            case BLANK: {
+                sb.setCharAt(0, '1');
+                sb.setCharAt(1, '0');
+                sb.setCharAt(3, '0');
+                break;
+            }
+        }
+        sb.setCharAt(2, '0');
+
+        return sb.toString();
     }
 
     public void set_height(int bheight) {
@@ -67,8 +109,12 @@ public class Block {
         return block_type;
     }
 
+    public int to_int() {
+        return Integer.parseInt(str_repr());
+    }
+
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return str_repr();
     }
 }
