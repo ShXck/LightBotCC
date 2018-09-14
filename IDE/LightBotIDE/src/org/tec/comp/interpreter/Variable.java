@@ -4,15 +4,18 @@ public class Variable {
 
     private int var_value;
     private String var_id;
+    private boolean global;
 
-    public Variable(String id, int val) {
+    public Variable(String id, int val, boolean is_global) {
         var_value = val;
         var_id = id;
+        global = is_global;
     }
 
-    public Variable(String id) {
+    public Variable(String id, boolean is_global) {
         var_id = id;
         var_value = -1;
+        global = is_global;
     }
 
     public void set_value(int val) {
@@ -39,9 +42,11 @@ public class Variable {
         return var_value;
     }
 
+    public boolean is_global() { return global; }
+
     @Override
     public String toString() {
-        return "(" + var_id + "," + String.valueOf(var_value) + ")";
+        return var_id + ":" + String.valueOf(var_value);
     }
 
     @Override

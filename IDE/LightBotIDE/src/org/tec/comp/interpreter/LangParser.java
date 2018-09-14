@@ -3,8 +3,7 @@
 package org.tec.comp.interpreter;
 
 import org.tec.comp.Message_Handler;
-import org.tec.comp.game.Block;
-import org.tec.comp.game.Block_Type;
+import org.tec.comp.game.Direction;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,11 +14,21 @@ public class LangParser implements TestConstants {
 
     public static ArrayList<String> msg_list = new ArrayList<>();
     public static ArrayList<Variable> var_list = new ArrayList<>();
-    public static ArrayList<Block> block_list = new ArrayList<>();
+    public static ArrayList<Variable> mod_var_list = new ArrayList<>();
+    public static ArrayList<Position_Procedure> code_actions = new ArrayList<>();
+    public static ArrayList<Multiple_Action_Container> code_procedures = new ArrayList<>();
+
+    private static int proc_counter = 0;
+    private static Position_Procedure current_pos_proc = new Position_Procedure();
+    private static Multiple_Action_Container current_loop; // KEEP, FOR, WHEN.
+    private static Multiple_Action_Container current_proc; // Procedures.
+    private static boolean is_loop_active = false;
+    private static boolean is_proc_active = false;
+
 
     /*public static void main(String[] args) throws ParseException {
         try{
-            LangParser analyser = new LangParser(System.in);
+            Test analyser = new Test(System.in);
             analyser.Program();
             System.out.println("Successful compilation");
         } catch(ParseException pe) {
@@ -28,6 +37,13 @@ public class LangParser implements TestConstants {
         }
     }*/
 
+    static private Variable find_mod_var(String id) {
+        for(Variable v : mod_var_list) {
+            if(v.get_id().equals(id)) return v;
+        }
+        return null;
+    }
+
     static private Variable find_var(String id) {
         for(Variable v : var_list) {
             if(v.get_id().equals(id)) return v;
@@ -35,13 +51,24 @@ public class LangParser implements TestConstants {
         return null;
     }
 
+    static private Multiple_Action_Container find_proc(String name) {
+        for(Multiple_Action_Container c : code_procedures) {
+            if(c.get_proc_name().equals(name)) return c;
+        }
+        return null;
+    }
+
     static public void parse(String file) {
         try{
+            clean_compilation_data();
             LangParser analyser = new LangParser(new BufferedReader(new FileReader(file)));
             analyser.Program();
-            System.out.println("Successful compilation");
+            System.out.println("Successful compilation"); //  TODO: FROM HERE THE MAP CONSTRUCTION SHOULD BEGIN.
+            System.out.println(var_list);
+            System.out.println(code_actions);
+            System.out.println(code_procedures);
         } catch(ParseException pe) {
-          msg_list.add(pe.getMessage());
+            msg_list.add(pe.getMessage());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -49,234 +76,418 @@ public class LangParser implements TestConstants {
 
     static public void clean_compilation_data() {
         msg_list.clear();
-        block_list.clear();
         var_list.clear();
+        code_actions.clear();
+        mod_var_list.clear();
+    }
+
+    static final public void Program() throws ParseException {
+        IdField();
+        Main();
+        Procedures();
+        jj_consume_token(0);
+        code_actions.add(current_pos_proc);
+    }
+
+    static final public void Main() throws ParseException {
+        jj_consume_token(BEGIN);
+        jj_consume_token(LBRACKET);
+        Expressions();
+        jj_consume_token(RBRACKET);
+        jj_consume_token(END);
+    }
+
+    static final public void VarDeclaration() throws ParseException {
+        jj_consume_token(VARIABLE);
+        Token id_token = jj_consume_token(IDENTIFIER);
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+            case SEMICOLON:{
+                jj_consume_token(SEMICOLON);
+                Variable mod_var;
+                Variable unmod_var;
+                if(is_loop_active) {
+                    mod_var = new Variable(id_token.image, false);
+                    unmod_var = new Variable(id_token.image, false);
+                    current_loop.add_action_to_container(Action_Type.DECL_VAR, mod_var, null, -1);
+                } else if(is_proc_active){
+                    mod_var = new Variable(id_token.image, false);
+                    unmod_var = new Variable(id_token.image, false);
+                    current_proc.add_action_to_container(Action_Type.DECL_VAR, mod_var, null, -1);
+                } else {
+                    if(current_pos_proc.is_empty())  {
+                        mod_var = new Variable(id_token.image, true);
+                        unmod_var = new Variable(id_token.image, false);
+                    }
+                    else{
+                        mod_var = new Variable(id_token.image, false);
+                        unmod_var = new Variable(id_token.image, false);
+                        current_pos_proc.add_action(Action_Type.DECL_VAR, mod_var, null, -1);
+                    }
+                }
+                var_list.add(unmod_var);
+                mod_var_list.add(mod_var);
+                break;
+            }
+            case EQUAL:{
+                jj_consume_token(EQUAL);
+                Token value_token = jj_consume_token(INTEGER);
+                jj_consume_token(SEMICOLON);
+                Variable mod_var;
+                Variable unmod_var;
+                if(is_loop_active) {
+                    mod_var = new Variable(id_token.image, Integer.parseInt(value_token.image), false);
+                    unmod_var = new Variable(id_token.image, Integer.parseInt(value_token.image), false);
+                    current_loop.add_action_to_container(Action_Type.DECL_VAR, mod_var, null, -1);
+                } else if(is_proc_active) {
+                    mod_var = new Variable(id_token.image, Integer.parseInt(value_token.image), false);
+                    unmod_var = new Variable(id_token.image, Integer.parseInt(value_token.image), false);
+                    current_proc.add_action_to_container(Action_Type.DECL_VAR, mod_var, null, -1);
+                } else {
+                    if(current_pos_proc.is_empty()) {
+                        mod_var = new Variable(id_token.image, Integer.parseInt(value_token.image), true);
+                        unmod_var = new Variable(id_token.image, Integer.parseInt(value_token.image), true);
+                    }
+                    else {
+                        mod_var = new Variable(id_token.image, Integer.parseInt(value_token.image), false);
+                        unmod_var = new Variable(id_token.image, Integer.parseInt(value_token.image), false);
+                        current_pos_proc.add_action(Action_Type.DECL_VAR, mod_var, null, -1);
+                    }
+                }
+                var_list.add(unmod_var);
+                mod_var_list.add(mod_var);
+                break;
+            }
+            default:
+                jj_la1[0] = jj_gen;
+                jj_consume_token(-1);
+                throw new ParseException();
+        }
+    }
+
+    static final public void VarSet() throws ParseException {
+        jj_consume_token(SET);
+        Token token_id = jj_consume_token(IDENTIFIER);
+        jj_consume_token(EQUAL);
+        Token token_val = jj_consume_token(INTEGER);
+        jj_consume_token(SEMICOLON);
+
+        Variable mod_var = find_mod_var(token_id.image);
+        Variable unmod_var = find_var(token_id.image); //
+
+        try{ // If mod_var is null the variable doesn't exist, so there's an error thrown in the console of the IDE.
+            mod_var.set_value(Integer.parseInt(token_val.image));
+            if(is_loop_active) {
+                current_loop.add_action_to_container(Action_Type.SET_VAR, unmod_var, null, Integer.parseInt(token_val.image));
+            } else if(is_proc_active) {
+                current_proc.add_action_to_container(Action_Type.SET_VAR, unmod_var, null, Integer.parseInt(token_val.image));
+            } else {
+                current_pos_proc.add_action(Action_Type.SET_VAR, unmod_var, null, Integer.parseInt(token_val.image));
+            }
+        } catch (NullPointerException npe) {
+            msg_list.add(Message_Handler.no_such_var_found(token_id.image));
+        }
+    }
+
+    static final public void VarIncrement() throws ParseException {
+        jj_consume_token(INCREMENT);
+        Token token_id = jj_consume_token(IDENTIFIER);
+        jj_consume_token(SEMICOLON);
+
+        Variable var = find_mod_var(token_id.image);
+        Variable unmod_var = find_var(token_id.image);
+
+        try {
+            var.increment();
+            if (is_loop_active) {
+                current_loop.add_action_to_container(Action_Type.INCR_VAR, unmod_var, null, -1);
+            } else if(is_proc_active) {
+                current_proc.add_action_to_container(Action_Type.INCR_VAR, unmod_var, null, -1);
+            } else {
+                current_pos_proc.add_action(Action_Type.INCR_VAR, unmod_var, null, -1);
+            }
+        } catch (NullPointerException npe) {
+            msg_list.add(Message_Handler.no_such_var_found(token_id.image));
+        }
+    }
+
+    static final public void VarDecrement() throws ParseException {
+        jj_consume_token(DECREMENT);
+        Token token_id = jj_consume_token(IDENTIFIER);
+        jj_consume_token(SEMICOLON);
+
+        Variable mod_var = find_mod_var(token_id.image);
+        Variable unmod_var = find_var(token_id.image);
+
+        try {
+            mod_var.decrement();
+            if (is_loop_active) {
+                current_loop.add_action_to_container(Action_Type.DECR_VAR, unmod_var, null, -1);
+            } else if(is_proc_active) {
+                current_proc.add_action_to_container(Action_Type.DECR_VAR, unmod_var, null, -1);
+            } else {
+                current_pos_proc.add_action(Action_Type.DECR_VAR, unmod_var, null, -1);
+            }
+        } catch (NullPointerException npe) {
+            msg_list.add(Message_Handler.no_such_var_found(token_id.image));
+        }
+    }
+
+    static final public void PlaceBlock() throws ParseException {
+        jj_consume_token(PLACEBLOCK);
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+            case INTEGER:{
+                Token token_n = jj_consume_token(INTEGER); // block quantity n (placeblock n).
+                if (is_loop_active) {
+                    current_loop.add_action_to_container(Action_Type.PLACE_BLOCK, Integer.parseInt(token_n.image));
+                } else if(is_proc_active) {
+                    current_proc.add_action_to_container(Action_Type.PLACE_BLOCK, Integer.parseInt(token_n.image));
+                }else {
+                    current_pos_proc.add_action(Action_Type.PLACE_BLOCK, Integer.parseInt(token_n.image));
+                }
+                jj_consume_token(SEMICOLON);
+                break;
+            }
+            case SEMICOLON:{
+                if (is_loop_active) {
+                    current_loop.add_action_to_container(Action_Type.PLACE_BLOCK, 1);
+                } else if(is_proc_active) {
+                    current_proc.add_action_to_container(Action_Type.PLACE_BLOCK, 1);
+                }else {
+                    current_pos_proc.add_action(Action_Type.PLACE_BLOCK, 1);
+                }
+                jj_consume_token(SEMICOLON);
+                break;
+            }
+            default:
+                jj_la1[1] = jj_gen;
+                jj_consume_token(-1);
+                ParseException pe = new ParseException(); // Add syntax exception to msg list.
+                msg_list.add(pe.getMessage());
+        }
+    }
+
+    static final public void HighBlock() throws ParseException {
+        jj_consume_token(HIGHBLOCK);
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+            case INTEGER:{
+                Token token_height = jj_consume_token(INTEGER);
+                if (is_loop_active) {
+                    current_loop.add_action_to_container(Action_Type.PLACE_HIGH, Integer.parseInt(token_height.image));
+                } else if(is_proc_active) {
+                    current_proc.add_action_to_container(Action_Type.PLACE_HIGH, Integer.parseInt(token_height.image));
+                }else {
+                    current_pos_proc.add_action(Action_Type.PLACE_HIGH, Integer.parseInt(token_height.image));
+                }
+                jj_consume_token(SEMICOLON);
+                break;
+            }
+            case SEMICOLON:{
+                if (is_loop_active) {
+                    current_loop.add_action_to_container(Action_Type.PLACE_HIGH, 2);
+                } else if(is_proc_active) {
+                    current_proc.add_action_to_container(Action_Type.PLACE_HIGH, 2);
+                }else {
+                    current_pos_proc.add_action(Action_Type.PLACE_HIGH, 2);
+                }
+                jj_consume_token(SEMICOLON);
+                break;
+            }
+            default:
+                jj_la1[2] = jj_gen;
+                jj_consume_token(-1);
+                ParseException pe = new ParseException(); // Add syntax exception to msg list.
+                msg_list.add(pe.getMessage());
+        }
+    }
+
+    static final public void PosFunc() throws ParseException {
+        jj_consume_token(POSFUNC);
+        jj_consume_token(LBRACKET);
+        Token token_id1 = jj_consume_token(IDENTIFIER);
+        jj_consume_token(COMMA);
+        Token token_id2 = jj_consume_token(IDENTIFIER);
+        jj_consume_token(RBRACKET);
+        jj_consume_token(SEMICOLON);
+
+        Variable param1 = find_mod_var(token_id1.image);
+        Variable param2 = find_mod_var(token_id2.image);
+
+        try {
+            if(current_pos_proc.is_empty()) {
+                current_pos_proc.set_id(proc_counter++);
+                current_pos_proc.set_proc_pos(param1.get_val(), param2.get_val());
+            }
+            else {
+                code_actions.add(current_pos_proc);
+                current_pos_proc = new Position_Procedure(proc_counter++, param1.get_val(), param2.get_val());
+            }
+        } catch (NullPointerException npe) {
+            if(param1 == null) {
+                msg_list.add(Message_Handler.no_such_var_found(token_id1.image));
+            } else if(param2 == null) {
+                msg_list.add(Message_Handler.no_such_var_found(token_id2.image));
+            }
+        }
     }
 
 
-  static final public void Program() throws ParseException {
-    IdField();
-    Main();
-    Procedures();
-    jj_consume_token(0);
-  }
-
-  static final public void Main() throws ParseException {
-    jj_consume_token(BEGIN);
-    jj_consume_token(LBRACKET);
-    Expressions();
-    jj_consume_token(RBRACKET);
-    jj_consume_token(END);
-  }
-
-  static final public void VarDeclaration() throws ParseException {
-    jj_consume_token(VARIABLE);
-    Token id_token = jj_consume_token(IDENTIFIER);
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case SEMICOLON:{
-      jj_consume_token(SEMICOLON);
-      var_list.add(new Variable(id_token.image));
-      break;
-      }
-    case EQUAL:{
-      jj_consume_token(EQUAL);
-      Token value_token = jj_consume_token(INTEGER);
-      jj_consume_token(SEMICOLON);
-      var_list.add(new Variable(id_token.image, Integer.parseInt(value_token.image)));
-      break;
-      }
-    default:
-      jj_la1[0] = jj_gen;
-      jj_consume_token(-1);
-      ParseException pe = new ParseException(); // Add syntax exception to msg list.
-      msg_list.add(pe.getMessage());
+    static final public void PutLight() throws ParseException {
+        jj_consume_token(PUTLIGHT);
+        jj_consume_token(SEMICOLON);
+        if (is_loop_active) {
+            current_loop.add_action_to_container(Action_Type.PUT_LIGHT, -1);
+        } else if(is_proc_active) {
+            current_proc.add_action_to_container(Action_Type.PUT_LIGHT, -1);
+        }else {
+            current_pos_proc.add_action(Action_Type.PUT_LIGHT, -1);
+        }
     }
-  }
 
-  static final public void VarSet() throws ParseException {
-    jj_consume_token(SET);
-    Token token_id = jj_consume_token(IDENTIFIER);
-    jj_consume_token(EQUAL);
-    Token token_val = jj_consume_token(INTEGER);
-    jj_consume_token(SEMICOLON);
-
-    Variable var = find_var(token_id.image);
-
-    try{ // If var is null the variable doesn't exist, so there's an error thrown in the console of the IDE.
-        var.set_value(Integer.parseInt(token_val.image));
-    } catch (NullPointerException npe) {
-        msg_list.add(Message_Handler.no_such_var_found(token_id.image));
+    static final public void KeepStatement() throws ParseException {
+        is_loop_active = true;
+        current_loop = new Multiple_Action_Container();
+        jj_consume_token(KEEP);
+        Expressions();
+        jj_consume_token(SKP);
+        jj_consume_token(KEND);
+        jj_consume_token(SEMICOLON);
+        if(is_proc_active) current_proc.add_action_to_container(Action_Type.KEEP_LOOP, current_loop);
+        else current_pos_proc.add_action(Action_Type.KEEP_LOOP, current_loop);
+        is_loop_active = false;
     }
-  }
 
-  static final public void VarIncrement() throws ParseException {
-    jj_consume_token(INCREMENT);
-    Token token_id = jj_consume_token(IDENTIFIER);
-    jj_consume_token(SEMICOLON);
-
-    Variable var = find_var(token_id.image);
-
-    try {
-        var.increment();
-    } catch (NullPointerException npe) {
-        msg_list.add(Message_Handler.no_such_var_found(token_id.image));
+    static final public void ForStatement() throws ParseException {
+        is_loop_active = true;
+        jj_consume_token(FOR);
+        Token token_id = jj_consume_token(IDENTIFIER);
+        jj_consume_token(EQUAL);
+        Token token_ctr = jj_consume_token(INTEGER);
+        current_loop = new Multiple_Action_Container(token_id.image, Integer.parseInt(token_ctr.image));
+        var_list.add(new Variable(token_id.image, Integer.parseInt(token_ctr.image), false));
+        jj_consume_token(TIMES);
+        Expressions();
+        jj_consume_token(FEND);
+        jj_consume_token(SEMICOLON);
+        if(is_proc_active) current_proc.add_action_to_container(Action_Type.FOR_LOOP, current_loop);
+        else current_pos_proc.add_action(Action_Type.FOR_LOOP, current_loop);
+        is_loop_active = false;
     }
-  }
 
-  static final public void VarDecrement() throws ParseException {
-    jj_consume_token(DECREMENT);
-    Token token_id = jj_consume_token(IDENTIFIER);
-    jj_consume_token(SEMICOLON);
+    static final public void WhenStatement() throws ParseException {
+        is_loop_active = true;
+        jj_consume_token(WHEN);
+        Token token_id = jj_consume_token(IDENTIFIER);
+        jj_consume_token(EQUAL);
+        Token token_ctr = jj_consume_token(INTEGER);
+        current_loop = new Multiple_Action_Container(token_id.image, Integer.parseInt(token_ctr.image));
+        jj_consume_token(THEN);
+        Expressions();
+        jj_consume_token(WHEND);
+        jj_consume_token(SEMICOLON);
+        if(is_proc_active)  current_proc.add_action_to_container(Action_Type.WHEN_LOOP, current_loop);
+        else current_pos_proc.add_action(Action_Type.WHEN_LOOP, current_loop);
+        is_loop_active = false;
+    }
 
-      Variable var = find_var(token_id.image);
+    static final public void PosStartFunc() throws ParseException {
+        jj_consume_token(POSSTARTFUNC);
+        jj_consume_token(LBRACKET);
+        Token token_id1 = jj_consume_token(IDENTIFIER);
+        jj_consume_token(COMMA);
+        Token token_id2 =jj_consume_token(IDENTIFIER);
+        jj_consume_token(RBRACKET);
+        jj_consume_token(SEMICOLON);
 
-      try {
-          var.decrement();
-      } catch (NullPointerException npe) {
-          msg_list.add(Message_Handler.no_such_var_found(token_id.image));
-      }
-  }
+        Variable param1 = find_mod_var(token_id1.image);
+        Variable param2 = find_mod_var(token_id2.image);
 
-  static final public void PlaceBlock() throws ParseException {
-    jj_consume_token(PLACEBLOCK);
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case INTEGER:{
-        Token token_n = jj_consume_token(INTEGER); // block quantity n (placeblock n). //TODO: GET THE CURRENT DIRECTION TO ADD THE BLOCK.
-        for(int i = 0; i < Integer.parseInt(token_n.image); i++) {
-            block_list.add(new Block(Block_Type.NORMAL_BLOCK, 0)); // TODO: ADD THE POSITIONS OF THE BLOCKS.
+        try {
+            param1.get_id();
+            param2.get_id();
+            current_pos_proc.add_action(Action_Type.POS_START, param1, param2, -1);
+        } catch (NullPointerException npe) {
+            if(param1 == null) {
+                msg_list.add(Message_Handler.no_such_var_found(token_id1.image));
+            } else if(param2 == null) {
+                msg_list.add(Message_Handler.no_such_var_found(token_id2.image));
+            }
+        }
+    }
+
+    static final public void CallProc() throws ParseException {
+        jj_consume_token(CALL);
+        Token token_id = jj_consume_token(PROCNAME);
+        //Multiple_Action_Container proc_called = find_proc(token_id.image);
+
+        //proc_called.get_proc_name();
+        if(is_loop_active) {
+            current_loop.add_action_to_container(Action_Type.CALL_PROC, token_id.image);
+        } else if(is_proc_active) {
+            current_proc.add_action_to_container(Action_Type.CALL_PROC, token_id.image);
+        } else {
+            current_pos_proc.add_action(Action_Type.CALL_PROC, token_id.image);
         }
         jj_consume_token(SEMICOLON);
-        break;
     }
-    case SEMICOLON:{
-        block_list.add(new Block(Block_Type.NORMAL_BLOCK, 0));
+
+    static final public void ChangeDirFunc() throws ParseException {
+        jj_consume_token(CHANGEDIR);
+        jj_consume_token(LBRACKET);
+        jj_consume_token(SLBRACKET);
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+            case LEFT:{
+                jj_consume_token(LEFT);
+                if (is_loop_active) {
+                    current_loop.add_action_to_container(Action_Type.CHANGE_DIR, Direction.LEFT);
+                } else if(is_proc_active) {
+                    current_proc.add_action_to_container(Action_Type.CHANGE_DIR, Direction.LEFT);
+                } else {
+                    current_pos_proc.add_action(Action_Type.CHANGE_DIR, Direction.LEFT);
+                }
+                break;
+            }
+            case RIGHT:{
+                jj_consume_token(RIGHT);
+                if (is_loop_active) {
+                    current_loop.add_action_to_container(Action_Type.CHANGE_DIR, Direction.RIGHT);
+                } else if(is_proc_active) {
+                    current_proc.add_action_to_container(Action_Type.CHANGE_DIR, Direction.RIGHT);
+                } else {
+                    current_pos_proc.add_action(Action_Type.CHANGE_DIR, Direction.RIGHT);
+                }
+                break;
+            }
+            case UP:{
+                jj_consume_token(UP);
+                if (is_loop_active) {
+                    current_loop.add_action_to_container(Action_Type.CHANGE_DIR, Direction.UP);
+                } else if(is_proc_active) {
+                    current_proc.add_action_to_container(Action_Type.CHANGE_DIR, Direction.UP);
+                } else {
+                    current_pos_proc.add_action(Action_Type.CHANGE_DIR, Direction.UP);
+                }
+                break;
+            }
+            case DOWN:{
+                jj_consume_token(DOWN);
+                if (is_loop_active) {
+                    current_loop.add_action_to_container(Action_Type.CHANGE_DIR, Direction.DOWN);
+                } else if(is_proc_active) {
+                    current_proc.add_action_to_container(Action_Type.CHANGE_DIR, Direction.DOWN);
+                } else {
+                    current_pos_proc.add_action(Action_Type.CHANGE_DIR, Direction.DOWN);
+                }
+                break;
+            }
+            default:
+                jj_la1[3] = jj_gen;
+                jj_consume_token(-1);
+                throw new ParseException();
+        }
+        jj_consume_token(SRBRACKET);
+        jj_consume_token(RBRACKET);
         jj_consume_token(SEMICOLON);
-        break;
     }
-    default:
-          jj_la1[1] = jj_gen;
-          jj_consume_token(-1);
-          ParseException pe = new ParseException(); // Add syntax exception to msg list.
-          msg_list.add(pe.getMessage());
-    }
-
-  }
-
-  static final public void HighBlock() throws ParseException {
-    jj_consume_token(HIGHBLOCK);
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case INTEGER:{
-      Token token_height = jj_consume_token(INTEGER);
-      block_list.add(new Block(Block_Type.HIGH_BLOCK, Integer.parseInt(token_height.image)));
-      jj_consume_token(SEMICOLON);
-      break;
-      }
-    case SEMICOLON:{
-        block_list.add(new Block(Block_Type.HIGH_BLOCK, 2)); // PLACE A HIGH BLOCK LEVEL 2 (DEFAULT).
-        jj_consume_token(SEMICOLON);
-        break;
-    }
-    default:
-        jj_la1[2] = jj_gen;
-        jj_consume_token(-1);
-        ParseException pe = new ParseException(); // Add syntax exception to msg list.
-        msg_list.add(pe.getMessage());
-    }
-  }
-
-  static final public void PosFunc() throws ParseException {
-    jj_consume_token(POSFUNC);
-    jj_consume_token(LBRACKET);
-    jj_consume_token(IDENTIFIER);
-    jj_consume_token(COMMA);
-    jj_consume_token(IDENTIFIER);
-    jj_consume_token(RBRACKET);
-    jj_consume_token(SEMICOLON);
-  }
-
-  static final public void PutLight() throws ParseException {
-    jj_consume_token(PUTLIGHT);
-    jj_consume_token(SEMICOLON);
-    block_list.add(new Block(Block_Type.BLUE_LIGHT, 0));
-  }
-
-  static final public void KeepStatement() throws ParseException {
-    jj_consume_token(KEEP);
-    Expressions();
-    jj_consume_token(SKP);
-    jj_consume_token(KEND);
-    jj_consume_token(SEMICOLON);
-  }
-
-  static final public void ForStatement() throws ParseException {
-    jj_consume_token(FOR);
-    jj_consume_token(IDENTIFIER);
-    jj_consume_token(EQUAL);
-    jj_consume_token(INTEGER);
-    jj_consume_token(TIMES);
-    Expressions();
-    jj_consume_token(FEND);
-    jj_consume_token(SEMICOLON);
-  }
-
-  static final public void WhenStatement() throws ParseException {
-    jj_consume_token(WHEN);
-    jj_consume_token(IDENTIFIER);
-    jj_consume_token(EQUAL);
-    jj_consume_token(INTEGER);
-    jj_consume_token(THEN);
-    Expressions();
-    jj_consume_token(WHEND);
-    jj_consume_token(SEMICOLON);
-  }
-
-  static final public void PosStartFunc() throws ParseException {
-    jj_consume_token(POSSTARTFUNC);
-    jj_consume_token(LBRACKET);
-    jj_consume_token(IDENTIFIER);
-    jj_consume_token(COMMA);
-    jj_consume_token(IDENTIFIER);
-    jj_consume_token(RBRACKET);
-    jj_consume_token(SEMICOLON);
-  }
-
-  static final public void CallProc() throws ParseException {
-    jj_consume_token(CALL);
-    jj_consume_token(PROCNAME);
-    jj_consume_token(SEMICOLON);
-  }
-
-  static final public void ChangeDirFunc() throws ParseException {
-    jj_consume_token(CHANGEDIR);
-    jj_consume_token(LBRACKET);
-    jj_consume_token(SLBRACKET);
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case LEFT:{
-      jj_consume_token(LEFT);
-      break;
-      }
-    case RIGHT:{
-      jj_consume_token(RIGHT);
-      break;
-      }
-    case BACK:{
-      jj_consume_token(BACK);
-      break;
-      }
-    case SAME:{
-      jj_consume_token(SAME);
-      break;
-      }
-    default:
-      jj_la1[3] = jj_gen;
-      jj_consume_token(-1);
-      ParseException pe = new ParseException(); // Add syntax exception to msg list.
-      msg_list.add(pe.getMessage());
-    }
-    jj_consume_token(SRBRACKET);
-    jj_consume_token(RBRACKET);
-    jj_consume_token(SEMICOLON);
-  }
 
   static final public void IdField() throws ParseException {
     label_1:
@@ -306,10 +517,14 @@ public class LangParser implements TestConstants {
         jj_la1[5] = jj_gen;
         break label_2;
       }
+      is_proc_active = true;
       jj_consume_token(PROC);
-      jj_consume_token(PROCNAME);
+      Token token_id = jj_consume_token(PROCNAME);
+      current_proc = new Multiple_Action_Container(token_id.image);
       Expressions();
       jj_consume_token(ENDPROC);
+      is_proc_active = false;
+      code_procedures.add(current_proc);
     }
   }
 

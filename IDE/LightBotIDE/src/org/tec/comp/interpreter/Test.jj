@@ -58,8 +58,8 @@ TOKEN: {
     |   <CHANGEDIR: "ChangeDir">{System.out.println("CHANGEDIR ->"+image);}
     |   <RIGHT: "Right">{System.out.println("RIGHT ->"+image);}
     |   <LEFT: "Left">{System.out.println("LEFT ->"+image);}
-    |   <BACK: "Back">{System.out.println("BACK ->"+image);}
-    |   <SAME: "Same">{System.out.println("SAME ->"+image);}
+    |   <UP: "Up">{System.out.println("UP ->"+image);}
+    |   <DOWN: "Down">{System.out.println("DOWN ->"+image);}
 
 }
 
@@ -153,7 +153,7 @@ void CallProc() : {}
 
 void ChangeDirFunc() : {}
 {
-    <CHANGEDIR><LBRACKET><SLBRACKET>(<LEFT>|<RIGHT>|<BACK>|<SAME>)<SRBRACKET><RBRACKET><SEMICOLON>
+    <CHANGEDIR><LBRACKET><SLBRACKET>(<LEFT>|<RIGHT>|<UP>|<DOWN>)<SRBRACKET><RBRACKET><SEMICOLON>
 }
 
 void IdField() : {}
