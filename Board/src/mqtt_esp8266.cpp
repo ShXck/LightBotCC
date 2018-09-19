@@ -16,25 +16,25 @@ const int mqttPort = 16115;
 const char* mqttUser = "nnsmxwti";
 const char* mqttPassword = "37KKt6sf8N6L";
 const char* listen_topic1 = "esp/test";
-const char* publish_topic1 = "esp/echo";
 const char * clientID = "ESP8266Client";
 WiFiClient espClient;
 PubSubClient client(espClient);
-void callback(char* topic, byte* payload, unsigned int length);
 Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(8, 8, PIN,
   NEO_MATRIX_TOP     + NEO_MATRIX_RIGHT +
   NEO_MATRIX_COLUMNS + NEO_MATRIX_PROGRESSIVE,
   NEO_GRB            + NEO_KHZ800);
-const uint16_t colors[] = {
-  matrix.Color(255, 0, 0), matrix.Color(0, 255, 0), matrix.Color(0, 0, 255) };
+/*const uint16_t colors[] = {
+  matrix.Color(255, 0, 0), matrix.Color(0, 255, 0), matrix.Color(0, 0, 255) };*/
 
+void callback(char* topic, byte* payload, unsigned int length);
+JsonObject& parseString2JSON(char json[]);
+void displayMatrix(int matrixArray[8][8]);
 
 
 void setup() {
   matrix.begin();
   matrix.setTextWrap(false);
-  matrix.setBrightness(100);
-  matrix.setTextColor(colors[0]);
+  matrix.setBrightness(200);
 
 
   Serial.begin(115200);
@@ -65,47 +65,41 @@ void setup() {
 
     }
   }
-
   client.publish(listen_topic1, "Hello from ESP8266");
   client.subscribe(listen_topic1);
-
 }
 
 
 //Function that processes incoming message
 void callback(char* topic, byte* payload, unsigned int length) {
-
-  char char_array[length];
+  char message[length];
   for (int i = 0; i < length; i++) {
-    char_array[i]=(char)payload[i];
+    message[i]=(char)payload[i];
   }
-
-  //The buffer size does not match with the size of the incomming string, it's calculated by the utility found in https://arduinojson.org/assistant/
-  const size_t bufferSize = JSON_ARRAY_SIZE(768) + JSON_OBJECT_SIZE(2) + 1730;
-  DynamicJsonBuffer jsonBuffer(bufferSize);
-  JsonObject& root = jsonBuffer.parseObject(char_array);
-  jsonBuffer.clear();
- if (!root.success()) {
-   Serial.println("parseObject() failed");
- }
-
-
-JsonArray& jsonArray = root["process"];
-Serial.println(jsonArray.get<int>(0));
-Serial.println(jsonArray.size());
-Serial.println(root["iD"].asString());
-
-  // //echo del mensaje
-  // const char* m = message.c_str();
-  // //Serial.println(m);
-  // client.publish(publish_topic1, m);
+  JsonObject& root = parseString2JSON(message);
+  JsonArray& jsonArray = root["process"];
+  Serial.println(jsonArray.get<int>(0));
+  Serial.println(jsonArray.size());
+  Serial.println(root["iD"].asString());
   Serial.println("-----------------------");
 
 }
+
+JsonObject& parseString2JSON(char json[]){
+  //The buffer size does not match with the size of the incomming string, it's calculated by the utility found in https://arduinojson.org/assistant/
+  const size_t bufferSize = JSON_ARRAY_SIZE(768) + JSON_OBJECT_SIZE(2) + 1730;
+  DynamicJsonBuffer jsonBuffer(bufferSize);
+  JsonObject& root = jsonBuffer.parseObject(json);
+  jsonBuffer.clear();
+  if (!root.success()) {
+   Serial.println("parseo fallido");
+  }
+  return root;
+}
+
 /**
 @brief Function for reconnecting to mqtt broker if connection is lost.
 */
-
 void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
@@ -127,7 +121,16 @@ void reconnect() {
   }
 }
 
-
+//No hay manera de no hacerlo alambrado el tamaño de la matriz a menos de pasar la cantidad de columnas y filas por parámetros, igual no hay problema
+void displayMatrix(int matrixArray[8][8]){
+    for(int i=0;i<8;i++ ){
+        for(int j=0;j<8;j++) {
+            if(matrixArray[i][j]>0)
+                matrix.drawPixel(i, j, matrix.Color(0, 0, 255));
+        }
+    }
+    matrix.show();
+}
 
 
 int x    = matrix.width();
@@ -139,13 +142,8 @@ void loop() {
   }
   client.loop();
   matrix.fillScreen(0);
-  matrix.setCursor(x, 0);
-  matrix.print(F("AK7"));
-  if(--x < -36) {
-    x = matrix.width();
-    if(++pass >= 3) pass = 0;
-    matrix.setTextColor(colors[pass]);
-  }
-  matrix.show();
+  int ejem[8][8]={{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8}};
+  matrix.fillScreen(0);
+  displayMatrix(ejem);
   delay(100);
 }
