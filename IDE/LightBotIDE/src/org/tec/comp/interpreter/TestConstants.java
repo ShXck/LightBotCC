@@ -83,9 +83,9 @@ public interface TestConstants {
   /** RegularExpression Id. */
   int LEFT = 37;
   /** RegularExpression Id. */
-  int BACK = 38;
+  int UP = 38;
   /** RegularExpression Id. */
-  int SAME = 39;
+  int DOWN = 39;
   /** RegularExpression Id. */
   int INTEGER = 40;
   /** RegularExpression Id. */
@@ -136,8 +136,8 @@ public interface TestConstants {
     "\"ChangeDir\"",
     "\"Right\"",
     "\"Left\"",
-    "\"Back\"",
-    "\"Same\"",
+    "\"Up\"",
+    "\"Down\"",
     "<INTEGER>",
     "<PROCNAME>",
     "<IDENTIFIER>",

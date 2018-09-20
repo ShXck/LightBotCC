@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="413.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Interface">
+   <children>
+      <ImageView fitHeight="168.0" fitWidth="177.0" layoutX="405.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/wallpaper/lightbot2.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="174.0" layoutY="20.0" prefHeight="44.0" prefWidth="277.0" text="Instructions">
+         <font>
+            <Font name="System Bold Italic" size="36.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="67.0" fitWidth="75.0" layoutX="91.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="66.0" layoutY="97.0" prefHeight="29.0" prefWidth="339.0" style="-: ../resource/control/Up.png;" text="The walk command tells me to walk forward" textFill="#463b3b" />
+      <Label layoutX="66.0" layoutY="142.0" prefHeight="29.0" prefWidth="328.0" text="The right command tells me to turn to the right" />
+      <Label layoutX="66.0" layoutY="186.0" prefHeight="29.0" prefWidth="307.0" text="The left command tells me to turn to the left" />
+      <Label layoutX="66.0" layoutY="229.0" prefHeight="29.0" prefWidth="307.0" text="The light command tells me to light up a tile" />
+      <Label layoutX="66.0" layoutY="273.0" prefHeight="29.0" prefWidth="366.0" text="The jump command tells me to jump up or jump down" />
+      <Label layoutX="66.0" layoutY="314.0" prefHeight="29.0" prefWidth="387.0" text="The P1 command tells me to run the commands in PROC1" />
+      <ImageView fitHeight="29.0" fitWidth="30.0" layoutX="27.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/control/Up.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="30.0" layoutX="27.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/control/Tright.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="30.0" layoutX="27.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/control/Tleft.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="30.0" layoutX="27.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/control/Light.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="30.0" layoutX="27.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/control/Jump.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="30.0" layoutX="27.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/control/P1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="29.0" fitWidth="30.0" layoutX="27.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resource/control/P2.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="66.0" layoutY="353.0" prefHeight="29.0" prefWidth="387.0" text="The P2 command tells me to run the commands in PROC2" />
+   </children>
+</AnchorPane>
