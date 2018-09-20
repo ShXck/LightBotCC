@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="257.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Color">
+   <children>
+      <Label layoutX="85.0" layoutY="96.0" text="Nivel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="169.0" layoutY="96.0" text="Robot">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="285.0" layoutY="96.0" text="Bombillo">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="444.0" layoutY="96.0" text="Piso">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="99.0" layoutY="133.0" text="1">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="99.0" layoutY="171.0" text="2">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="99.0" layoutY="210.0" text="3">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutX="151.0" layoutY="87.0" orientation="VERTICAL" prefHeight="150.0" prefWidth="6.0" />
+      <Separator layoutX="264.0" layoutY="87.0" orientation="VERTICAL" prefHeight="150.0" prefWidth="6.0" />
+      <Separator layoutX="411.0" layoutY="87.0" orientation="VERTICAL" prefHeight="150.0" prefWidth="6.0" />
+      <Separator layoutX="523.0" layoutY="90.0" orientation="VERTICAL" prefHeight="150.0" prefWidth="6.0" />
+      <Separator layoutX="75.0" layoutY="132.0" prefHeight="1.0" prefWidth="450.0" />
+      <Separator layoutX="75.0" layoutY="163.0" prefHeight="1.0" prefWidth="450.0" />
+      <Separator layoutX="75.0" layoutY="200.0" prefHeight="1.0" prefWidth="450.0" />
+      <Separator layoutX="75.0" layoutY="239.0" prefHeight="1.0" prefWidth="450.0" />
+      <Label layoutX="187.0" layoutY="140.0" prefHeight="16.0" prefWidth="49.0" />
+      <Separator layoutX="75.0" layoutY="86.0" prefHeight="1.0" prefWidth="450.0" />
+      <Separator layoutX="72.0" layoutY="87.0" orientation="VERTICAL" prefHeight="150.0" prefWidth="6.0" />
+   </children>
+</AnchorPane>
