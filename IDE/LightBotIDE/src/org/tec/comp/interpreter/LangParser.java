@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class LangParser implements TestConstants {
 
@@ -17,6 +19,7 @@ public class LangParser implements TestConstants {
     public static ArrayList<Variable> mod_var_list = new ArrayList<>();
     public static ArrayList<Position_Procedure> code_actions = new ArrayList<>();
     public static ArrayList<Multiple_Action_Container> code_procedures = new ArrayList<>();
+    public static ArrayList<String> proc_names = new ArrayList<>();
 
     private static int proc_counter = 0;
     private static Position_Procedure current_pos_proc = new Position_Procedure();
@@ -51,11 +54,11 @@ public class LangParser implements TestConstants {
         return null;
     }
 
-    static private Multiple_Action_Container find_proc(String name) {
-        for(Multiple_Action_Container c : code_procedures) {
-            if(c.get_proc_name().equals(name)) return c;
-        }
-        return null;
+    static private void remove_duplicate_msgs() {
+        Set<String> set = new LinkedHashSet<>();
+        set.addAll(msg_list);
+        msg_list.clear();
+        msg_list.addAll(set);
     }
 
     static public void parse(String file) {
@@ -63,10 +66,9 @@ public class LangParser implements TestConstants {
             clean_compilation_data();
             LangParser analyser = new LangParser(new BufferedReader(new FileReader(file)));
             analyser.Program();
-            System.out.println("Successful compilation"); //  TODO: FROM HERE THE MAP CONSTRUCTION SHOULD BEGIN.
-            System.out.println(var_list);
-            System.out.println(code_actions);
-            System.out.println(code_procedures);
+            System.out.println("Successful compilation");
+            Semantic_Handler.run_semantic_parse();
+            remove_duplicate_msgs();
         } catch(ParseException pe) {
             msg_list.add(pe.getMessage());
         } catch (FileNotFoundException e) {
@@ -100,6 +102,9 @@ public class LangParser implements TestConstants {
     static final public void VarDeclaration() throws ParseException {
         jj_consume_token(VARIABLE);
         Token id_token = jj_consume_token(IDENTIFIER);
+
+        if(id_token.image.length() > 10 || id_token.image.isEmpty()) msg_list.add(Message_Handler.invalid_length_variable_id(id_token.image));
+
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
             case SEMICOLON:{
                 jj_consume_token(SEMICOLON);
@@ -197,13 +202,16 @@ public class LangParser implements TestConstants {
         Variable unmod_var = find_var(token_id.image);
 
         try {
-            var.increment();
-            if (is_loop_active) {
-                current_loop.add_action_to_container(Action_Type.INCR_VAR, unmod_var, null, -1);
-            } else if(is_proc_active) {
-                current_proc.add_action_to_container(Action_Type.INCR_VAR, unmod_var, null, -1);
-            } else {
-                current_pos_proc.add_action(Action_Type.INCR_VAR, unmod_var, null, -1);
+            if(!var.is_assigned()) {
+                msg_list.add(Message_Handler.var_no_assigned(token_id.image));
+                var.increment();
+                if (is_loop_active) {
+                    current_loop.add_action_to_container(Action_Type.INCR_VAR, unmod_var, null, -1);
+                } else if(is_proc_active) {
+                    current_proc.add_action_to_container(Action_Type.INCR_VAR, unmod_var, null, -1);
+                } else {
+                    current_pos_proc.add_action(Action_Type.INCR_VAR, unmod_var, null, -1);
+                }
             }
         } catch (NullPointerException npe) {
             msg_list.add(Message_Handler.no_such_var_found(token_id.image));
@@ -219,13 +227,16 @@ public class LangParser implements TestConstants {
         Variable unmod_var = find_var(token_id.image);
 
         try {
-            mod_var.decrement();
-            if (is_loop_active) {
-                current_loop.add_action_to_container(Action_Type.DECR_VAR, unmod_var, null, -1);
-            } else if(is_proc_active) {
-                current_proc.add_action_to_container(Action_Type.DECR_VAR, unmod_var, null, -1);
-            } else {
-                current_pos_proc.add_action(Action_Type.DECR_VAR, unmod_var, null, -1);
+            if(!mod_var.is_assigned()) msg_list.add(Message_Handler.var_no_assigned(token_id.image));
+            else {
+                mod_var.decrement();
+                if (is_loop_active) {
+                    current_loop.add_action_to_container(Action_Type.DECR_VAR, unmod_var, null, -1);
+                } else if (is_proc_active) {
+                    current_proc.add_action_to_container(Action_Type.DECR_VAR, unmod_var, null, -1);
+                } else {
+                    current_pos_proc.add_action(Action_Type.DECR_VAR, unmod_var, null, -1);
+                }
             }
         } catch (NullPointerException npe) {
             msg_list.add(Message_Handler.no_such_var_found(token_id.image));
@@ -313,13 +324,16 @@ public class LangParser implements TestConstants {
         Variable param2 = find_mod_var(token_id2.image);
 
         try {
-            if(current_pos_proc.is_empty()) {
-                current_pos_proc.set_id(proc_counter++);
-                current_pos_proc.set_proc_pos(param1.get_val(), param2.get_val());
-            }
+            if(!param1.is_assigned()) msg_list.add(Message_Handler.var_no_assigned(token_id1.image));
+            else if(!param2.is_assigned()) msg_list.add(Message_Handler.var_no_assigned(token_id2.image));
             else {
-                code_actions.add(current_pos_proc);
-                current_pos_proc = new Position_Procedure(proc_counter++, param1.get_val(), param2.get_val());
+                if (current_pos_proc.is_empty()) {
+                    current_pos_proc.set_id(proc_counter++);
+                    current_pos_proc.set_proc_pos(param1.get_val(), param2.get_val());
+                } else {
+                    code_actions.add(current_pos_proc);
+                    current_pos_proc = new Position_Procedure(proc_counter++, param1.get_val(), param2.get_val());
+                }
             }
         } catch (NullPointerException npe) {
             if(param1 == null) {
@@ -402,9 +416,9 @@ public class LangParser implements TestConstants {
         Variable param2 = find_mod_var(token_id2.image);
 
         try {
-            param1.get_id();
-            param2.get_id();
-            current_pos_proc.add_action(Action_Type.POS_START, param1, param2, -1);
+            if(!param1.is_assigned()) msg_list.add(Message_Handler.var_no_assigned(token_id1.image));
+            else if(!param2.is_assigned()) msg_list.add(Message_Handler.var_no_assigned(token_id2.image));
+            else current_pos_proc.add_action(Action_Type.POS_START, param1, param2, -1);
         } catch (NullPointerException npe) {
             if(param1 == null) {
                 msg_list.add(Message_Handler.no_such_var_found(token_id1.image));
@@ -417,9 +431,7 @@ public class LangParser implements TestConstants {
     static final public void CallProc() throws ParseException {
         jj_consume_token(CALL);
         Token token_id = jj_consume_token(PROCNAME);
-        //Multiple_Action_Container proc_called = find_proc(token_id.image);
 
-        //proc_called.get_proc_name();
         if(is_loop_active) {
             current_loop.add_action_to_container(Action_Type.CALL_PROC, token_id.image);
         } else if(is_proc_active) {
@@ -520,6 +532,7 @@ public class LangParser implements TestConstants {
       is_proc_active = true;
       jj_consume_token(PROC);
       Token token_id = jj_consume_token(PROCNAME);
+      proc_names.add(token_id.image);
       current_proc = new Multiple_Action_Container(token_id.image);
       Expressions();
       jj_consume_token(ENDPROC);

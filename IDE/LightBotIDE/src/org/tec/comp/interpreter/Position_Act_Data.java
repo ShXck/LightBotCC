@@ -53,6 +53,10 @@ public class Position_Act_Data extends Action {
         return n;
     }
 
+    public String get_proc_name() {
+        return proc_name;
+    }
+
     public Direction direction() {
         return dir;
     }
