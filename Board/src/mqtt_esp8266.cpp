@@ -9,22 +9,25 @@
 
 //Global variables, can be simplified to reduce static memory use
 #define PIN D11
-const char* ssid = "Familia-Mora-Ramirez";
-const char* password =  "tekila2013";
+const char* ssid = "OnePlus 3";
+const char* password =  "sebasmora";
 const char* mqttServer = "m12.cloudmqtt.com";
 const int mqttPort = 16115;
 const char* mqttUser = "nnsmxwti";
 const char* mqttPassword = "37KKt6sf8N6L";
 const char* listen_topic1 = "esp/test";
-const char * clientID = "ESP8266Client";
+const char * clientID = "ESP8266Cl**hient";
 WiFiClient espClient;
 PubSubClient client(espClient);
 Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(8, 8, PIN,
   NEO_MATRIX_TOP     + NEO_MATRIX_RIGHT +
   NEO_MATRIX_COLUMNS + NEO_MATRIX_PROGRESSIVE,
   NEO_GRB            + NEO_KHZ800);
-/*const uint16_t colors[] = {
-  matrix.Color(255, 0, 0), matrix.Color(0, 255, 0), matrix.Color(0, 0, 255) };*/
+
+
+const uint16_t colores_piso[]={matrix.Color(255, 255, 255), matrix.Color(255,20,147), matrix.Color(255, 0, 0)};
+const uint16_t colores_bombillo[]={matrix.Color(0,0,255), matrix.Color(70,130,180), matrix.Color(0,255,255),matrix.Color(255,255,0)};
+const uint16_t colores_robot[]={matrix.Color(0,255,150) ,matrix.Color(20,255,100),matrix.Color(50,255,20)};
 
 void callback(char* topic, byte* payload, unsigned int length);
 JsonObject& parseString2JSON(char json[]);
@@ -76,11 +79,24 @@ void callback(char* topic, byte* payload, unsigned int length) {
   for (int i = 0; i < length; i++) {
     message[i]=(char)payload[i];
   }
+
   JsonObject& root = parseString2JSON(message);
-  JsonArray& jsonArray = root["process"];
-  Serial.println(jsonArray.get<int>(0));
-  Serial.println(jsonArray.size());
-  Serial.println(root["iD"].asString());
+  String id = root["id"];
+  if(id.equals("ide")){
+      JsonArray& jsonArray = root["board"];
+      /*llamar lógica de cuando le entra el mapa*/
+  }
+  else if (id.equals("app")) {
+      JsonArray& jsonArray = root["process"];
+    /* llamar lógica de cuando le entra un proceso*/
+  }
+  else{
+    Serial.println("JSON no valido");
+  }
+
+
+
+  Serial.println(root["id"].asString());
   Serial.println("-----------------------");
 
 }
@@ -108,7 +124,6 @@ void reconnect() {
     if (client.connect(clientID)) {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      //client.publish("outTopic", "hello world");
       // ... and resubscribe
       client.subscribe(listen_topic1);
     } else {
@@ -125,16 +140,20 @@ void reconnect() {
 void displayMatrix(int matrixArray[8][8]){
     for(int i=0;i<8;i++ ){
         for(int j=0;j<8;j++) {
-            if(matrixArray[i][j]>0)
-                matrix.drawPixel(i, j, matrix.Color(0, 0, 255));
+            if(matrixArray[i][j]==1)
+                matrix.drawPixel(i, j, colores_robot[0]);
+            if(matrixArray[i][j]==2)
+                matrix.drawPixel(i, j, colores_robot[1]);
+            if(matrixArray[i][j]==3)
+                matrix.drawPixel(i, j, colores_robot[2]);
         }
     }
     matrix.show();
 }
 
 
-int x    = matrix.width();
-int pass = 0;
+// int x    = matrix.width();
+// int pass = 0;
 
 void loop() {
   if (!client.connected()) {
@@ -143,7 +162,6 @@ void loop() {
   client.loop();
   matrix.fillScreen(0);
   int ejem[8][8]={{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8},{1,2,3,4,5,6,7,8}};
-  matrix.fillScreen(0);
   displayMatrix(ejem);
   delay(100);
 }
