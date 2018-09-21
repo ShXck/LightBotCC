@@ -32,47 +32,82 @@ public class Position_Procedure {
     /**
      * Función que maneja una acción relacionada a posicionar un bloque.
      * @param act el tipo de acción.
-     * @param
+     * @param el parámetro del bloque (-1 si no tiene).
      */
     public void add_action(Action_Type act, int nparam) {
         action_list.add(new Position_Act_Data(act, nparam));
     }
 
     /**
-     * Function that manages addition of variable dependant actions.
-     * @param act action type.
-     * @param v1 first variable.
-     * @param v2 second variable (pass it as null if the action works only on one variable).
-     * @param nparam value of variable. (just in case of action SET otherwise should be -1).
+     * Maneja acciones relacionadas con variables.
+     * @param act tipo de acción.
+     * @param v1 primera variable.
+     * @param v2 segunda variable (nula si la acción solo depende de una).
+     * @param nparam valor n de variable (-1 si no tiene).
      */
     public void add_action(Action_Type act, Variable v1, Variable v2, int nparam) {
         action_list.add(new Var_Act_Data(act, v1, v2, nparam));
     }
 
+    /**
+     * Maneja acciones relacionadas con procedimientos.
+     * @param act el tipo de acción.
+     * @param proc el nombre del procedimiento.
+     */
     public void add_action(Action_Type act, String proc) {
         action_list.add(new Position_Act_Data(act, proc));
     }
 
+    /**
+     * Maneja Acciones relaciodas con direcciones.
+     * @param act el tipo de acción.
+     * @param dir la dirección.
+     */
     public void add_action(Action_Type act, Direction dir) {
         action_list.add(new Position_Act_Data(act, dir));
     }
 
+    /**
+     * Fija la posición de un procedimiento.
+     * @param xpos la posición en x.
+     * @param ypos la posición en y.
+     */
     public void set_proc_pos(int xpos, int ypos) {
         proc_position = new Pair<>(xpos, ypos);
     }
 
+    /**
+     * Fija el valor del id.
+     * @param id la id.
+     */
     public void set_id(int id) {
         proc_id = id;
     }
 
+    /**
+     *
+     * @return el valor de la id del procediemiento.
+     */
     public int id() { return proc_id; }
 
+    /**
+     *
+     * @return lq posición del procedimiento.
+     */
     public Pair<Integer, Integer> position() { return proc_position; }
 
+    /**
+     *
+     * @return la lista de acciones.
+     */
     public ArrayList<Action> get_action_list() {
         return action_list;
     }
 
+    /**
+     *
+     * @return si el procedimiento está vacío.
+     */
     public boolean is_empty() {
         return (proc_id == -1 && proc_position == null && action_list.size() == 0);
     }
