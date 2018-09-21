@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxWidth="510.0" minHeight="250.0" minWidth="510.0" prefHeight="250.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Main">
+   <children>
+      <Separator layoutX="32.0" layoutY="175.0" prefHeight="1.0" prefWidth="450.0" />
+      <Label layoutX="42.0" layoutY="71.0" text="Nivel">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="126.0" layoutY="71.0" text="Robot">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="242.0" layoutY="71.0" text="Bombillo">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="401.0" layoutY="71.0" text="Piso">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="56.0" layoutY="108.0" text="1">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="56.0" layoutY="146.0" text="2">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="56.0" layoutY="185.0" text="3">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutX="108.0" layoutY="62.0" orientation="VERTICAL" prefHeight="150.0" prefWidth="6.0" />
+      <Separator layoutX="221.0" layoutY="62.0" orientation="VERTICAL" prefHeight="150.0" prefWidth="6.0" />
+      <Separator layoutX="368.0" layoutY="62.0" orientation="VERTICAL" prefHeight="150.0" prefWidth="6.0" />
+      <Separator layoutX="480.0" layoutY="65.0" orientation="VERTICAL" prefHeight="150.0" prefWidth="6.0" />
+      <Separator layoutX="32.0" layoutY="107.0" prefHeight="1.0" prefWidth="450.0" />
+      <Separator layoutX="32.0" layoutY="138.0" prefHeight="1.0" prefWidth="450.0" />
+      <Separator layoutX="32.0" layoutY="214.0" prefHeight="1.0" prefWidth="450.0" />
+      <Label layoutX="144.0" layoutY="115.0" prefHeight="16.0" prefWidth="49.0" style="-fx-background-color: b82929;" textFill="#b82929" />
+      <Separator layoutX="32.0" layoutY="61.0" prefHeight="1.0" prefWidth="450.0" />
+      <Separator layoutX="29.0" layoutY="62.0" orientation="VERTICAL" prefHeight="150.0" prefWidth="6.0" />
+      <Label layoutX="177.0" layoutY="25.0" text="Pane Color">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="270.0" layoutY="115.0" prefHeight="16.0" prefWidth="49.0" style="-fx-background-color: b82929;" textFill="#b82929" />
+      <Label layoutX="401.0" layoutY="115.0" prefHeight="16.0" prefWidth="49.0" style="-fx-background-color: b28652;" textFill="#b82929" />
+      <Label layoutX="142.0" layoutY="153.0" prefHeight="16.0" prefWidth="49.0" style="-fx-background-color: b87029;" textFill="#b82929" />
+      <Label layoutX="268.0" layoutY="153.0" prefHeight="16.0" prefWidth="49.0" style="-fx-background-color: #2ab73a;" textFill="#2ab73a" />
+      <Label layoutX="399.0" layoutY="153.0" prefHeight="16.0" prefWidth="49.0" style="-fx-background-color: b38929;" textFill="#b82929" />
+      <Label layoutX="142.0" layoutY="192.0" prefHeight="16.0" prefWidth="49.0" style="-fx-background-color: b82929;" textFill="#b82929" />
+      <Label layoutX="268.0" layoutY="192.0" prefHeight="16.0" prefWidth="49.0" style="-fx-background-color: b82963;" textFill="#b82929" />
+      <Label layoutX="399.0" layoutY="192.0" prefHeight="16.0" prefWidth="49.0" style="-fx-background-color: b82929;" textFill="#b82929" />
+   </children>
+</AnchorPane>

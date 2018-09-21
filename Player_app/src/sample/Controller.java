@@ -3,18 +3,28 @@ package sample;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.json.simple.JSONArray;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.System.exit;
 
 public class Controller {
 
@@ -54,6 +64,9 @@ public class Controller {
     @FXML private ImageView p81;
     @FXML private ImageView musiX;
     @FXML private CheckBox main10,proc10,proc101;
+
+    @FXML private MenuItem newMenuItemDELETE = new MenuItem("Delete");
+
     //Bandera para iniciar programa(cargar listas)
     private static boolean bandera = true;
     //Musica
@@ -63,7 +76,7 @@ public class Controller {
     //Imagenes para los fondos de pantalla
     private Image celeste = new Image(getClass().getResourceAsStream("/resource/wallpaper/celeste.png"));
     private Image roza = new Image(getClass().getResourceAsStream("/resource/wallpaper/roza.png"));
-    private Image dark = new Image(getClass().getResourceAsStream("/resource/wallpaper/dark.jpg"));
+    private Image dark = new Image(getClass().getResourceAsStream("/resource/wallpaper/dark.png"));
     //Imagenes de control
     private Image imageUP = new Image(getClass().getResourceAsStream("/resource/control/Up.png"));
     private Image imageTURN_LEFT = new Image(getClass().getResourceAsStream("/resource/control/Tleft.png"));
@@ -74,6 +87,8 @@ public class Controller {
     private Image imageP2 = new Image(getClass().getResourceAsStream("/resource/control/P2.png"));
     private Image playMusic = new Image(getClass().getResourceAsStream("/resource/control/play.png"));
     private Image pauseMusic = new Image(getClass().getResourceAsStream("/resource/control/pause.png"));
+
+    private Image xImage = new Image(getClass().getResourceAsStream("/resource/control/pause.png"));
 
     static Subscriber s;
 
@@ -126,6 +141,14 @@ public class Controller {
         fondo.setImage(dark);
     }
 
+    public void addIcon(){
+        ImageView openView = new ImageView(xImage);
+       // openView.setFitWidth(15);
+       // openView.setFitHeight(15);
+        newMenuItemDELETE.setGraphic(openView);
+
+       //newMenuItemDELETE.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
+    }
     /**
      * Reproduccion de musica de fondo
      */
@@ -207,10 +230,72 @@ public class Controller {
      */
     private void updateALL(){
         if (bandera) {
+            addIcon();
             updateIMAGE();
             updateIMAGEVIEW();
+
         }
         bandera=false;
+    }
+
+    /**
+     * Metodo para abrir la ventana de instrucciones
+     * @throws IOException
+     */
+    public void passInstructions() throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("Instructions.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Stage stage = new Stage();
+        stage.setTitle("Instructions");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * Metodo para abrir la ventana de colores visuales
+     * @throws IOException
+     */
+    public void passColor() throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("Color.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 510, 250);
+        Stage stage = new Stage();
+        stage.setTitle("Color");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * Metodo para finalizar la aplicacion
+     */
+    public void close(){
+        exit(0);
+    }
+
+    /**
+     * Metodo para borrar tablero
+     */
+    public void deleteAll(){
+
+        listMAIN.clear();
+
+    listPROC1.clear();
+        listPROC11.clear();
+
+        for (int asa = 0;asa<listIMAGEVIEW_MAIN.size();asa++){
+            listIMAGEVIEW_MAIN.get(asa).setImage(null);
+        }
+
+        for (int asa = 0;asa<listIMAGEVIEW_PROC1.size();asa++){
+            listIMAGEVIEW_PROC1.get(asa).setImage(null);
+        }
+        for (int asa = 0;asa<listIMAGEVIEW_PROC11.size();asa++){
+            listIMAGEVIEW_PROC11.get(asa).setImage(null);
+        }
+
     }
 
     /**

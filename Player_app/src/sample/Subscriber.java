@@ -2,6 +2,7 @@ package sample;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+
 /**
  * A sample application that demonstrates how to use the Paho MQTT v3.1 Client blocking API.
  */
