@@ -2,52 +2,57 @@ Var ver= 0;
 Var hor= 0;
 
 Begin
-	(
 	Pos(ver,hor);
-	place-block 8;
+	Place Block 5;
+	High Block;
 	Set hor = 4;
 	Pos(ver,hor);
-	ChangeDir([Down]);
+	ChangeDir([DOWN]);
 	For i = 5 Times
-	    high-block 3;
-	    Add+hor;
+	    High Block 3;
 	FEnd;
-	put-light;
+	Put Light;
+
+	// comment
 
 	Var r = 3;
 	Var s = 0;
 	Pos(r,s);
-	ChangeDir([Right]);
+	ChangeDir([RIGHT]);
 	For j = 3 Times
-	    place-block;
+        High Block;
 	FEnd;
 
     Set r = 6;
     Set s = 4;
     Pos(r,s);
 	For k = 2 Times
-	    put-light;
+	    Call proc2;
 	FEnd;
 
-	Set ver = 8;
+	Set ver = 7;
 	Set hor = 1;
 	Pos(ver, hor);
-	For t = 7 Times
-	    high-block;
-	FEnd;
+
+    Call myProc;
 
 	Var hor_robot = 1;
 	Var ver_robot = 1;
 	Set hor = 22;
-	Less-ver;
 	PosStart(ver_robot, hor_robot);
-	)
+
+	Set hor = 0;
+	Set ver = 0;
+	Pos(ver,hor);
 End
 
-Proc MyProc 
-    Var v = 1;
+Proc myProc
+    For t = 2 Times
+        High Block;
+        Call proc2;
+    FEnd;
 End-Proc
 
-Proc Proc2
-	put-light;
+Proc proc2
+	Put Light;
 End-Proc
