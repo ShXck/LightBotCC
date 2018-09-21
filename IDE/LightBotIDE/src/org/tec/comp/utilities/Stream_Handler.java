@@ -15,7 +15,13 @@ import java.util.List;
 public class Stream_Handler {
 
 	private static final String FILE_EXT = ".txt";
-	
+
+	/**
+	 * Escribe en un archivo.
+	 * @param content el contenido del archivo.
+	 * @param file_name el nombre del archivo.
+	 * @throws IOException
+	 */
 	public static void write_file(String content, String file_name) throws IOException {
 		try(
 		BufferedReader reader = new BufferedReader(new StringReader(content));
@@ -24,7 +30,12 @@ public class Stream_Handler {
 			reader.lines().forEach(line -> writer.println(line));
 		}
 	}
-	
+
+	/**
+	 * Obtiene el contenido de un archivo de texto.
+	 * @param file el nombre del archivo.
+	 * @return el contenido del archivo.
+	 */
 	public static String get_file_content(File file) {
 		FileReader reader;
 		StringBuffer str_buffer = new StringBuffer();
@@ -42,7 +53,12 @@ public class Stream_Handler {
 		}
 		return str_buffer.toString();
 	}
-	
+
+	/**
+	 * Obtiene una lista con cada línea del código.
+	 * @param file el archivo a leer.
+	 * @return la lista con las líneas del código.
+	 */
 	public static ArrayList<String> get_lines_as_list(String file) {
 		ArrayList<String> result = new ArrayList<String>();
 		

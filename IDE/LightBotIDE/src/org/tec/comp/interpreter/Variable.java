@@ -18,30 +18,52 @@ public class Variable {
         global = is_global;
     }
 
+    /**
+     * Asigna un valor a la variable.
+     * @param val el valor de la variable.
+     */
     public void set_value(int val) {
         var_value = val;
     }
 
+    /**
+     * @return si la variables está asignada o no.
+     */
     public boolean is_assigned() {
         return var_value != -1;
     }
 
+    /**
+     * Se incrementa en uno el valor de la variable.
+     */
     public void increment() {
         var_value++;
     }
 
+    /**
+     * Se decrementa en uno el valor de la variable.
+     */
     public void decrement() {
         var_value--;
     }
 
+    /**
+     * @return Obtiene el nombre de la variable.
+     */
     public String get_id() {
         return var_id;
     }
 
+    /**
+     * @return el valro numérico de la variable.
+     */
     public int get_val() {
         return var_value;
     }
 
+    /**
+     * @return Si es global o no.
+     */
     public boolean is_global() { return global; }
 
     @Override

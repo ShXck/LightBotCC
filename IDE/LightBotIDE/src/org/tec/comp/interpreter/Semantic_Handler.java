@@ -1,20 +1,30 @@
 package org.tec.comp.interpreter;
 
-import org.tec.comp.Message_Handler;
+import org.tec.comp.utilities.Message_Handler;
 
 public class Semantic_Handler {
 
+    /**
+     * Corre el analizados semántico.
+     */
     public static void run_semantic_parse() {
         check_procs();
         check_vars();
         check_instruction(Action_Type.POS_START);
         check_instruction(Action_Type.PUT_LIGHT);
+        check_instruction(Action_Type.COMMENT);
     }
 
+    /**
+     *  Comprueba que hayan variables en el código.
+     */
     private static void check_vars() {
         if(LangParser.var_list.isEmpty()) LangParser.msg_list.add(Message_Handler.no_vars_found());
     }
 
+    /**
+     * Comprueba que los procedimientos llamados existan.
+     */
     private static void check_procs() {
         for(Position_Procedure pos : LangParser.code_actions) {
             for(Action a : pos.get_action_list()) {
@@ -30,6 +40,10 @@ public class Semantic_Handler {
         }
     }
 
+    /**
+     * Comprueba que exista una instrucción específica en el código.
+     * @param action la acción que se quiere verificar.
+     */
     private static void check_instruction(Action_Type action) {
         boolean action_found = false;
         for (Position_Procedure pp : LangParser.code_actions) {

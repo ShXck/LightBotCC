@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
@@ -12,7 +13,7 @@ import org.tec.comp.game.Game_Board;
 import org.tec.comp.game.Subscriber;
 import org.tec.comp.game.TransferObject;
 import org.tec.comp.interpreter.LangParser;
-import org.tec.comp.interpreter.ParseException;
+import org.tec.comp.utilities.Message_Handler;
 import org.tec.comp.utilities.Stream_Handler;
 
 public class IDE_Window implements Runnable, ActionListener {
@@ -28,10 +29,10 @@ public class IDE_Window implements Runnable, ActionListener {
 	private final String SAVE_FILE_LBL = "Save File";
 	private final String BUILD_CODE_LBL = "Build Code";
 	private final String CONSOLE_LBL = "Console";
-	private final String SEND_CODE_LBL = "Send Code";
+	private final String SEND_CODE_LBL = "Send Map";
 
 	Game_Board game_board = new Game_Board();
-	Subscriber subscriber = new Subscriber("m12.cloudmqtt.com:16115","nnsmxwti","37KKt6sf8N6L","java_app","test_topic");
+	Subscriber subscriber = new Subscriber("m20.cloudmqtt.com:12525","fckzxtel","R3Rs1bph3H4R","java_app","esp/test");
 
     public IDE_Window() throws MqttException { }
 
@@ -120,14 +121,19 @@ public class IDE_Window implements Runnable, ActionListener {
 					set_console_msg(Message_Handler.build_no_code_err(), Color.RED);
 				} else {
 					save_file();
-                    LangParser.parse("testcode.txt");
-                    if(!LangParser.msg_list.isEmpty()) {
+					//if(game_board.is_built()) game_board.clean_board(); // TODO: CHECK.
+                    LangParser.parse("mycode.txt");
+                    if(!LangParser.msg_list.isEmpty() && game_board.get_msg_list().isEmpty()) {
                         set_console_msg(build_console_msg(LangParser.msg_list), Color.RED);
                         LangParser.clean_compilation_data();
                     } else {
-                        set_console_msg(Message_Handler.success_build_code(), Color.BLUE);
                         game_board.build_board(LangParser.code_actions);
-                        //game_board.print_board();
+                        if(game_board.get_msg_list().isEmpty()) {
+                            set_console_msg(Message_Handler.success_build_code(), Color.BLUE);
+                            game_board.print_board();
+                            game_board.set_built_state(true);
+                        }
+                        else set_console_msg(build_console_msg(game_board.get_msg_list()), Color.RED);
                     }
                 }
 			}      	
@@ -138,7 +144,11 @@ public class IDE_Window implements Runnable, ActionListener {
             public void actionPerformed(ActionEvent e) {
                 TransferObject to = new TransferObject(game_board.get_board());
                 try {
-                    subscriber.sendMessage(to.to_json());
+                    if(game_board.is_built()) {
+                        set_console_msg(Message_Handler.map_sent_success(), Color.BLUE);
+                        subscriber.sendMessage(to.to_json());
+                    }
+                    else set_console_msg(Message_Handler.map_not_built(), Color.RED);
                 } catch (MqttException e1) {
                     e1.printStackTrace();
                 }
@@ -184,10 +194,29 @@ public class IDE_Window implements Runnable, ActionListener {
         frame.setVisible(true);
     }
 
+    /**
+     * Construye el mensaje para la consola.
+     * @param msgs la lista de mensajes.
+     * @return el mensaje construido.
+     */
     private String build_console_msg(ArrayList<String> msgs) {
 	    String result = "<html>";
 	    for(String s : msgs) {
 	        result += s + "<br>";
+        }
+        result += "</html>";
+        return result;
+    }
+
+    /**
+     * Construye el mensaje para la consola.
+     * @param msgs el conjunto de mensajes.
+     * @return el mensaje construido.
+     */
+    private String build_console_msg(Set<String> msgs) {
+        String result = "<html>";
+        for(String s : msgs) {
+            result += s + "<br>";
         }
         result += "</html>";
         return result;

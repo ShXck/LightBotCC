@@ -17,14 +17,26 @@ public class Var_Act_Data extends Action {
         set_val = set_value;
     }
 
+    /**
+     *
+     * @return La primera variable.
+     */
     public Variable first_var() {
         return var1;
     }
 
+    /**
+     *
+     * @return La segunda variable.
+     */
     public Variable second_var() {
         return var2;
     }
 
+    /**
+     *
+     * @return el valor de asignación de la variable.
+     */
     public int get_set_val() {return set_val;}
 
     public String toString() {

@@ -2,7 +2,6 @@ package org.tec.comp.game;
 
 public class Block {
 
-    private int id;
     private int height;
     private Block_Type block_type;
 
@@ -10,35 +9,20 @@ public class Block {
         set_block(type, bheight);
     }
 
+    /**
+     * Modifica el tipo de bloque.
+     * @param type el tipo.
+     * @param bheight la altura.
+     */
     public void set_block(Block_Type type, int bheight) {
         block_type = type;
         height = bheight;
-
-        switch (type) {
-            case NORMAL_BLOCK: {
-                id = 0;
-                break;
-            }
-            case HIGH_BLOCK: {
-                id = 1;
-                break;
-            }
-            case BLUE_LIGHT: {
-                id = 2;
-                break;
-            }
-            case BLANK: {
-                id = 9;
-                break;
-            }
-            case ROBOT: {
-                id = 4;
-                break;
-            }
-        }
     }
 
-
+    /**
+     * Construye una representación númerica del bloque.
+     * @return la representación del bloque.
+     */
     private String str_repr() {
         StringBuilder sb = new StringBuilder("XXXX");
 
@@ -97,18 +81,25 @@ public class Block {
         height = bheight;
     }
 
+    /**
+     * @return la altura del bloque.
+     */
     public int get_height() {
         return height;
     }
 
-    public int get_id() {
-        return id;
-    }
-
+    /**
+     *
+     * @return el tipo de bloque.
+     */
     public Block_Type get_type() {
         return block_type;
     }
 
+    /**
+     *
+     * @return Representación numérica del bloque.
+     */
     public int to_int() {
         return Integer.parseInt(str_repr());
     }

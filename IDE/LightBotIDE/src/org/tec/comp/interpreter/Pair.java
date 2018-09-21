@@ -18,19 +18,34 @@ public class Pair<X,Y> {
         return second_element;
     }
 
+    /**
+     * Asigna el valor a la primera variable.,
+     * @param val el nuevo valor.
+     */
     public void set_first(X val) {
         first_element = val;
     }
 
+    /**
+     * Asigna el valor de la segunda variable.
+     * @param val el nuevo valor.
+     */
     public void set_second(Y val) {
         second_element = val;
     }
 
+    /**
+     * Actualiza los valores de ambas variables.
+     * @param xval primer valor.
+     * @param yval segundo valor.
+     * @return el par actualzado.
+     */
     public Pair<X,Y> update_values(X xval, Y yval) {
         first_element = xval;
         second_element = yval;
         return this;
     }
+
 
     public String toString() {
         return "(" + first_element + "," + second_element + ")";

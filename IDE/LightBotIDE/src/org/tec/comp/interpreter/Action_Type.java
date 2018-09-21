@@ -14,5 +14,6 @@ public enum Action_Type {
     FOR_LOOP,
     WHEN_LOOP,
     POS_START,
-    CALL_PROC
+    CALL_PROC,
+    COMMENT
 }

@@ -14,6 +14,10 @@ public class TransferObject {
         set_int_board(board);
     }
 
+    /**
+     * Construye una matriz por defecto.
+     * @param board la matriz original.
+     */
     private void set_int_board(Block[][] board) {
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[0].length; j++) {
@@ -22,6 +26,10 @@ public class TransferObject {
         }
     }
 
+    /**
+     * Convierte la matriz a una representación de JSON.
+     * @return el json de la matriz.
+     */
     public String to_json() {
         ObjectMapper mapper = new ObjectMapper();
         String result = "";
@@ -34,6 +42,9 @@ public class TransferObject {
         return result;
     }
 
+    /**
+     * Imprime la matriz.
+     */
     public void print_board() {
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[0].length; j++) {
@@ -43,14 +54,25 @@ public class TransferObject {
         }
     }
 
+    /**
+     *
+     * @return la matriz construida.
+     */
     public int[][] getBoard() {
         return board;
     }
 
+    /**
+     * Asigna el valor del tablero.
+     * @param board el nuevo tablero.
+     */
     public void setBoard(int[][] board) {
         this.board = board;
     }
 
+    /**
+     * @return la id del tablero.
+     */
     public String getID() {
         return ID;
     }

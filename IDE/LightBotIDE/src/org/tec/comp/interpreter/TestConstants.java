@@ -31,67 +31,69 @@ public interface TestConstants {
   /** RegularExpression Id. */
   int COMMA = 11;
   /** RegularExpression Id. */
-  int VARIABLE = 12;
+  int CSLASH = 12;
   /** RegularExpression Id. */
-  int SET = 13;
+  int VARIABLE = 13;
   /** RegularExpression Id. */
-  int INCREMENT = 14;
+  int SET = 14;
   /** RegularExpression Id. */
-  int DECREMENT = 15;
+  int INCREMENT = 15;
   /** RegularExpression Id. */
-  int BEGIN = 16;
+  int DECREMENT = 16;
   /** RegularExpression Id. */
-  int END = 17;
+  int BEGIN = 17;
   /** RegularExpression Id. */
-  int PROC = 18;
+  int END = 18;
   /** RegularExpression Id. */
-  int ENDPROC = 19;
+  int PROC = 19;
   /** RegularExpression Id. */
-  int PLACEBLOCK = 20;
+  int ENDPROC = 20;
   /** RegularExpression Id. */
-  int HIGHBLOCK = 21;
+  int PLACEBLOCK = 21;
   /** RegularExpression Id. */
-  int POSFUNC = 22;
+  int HIGHBLOCK = 22;
   /** RegularExpression Id. */
-  int PUTLIGHT = 23;
+  int POSFUNC = 23;
   /** RegularExpression Id. */
-  int KEEP = 24;
+  int PUTLIGHT = 24;
   /** RegularExpression Id. */
-  int KEND = 25;
+  int KEEP = 25;
   /** RegularExpression Id. */
-  int TIMES = 26;
+  int KEND = 26;
   /** RegularExpression Id. */
-  int SKP = 27;
+  int TIMES = 27;
   /** RegularExpression Id. */
-  int FOR = 28;
+  int SKP = 28;
   /** RegularExpression Id. */
-  int FEND = 29;
+  int FOR = 29;
   /** RegularExpression Id. */
-  int WHEN = 30;
+  int FEND = 30;
   /** RegularExpression Id. */
-  int WHEND = 31;
+  int WHEN = 31;
   /** RegularExpression Id. */
-  int THEN = 32;
+  int WHEND = 32;
   /** RegularExpression Id. */
-  int POSSTARTFUNC = 33;
+  int THEN = 33;
   /** RegularExpression Id. */
-  int CALL = 34;
+  int POSSTARTFUNC = 34;
   /** RegularExpression Id. */
-  int CHANGEDIR = 35;
+  int CALL = 35;
   /** RegularExpression Id. */
-  int RIGHT = 36;
+  int CHANGEDIR = 36;
   /** RegularExpression Id. */
-  int LEFT = 37;
+  int RIGHT = 37;
   /** RegularExpression Id. */
-  int UP = 38;
+  int LEFT = 38;
   /** RegularExpression Id. */
-  int DOWN = 39;
+  int UP = 39;
   /** RegularExpression Id. */
-  int INTEGER = 40;
+  int DOWN = 40;
   /** RegularExpression Id. */
-  int PROCNAME = 41;
+  int INTEGER = 41;
   /** RegularExpression Id. */
-  int IDENTIFIER = 42;
+  int PROCNAME = 42;
+  /** RegularExpression Id. */
+  int IDENTIFIER = 43;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -110,6 +112,7 @@ public interface TestConstants {
     "\"=\"",
     "\";\"",
     "\",\"",
+    "\"//\"",
     "\"Var\"",
     "\"Set\"",
     "\"Add+\"",
@@ -118,10 +121,10 @@ public interface TestConstants {
     "\"End\"",
     "\"Proc\"",
     "\"End-Proc\"",
-    "\"place-block\"",
-    "\"high-block\"",
+    "\"Place Block\"",
+    "\"High Block\"",
     "\"Pos\"",
-    "\"put-light\"",
+    "\"Put Light\"",
     "\"Keep\"",
     "\"Kend\"",
     "\"Times\"",
@@ -134,10 +137,10 @@ public interface TestConstants {
     "\"PosStart\"",
     "\"Call\"",
     "\"ChangeDir\"",
-    "\"Right\"",
-    "\"Left\"",
-    "\"Up\"",
-    "\"Down\"",
+    "\"RIGHT\"",
+    "\"LEFT\"",
+    "\"UP\"",
+    "\"DOWN\"",
     "<INTEGER>",
     "<PROCNAME>",
     "<IDENTIFIER>",
