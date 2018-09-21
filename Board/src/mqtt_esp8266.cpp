@@ -10,8 +10,8 @@
 
 //Global variables, can be simplified to reduce static memory use
 #define PIN D11
-const char* ssid = "OnePlus 3";
-const char* password =  "sebasmora";
+const char* ssid = "AndroidAP";
+const char* password =  "pnbz4650";
 const char* mqttServer = "m12.cloudmqtt.com";
 const int mqttPort = 16115;
 const char* mqttUser = "nnsmxwti";
@@ -33,7 +33,20 @@ const uint16_t colores_robot[] = {matrix.Color(0, 255, 150) , matrix.Color(20, 2
 void callback(char* topic, byte* payload, unsigned int length);
 JsonObject& parseString2JSON(char json[]);
 void displayMatrix(int matrixArray[8][8]);
-
+void espiral(int vueltas);
+void showUP(int coo);
+void addElement(JsonArray& jsonArray);
+void doMove(JsonArray& jsonArray);
+void T_Left();
+void up();
+void copiarMatriz();
+void jump_UP();
+void T_Right();
+void on_offLight();
+bool checkL();
+bool checkH();
+void prev_now();
+void move();
 //-----------------------------------------^-------------------------------------------------@Sebastian
 
 
@@ -46,19 +59,17 @@ int c_prev = 0;
 int coordenada = 2; //Inicio hacia el Norte:0   Este:1   Sur:2   Oeste:3
 
 void setup() {
-  Serial.begin(1200);
-  pinMode(2, OUTPUT);
-  pinMode(3, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
+Serial.begin(115200);
+  pinMode(D2, OUTPUT);
+  pinMode(D3, OUTPUT);
+  pinMode(D4, OUTPUT);
+  pinMode(D5, OUTPUT);
 
   //--------------------v------------------@Sebastian
   matrix.begin();
   matrix.setTextWrap(false);
   matrix.setBrightness(200);
 
-
-  Serial.begin(115200);
 
   WiFi.begin(ssid, password);
 
@@ -107,12 +118,13 @@ void callback(char* topic, byte* payload, unsigned int length) {
   if (id.equals("ide")) {
     JsonArray& jsonArray = root["board"];
     /*llamar lógica de cuando le entra el mapa*/
-    addElement(jsonArray);                                                                                                          //carga de la matri<
+    addElement(jsonArray);                                                                                                     //carga de la matri<
   }
   else if (id.equals("app")) {
     JsonArray& jsonArray = root["process"];
     /* llamar lógica de cuando le entra un proceso*/
     doMove(jsonArray);
+
   }
   else {
     Serial.println("JSON no valido");
@@ -182,11 +194,6 @@ void displayMatrix(int matrixArray[8][8]) {
 //-------------------------------^------------------------------@Sebastian
 
 void loop() {
-
-
-  //addElement();
-  //-------------------------------v------------------------------@Sebastian
-
   if (!client.connected()) {
     reconnect();
   }
@@ -195,10 +202,6 @@ void loop() {
   int ejem[8][8] = {{1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}};
   displayMatrix(ejem);
   delay(100);
-
-  //-------------------------------^------------------------------@Sebastian
-
-
 }
 void espiral(int vueltas) { //Como posible representacion del que el jugador gano
   int c = 0;
@@ -238,24 +241,26 @@ void addElement(JsonArray& jsonArray) {                                         
 
   for (int i = 0; i < 8; i++) {
     for (int e = 0; e < 8; e++) {
-      matriz[i][e] = jsonArray.get(i).get(e);                                                                                             // VERIFICAR QUE ESTO SE PUEDE HACER
+      matriz[i][e] = jsonArray[i][e];                                                                                             // VERIFICAR QUE ESTO SE PUEDE HACER
     }
   }
   copiarMatriz();
-  Serial.println("Loading...");
+//  Serial.println(matriz[0][0]);
+//  jsonArray.prettyPrintTo(Serial);
 }
 
 void doMove(JsonArray& jsonArray) {
   for (int r = 0; r < jsonArray.size(); r++) {
-    if (jsonArray.get(r) == 1) {
+    Serial.println("Contador: "+String(r));
+    if (jsonArray[r] == 1) {
       up();
-    } else if (jsonArray.get(r) == 2) {
-      T_Left();
-    } else if (jsonArray.get(r) == 3) {
-      T_Right();
-    } else if (jsonArray.get(r) == 4) {
+    } else if (jsonArray[r] == 2) {
+      //T_Left();
+    } else if (jsonArray[r] == 3) {
+      //T_Right();
+    } else if (jsonArray[r] == 4) {
       on_offLight();
-    } else if (jsonArray.get(r) == 5) {
+    } else if (jsonArray[r] == 5) {
       jump_UP();
     } else {
       Serial.println("Error de codigo de lectura 132131232121");
@@ -266,7 +271,7 @@ void doMove(JsonArray& jsonArray) {
 
 
 void copiarMatriz() {
-  matrizRespaldo = matriz;
+  //matrizRespaldo = matriz;
 }
 
 /*
@@ -434,38 +439,36 @@ void jump_UP() {
    Metodo para cambia el sentido derecho de hacia donde observa el robot (Usar luces del cuadro pequeño -JK-)
 */
 void T_Right() {
-  Serial.println("Turn Right...");
+  Serial.println("Turn Right.../n :"+String(coordenada));
   if (coordenada == 3) {
-    digitalWrite(coordenada + 2, LOW);
+  //  digitalWrite(coordenada + 2, LOW);
     coordenada = 0;
-    digitalWrite(coordenada + 2, HIGH);
-    delay(500);
+  //  digitalWrite(coordenada + 2, HIGH);
+    //delay(500);
   }
   else {
-    digitalWrite(coordenada + 2, LOW);
+    //digitalWrite(coordenada + 2, LOW);
     coordenada++;
-    digitalWrite(coordenada + 2, HIGH);
-    delay(500);
+    //digitalWrite(coordenada + 2, HIGH);
+    //delay(500);
   }
 }
-
-
 /*
    Metodo para cambia el sentido izquierdo de hacia donde observa el robot (Usar luces del cuadro pequeño -JK-)
 */
 void T_Left() {
-  Serial.println("Turn Left...");
+  Serial.println("Turn Left.../n :"+String(coordenada));
   if (coordenada == 0) {
-    digitalWrite(coordenada + 2, LOW);
+    //digitalWrite(coordenada + 2, LOW);
     coordenada = 3;
-    digitalWrite(coordenada + 2, HIGH);
-    delay(500);
+    //digitalWrite(coordenada + 2, HIGH);
+    //delay(500);
   }
   else {
-    digitalWrite(coordenada + 2, LOW);
+    //digitalWrite(coordenada + 2, LOW);
     coordenada--;
-    digitalWrite(coordenada + 2, HIGH);
-    delay(500);
+    //digitalWrite(coordenada + 2, HIGH);
+    //delay(500);
   }
 }
 
