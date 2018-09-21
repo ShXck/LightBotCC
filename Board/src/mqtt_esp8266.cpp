@@ -10,13 +10,13 @@
 
 //Global variables, can be simplified to reduce static memory use
 #define PIN D11
-#define PIN D2
-#define PIN D3
-#define PIN D4
-#define PIN D5
+#define PIN2 D2
+#define PIN3 D3
+#define PIN4 D4
+#define PIN5 D5
 
-const char* ssid = "LANPrivate";
-const char* password =  "Zh95fp48";
+const char* ssid = "jk";
+const char* password =  "abcdefgh";
 const char* mqttServer = "m20.cloudmqtt.com";
 const int mqttPort = 12525;
 const char* mqttUser = "fckzxtel";
@@ -68,10 +68,11 @@ int contadorDeProcedimiento = 0;
 void setup() {
   //start(3,3);
   Serial.begin(115200);
-  pinMode(D2, OUTPUT);
-  pinMode(D3, OUTPUT);
-  pinMode(D4, OUTPUT);
-  pinMode(D5, OUTPUT);
+  pinMode(PIN2, OUTPUT);
+  pinMode(PIN3, OUTPUT);
+  pinMode(PIN4, OUTPUT);
+  pinMode(PIN5, OUTPUT);
+
   //--------------------v------------------@Sebastian
   matrix.begin();
   matrix.setTextWrap(false);
@@ -90,11 +91,13 @@ void setup() {
     Serial.println("Connecting to MQTT...");
     if (client.connect(clientID, mqttUser, mqttPassword )) {
       Serial.println("connected");
+      //break;
     } else {
       Serial.print("failed with state ");
       Serial.print(client.state());
       delay(2000);
     }
+
   }
   client.publish(listen_topic1, "Hello from ESP8266");
   client.subscribe(listen_topic1);
@@ -110,21 +113,18 @@ void callback(char* topic, byte* payload, unsigned int length) {
   JsonObject& root = parseString2JSON(message);
   String id = root["id"];
   if (id.equals("ide")) {
-      Serial.println(root["id"].asString());
       JsonArray& jsonArray = root["board"];
-      addElement(jsonArray);
-      Serial.println(matriz[5][5]);                                                                                                 //carga de la matri<
+      addElement(jsonArray);                                                                                          //carga de la matri<
   }
   else if (id.equals("app")) {
-      Serial.println(root["id"].asString());
       JsonArray& jsonArrayPROCESS = root["process"];
       contadorDeProcedimiento=0;
-      loadProce(jsonArrayPROCESS);      //Cargo el vector process----------------------------------------- MMMMMMM no se ocupa?¡
-    //  doMove(jsonArrayPROCESS);
+      loadProce(jsonArrayPROCESS);
   }
   else {
     Serial.println("JSON no valido");
   }
+  Serial.println(root["id"].asString());
   Serial.println("---------Recibimiento de datos exitosamente--------------");
 
 }
@@ -149,7 +149,7 @@ void reconnect() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
-    if (client.connect(clientID)) {
+    if (client.connect(clientID, mqttUser, mqttPassword )) { //client.connect(clientID, mqttUser, mqttPassword )
       Serial.println("connected");
       // Once connected, publish an announcement...
       // ... and resubscribe
@@ -164,38 +164,11 @@ void reconnect() {
   }
 }
 
-void loop() {
-  if (!client.connected()) {
-    reconnect();
-  }
-  client.loop();
-  matrix.fillScreen(0);
-   int ejem[8][8] = {{2000,1000,1000,3100,1000,1000,1000,1000}, {1000,1000,1000,3100,1000,1000,1000,1000}, {2000,1000,1000,3100,1000,1000,1000,1000},
-   {2000,1000,1000,1000,1000,1000,1000,1000}, {2000,1000,1000,3100,1000,1000,1000,1000}, {2000,1000,1000,3100,1000,1000,1000,1000},
-    {2000,1000,1000,3100,1000,1000,1000,1000}, {2000,1000,1000,3100,1000,1000,1000,9999}};
 
-  if ( String(matriz[7][7]).length()==4){
-    Serial.println("----No vacia------");
-    displayMatrix(matriz);                              // cambiar ejem por matriz
-
-    int xwx = process[contadorDeProcedimiento];
-    if(xwx==1 || xwx==2 || xwx==3|| xwx==4){
-      Serial.println(">>>>>"+String(contadorDeProcedimiento)+"  --- Process:"+String(process[contadorDeProcedimiento]));
-      doMove(process,contadorDeProcedimiento);
-      contadorDeProcedimiento++;
-    }
-
-    delay(3000);
-  }else{
-      Serial.println("VACIA");
-      delay(1000);
-  }
-}
 
 
 //No hay manera de no hacerlo alambrado el tamaño de la matriz a menos de pasar la cantidad de columnas y filas por parámetros, igual no hay problema
 void displayMatrix(int matrixArray[8][8]) {
-
 String re= "";
   for (int i = 0; i < 8; i++ ) {
     for (int j = 0; j < 8; j++) {
@@ -230,8 +203,7 @@ String re= "";
 /*
    Metodo para crear/cargar la matriz
 */
-void addElement(JsonArray& jsonArray) {                                                                                                   // revisar el &
-Serial.println("A-a-a-a-a-a-a-a-a-a-a-a-a-a");
+void addElement(JsonArray& jsonArray) {
   for (int i = 0; i < 8; i++) {
     for (int e = 0; e < 8; e++) {
       matriz[i][e] = jsonArray[i][e];
@@ -241,9 +213,11 @@ Serial.println("A-a-a-a-a-a-a-a-a-a-a-a-a-a");
       }                                                                                          // VERIFICAR QUE ESTO SE PUEDE HACER
     }
   }
- Serial.println(matriz[5][5]);
 }
 
+/*
+Metodo para cargar los pasos
+*/
 void loadProce(JsonArray& jsonArrayP){
     for (int ix = 0; ix < jsonArrayP.size(); ix++) {
       process[ix]=jsonArrayP[ix];
@@ -251,8 +225,10 @@ void loadProce(JsonArray& jsonArrayP){
   }
 }
 
+/*
+Metodo para hacer un movimiento
+*/
 void doMove(int jsonArray[],int p) {       //Este metodo solo debe hacer solo un paso
-  //for (int r = 0; r < jsonArray.size(); r++) {
     Serial.println("Contador: "+String(p));
     if (jsonArray[p] == 1) {
       up();
@@ -266,8 +242,7 @@ void doMove(int jsonArray[],int p) {       //Este metodo solo debe hacer solo un
       jump_UP();
     } else {
       Serial.println("Error de codigo de lectura 13213-ERROR-1232121");
-  //  }
-  }
+    }
 }
 
 
@@ -292,7 +267,6 @@ void ShowElement() {
    Metodo para colocar la posicion inicial del robot
 */
 void start(int fila, int columna) {
-  //digitalWrite(2, HIGH);  //Norte
   Serial.println("Start in [" + String(fila) + "][" + String(columna) + "]");
   f_now = fila;  c_now = columna;
   int a = ( matriz[f_now][c_now] / 10) * 10 + 1;
@@ -304,50 +278,48 @@ void start(int fila, int columna) {
    ---El metodo cuenta con las verificaciones necesarias
 */
 void up() {
-  Serial.print("Move to ");
+  prev_now();
 
+  Serial.print("Move to ");
   if (coordenada == 0) { //Norte
     Serial.println("Nort");
     f_now = f_now - 1;    //AQUI VERIFICACION DE QUE NO SE SALGA DE LA MATRIZ
-    if (checkL() && checkH() ) {  //Limite y altura
-      prev_now();
+    if (checkL() && checkH()) {  //Limite y altura
+
       move();
       showUP(coordenada);
 
     } else {
       f_now = f_now + 1;
     }
-
   }
-  else if (coordenada == 1) { //Este
+  else if (coordenada == 3) { //Este
     Serial.println("East");
     c_now = c_now + 1;   //AQUI VERIFICACION DE QUE NO SE SALGA DE LA MATRIZ
     if (checkL() && checkH() ) {
-      prev_now();
+
       move();
       showUP(coordenada);
     } else {
       c_now = c_now - 1;
     }
-
   }
   else if (coordenada == 2) { //Sur
     f_now = f_now + 1;   //AQUI VERIFICACION DE QUE NO SE SALGA DE LA MATRIZ
     Serial.println("South");
     if (checkL() && checkH() ) {
-      prev_now();
+
       move();
       showUP(coordenada);
     } else {
       f_now = f_now - 1;
     }
-
   }
-  else if (coordenada == 3) { //Oeste
+  else if (coordenada == 1) { //Oeste
     c_now = c_now - 1;   //AQUI VERIFICACION DE QUE NO SE SALGA DE LA MATRIZ
     Serial.println("West");
     if (checkL() && checkH() ) {
-      prev_now();
+
       move();
       showUP(coordenada);
     } else {
@@ -361,9 +333,11 @@ void up() {
 */
 void move() { //Hacer verificaciones del altura........
   Serial.println("Ready move..");
-
   int n1 = (matriz[f_prev][c_prev] / 10) * 10;
   int n2 = (matriz[f_now][c_now] / 10) * 10 + 1;
+
+  Serial.println("f_prev-> "+String(f_prev)+"  c_prev->"+String(c_prev));
+  Serial.println("f_now-> "+String(f_now)+"  c_now->"+String(c_now));
 
   Serial.println("ANTES-> "+String(n1)+"  DESPUES->"+String(n2));
 
@@ -400,9 +374,9 @@ bool checkH() {
   int h2 = (matriz[f_now][c_now] / 1000);
 
   int deltaH = h1 - h2;
-  Serial.println("DeltaH: " + String(deltaH));
+  Serial.println("------------------------------> DeltaH: " + String(deltaH));
 
-  if (deltaH >= -1) {
+  if (deltaH >= 0) {
     return true;
   } else {
     Serial.println(">>>>> Error <<<<<< [Impossible jump]");
@@ -486,6 +460,14 @@ void T_Left() {
 
 
 
+void apagarTodo(){
+  digitalWrite(PIN2, LOW);
+  digitalWrite(PIN3, LOW);
+  digitalWrite(PIN4, LOW);
+  digitalWrite(PIN5, LOW);
+}
+
+
 //Metdos graficos para la placa JK
 
 
@@ -493,44 +475,79 @@ void espiral(int vueltas) { //Como posible representacion del que el jugador gan
   int c = 0;
   while (c < vueltas) {
     delay(100);
+
     T_Left();
     up();
     delay(100);
+
+
     T_Left();
     delay(100);
     up();
+
+
     T_Left();
     delay(100);
     up();
+
+
     T_Left();
     delay(100);
+    up();
+
+
     c++;
   }
+  apagarTodo();
 }
 
+
+
 void showUP(int coo) {
-  delay(200);
+  delay(500);
+
   if(coo==0){
-    digitalWrite(D2, LOW);
-    delay(500);
-    digitalWrite(D2, HIGH);
-  }
-  if(coo==1){
-    digitalWrite(D3, LOW);
-    delay(500);
-    digitalWrite(D3, HIGH);
-  }
-  if(coo==2){
-    digitalWrite(D4, LOW);
-    delay(500);
-    digitalWrite(D4, HIGH);
+    apagarTodo();
+    digitalWrite(PIN2, HIGH);
   }
   if(coo==3){
-    digitalWrite(D5, LOW);
-    delay(500);
-    digitalWrite(D5, HIGH);
+    apagarTodo();
+    digitalWrite(PIN3, HIGH);
+  }
+  if(coo==2){
+    apagarTodo();
+    digitalWrite(PIN4, HIGH);
+  }
+  if(coo==1){
+    apagarTodo();
+    digitalWrite(PIN5, HIGH);
   }
 
+}
+
+void loop() {
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+  matrix.fillScreen(0);
+
+
+  if ( String(matriz[7][7]).length()==4){
+    Serial.println("----No vacia------");
+    int xwx = process[contadorDeProcedimiento];
+    if(xwx==1 || xwx==2 || xwx==3|| xwx==4 || xwx==5){
+      Serial.println(">>>>>"+String(contadorDeProcedimiento)+"  --- Process:"+String(process[contadorDeProcedimiento]));
+      doMove(process,contadorDeProcedimiento);
+      contadorDeProcedimiento++;
+
+      //Hacer que no deje el rastro
+    }
+
+    displayMatrix(matriz);
+    delay(500);
+
+  }
 }
 
 /**
