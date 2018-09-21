@@ -10,12 +10,17 @@
 
 //Global variables, can be simplified to reduce static memory use
 #define PIN D11
-const char* ssid = "AndroidAP";
-const char* password =  "pnbz4650";
-const char* mqttServer = "m12.cloudmqtt.com";
-const int mqttPort = 16115;
-const char* mqttUser = "nnsmxwti";
-const char* mqttPassword = "37KKt6sf8N6L";
+#define PIN D2
+#define PIN D3
+#define PIN D4
+#define PIN D5
+
+const char* ssid = "LANPrivate";
+const char* password =  "Zh95fp48";
+const char* mqttServer = "m20.cloudmqtt.com";
+const int mqttPort = 12525;
+const char* mqttUser = "fckzxtel";
+const char* mqttPassword = "R3Rs1bph3H4R";
 const char* listen_topic1 = "esp/test";
 const char * clientID = "ESP8266Cl**hient";
 WiFiClient espClient;
@@ -36,10 +41,9 @@ void displayMatrix(int matrixArray[8][8]);
 void espiral(int vueltas);
 void showUP(int coo);
 void addElement(JsonArray& jsonArray);
-void doMove(JsonArray& jsonArray);
+void doMove(int jsonArray[],int p);
 void T_Left();
 void up();
-void copiarMatriz();
 void jump_UP();
 void T_Right();
 void on_offLight();
@@ -47,30 +51,31 @@ bool checkL();
 bool checkH();
 void prev_now();
 void move();
+void loadProce(JsonArray& jsonArrayP);
 //-----------------------------------------^-------------------------------------------------@Sebastian
 
 
 int matriz[8][8];
 int matrizRespaldo[8][8];
+int process[800];
 int f_now = 0;
 int c_now = 0;
 int f_prev = 0;
 int c_prev = 0;
-int coordenada = 2; //Inicio hacia el Norte:0   Este:1   Sur:2   Oeste:3
+int coordenada = 0; //Inicio hacia el Norte:0   Este:1   Sur:2   Oeste:3
+int contadorDeProcedimiento = 0;
 
 void setup() {
-Serial.begin(115200);
+  //start(3,3);
+  Serial.begin(115200);
   pinMode(D2, OUTPUT);
   pinMode(D3, OUTPUT);
   pinMode(D4, OUTPUT);
   pinMode(D5, OUTPUT);
-
   //--------------------v------------------@Sebastian
   matrix.begin();
   matrix.setTextWrap(false);
   matrix.setBrightness(200);
-
-
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -78,33 +83,23 @@ Serial.begin(115200);
     Serial.println("Connecting to WiFi..");
   }
   Serial.println("Connected to the WiFi network");
-
   client.setServer(mqttServer, mqttPort);
   client.setCallback(callback);
 
   while (!client.connected()) {
     Serial.println("Connecting to MQTT...");
-
     if (client.connect(clientID, mqttUser, mqttPassword )) {
-
       Serial.println("connected");
-
     } else {
-
       Serial.print("failed with state ");
       Serial.print(client.state());
       delay(2000);
-
     }
   }
   client.publish(listen_topic1, "Hello from ESP8266");
   client.subscribe(listen_topic1);
 
-  //-------------------^--------------------@Sebastian
 }
-
-//------------------------------v----------------------@Sebastian
-
 
 //Function that processes incoming message
 void callback(char* topic, byte* payload, unsigned int length) {
@@ -112,28 +107,25 @@ void callback(char* topic, byte* payload, unsigned int length) {
   for (int i = 0; i < length; i++) {
     message[i] = (char)payload[i];
   }
-
   JsonObject& root = parseString2JSON(message);
   String id = root["id"];
   if (id.equals("ide")) {
-    JsonArray& jsonArray = root["board"];
-    /*llamar lógica de cuando le entra el mapa*/
-    addElement(jsonArray);                                                                                                     //carga de la matri<
+      Serial.println(root["id"].asString());
+      JsonArray& jsonArray = root["board"];
+      addElement(jsonArray);
+      Serial.println(matriz[5][5]);                                                                                                 //carga de la matri<
   }
   else if (id.equals("app")) {
-    JsonArray& jsonArray = root["process"];
-    /* llamar lógica de cuando le entra un proceso*/
-    doMove(jsonArray);
-
+      Serial.println(root["id"].asString());
+      JsonArray& jsonArrayPROCESS = root["process"];
+      contadorDeProcedimiento=0;
+      loadProce(jsonArrayPROCESS);      //Cargo el vector process----------------------------------------- MMMMMMM no se ocupa?¡
+    //  doMove(jsonArrayPROCESS);
   }
   else {
     Serial.println("JSON no valido");
   }
-
-
-
-  Serial.println(root["id"].asString());
-  Serial.println("-----------------------");
+  Serial.println("---------Recibimiento de datos exitosamente--------------");
 
 }
 
@@ -172,107 +164,113 @@ void reconnect() {
   }
 }
 
-//No hay manera de no hacerlo alambrado el tamaño de la matriz a menos de pasar la cantidad de columnas y filas por parámetros, igual no hay problema
-void displayMatrix(int matrixArray[8][8]) {
-  for (int i = 0; i < 8; i++ ) {
-    for (int j = 0; j < 8; j++) {
-      if (matrixArray[i][j] == 1)
-        matrix.drawPixel(i, j, colores_robot[0]);
-      if (matrixArray[i][j] == 2)
-        matrix.drawPixel(i, j, colores_robot[1]);
-      if (matrixArray[i][j] == 3)
-        matrix.drawPixel(i, j, colores_robot[2]);
-    }
-  }
-  matrix.show();
-}
-
-
-// int x    = matrix.width();
-// int pass = 0;
-
-//-------------------------------^------------------------------@Sebastian
-
 void loop() {
   if (!client.connected()) {
     reconnect();
   }
   client.loop();
   matrix.fillScreen(0);
-  int ejem[8][8] = {{1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}, {1, 2, 3, 4, 5, 6, 7, 8}};
-  displayMatrix(ejem);
-  delay(100);
-}
-void espiral(int vueltas) { //Como posible representacion del que el jugador gano
-  int c = 0;
-  while (c < vueltas) {
-    delay(100);
-    T_Left();
-    up();
-    delay(100);
-    T_Left();
-    delay(100);
-    up();
-    T_Left();
-    delay(100);
-    up();
-    T_Left();
-    delay(100);
-    c++;
+   int ejem[8][8] = {{2000,1000,1000,3100,1000,1000,1000,1000}, {1000,1000,1000,3100,1000,1000,1000,1000}, {2000,1000,1000,3100,1000,1000,1000,1000},
+   {2000,1000,1000,1000,1000,1000,1000,1000}, {2000,1000,1000,3100,1000,1000,1000,1000}, {2000,1000,1000,3100,1000,1000,1000,1000},
+    {2000,1000,1000,3100,1000,1000,1000,1000}, {2000,1000,1000,3100,1000,1000,1000,9999}};
+
+  if ( String(matriz[7][7]).length()==4){
+    Serial.println("----No vacia------");
+    displayMatrix(matriz);                              // cambiar ejem por matriz
+
+    int xwx = process[contadorDeProcedimiento];
+    if(xwx==1 || xwx==2 || xwx==3|| xwx==4){
+      Serial.println(">>>>>"+String(contadorDeProcedimiento)+"  --- Process:"+String(process[contadorDeProcedimiento]));
+      doMove(process,contadorDeProcedimiento);
+      contadorDeProcedimiento++;
+    }
+
+    delay(3000);
+  }else{
+      Serial.println("VACIA");
+      delay(1000);
   }
 }
 
-void showUP(int coo) {
-  delay(200);
-  digitalWrite(coo + 2, LOW);
-  delay(500);
-  digitalWrite(coo + 2, HIGH);
-  delay(500);
-  digitalWrite(coo + 2, LOW);
-  delay(500);
-  digitalWrite(coo + 2, HIGH);
-  delay(200);
+
+//No hay manera de no hacerlo alambrado el tamaño de la matriz a menos de pasar la cantidad de columnas y filas por parámetros, igual no hay problema
+void displayMatrix(int matrixArray[8][8]) {
+
+String re= "";
+  for (int i = 0; i < 8; i++ ) {
+    for (int j = 0; j < 8; j++) {
+      re= re + String(matrixArray[i][j])+" | ";
+    }
+      re= re +"\n";
+  }
+  Serial.println(re);
+
+  for (int i = 0; i < 8; i++ ) {
+    for (int j = 0; j < 8; j++) {
+      String item = String(matrixArray[i][j]);//lo hice con string previendo por si hay nivel 0, lo cual no seria un int valido
+      int nivel=(item[0]-'0')-1;
+     //Si hay robot
+      if ((item[3]-'0')==1)
+        matrix.drawPixel(i, j, colores_robot[nivel]);
+
+      //Si hay luz
+      else if((item[1]-'0')==1){
+        if((item[2]-'0')==1)//si esta encendido
+          matrix.drawPixel(i, j, colores_bombillo[3]);
+        else//la prende segun el nivel que este
+            matrix.drawPixel(i, j, colores_bombillo[nivel]);
+      }
+      else//es piso comun y corriente
+        matrix.drawPixel(i, j, colores_piso[nivel]);
+    }
+  }
+  matrix.show();
 }
 
 /*
-   Metodo para crear la matriz
+   Metodo para crear/cargar la matriz
 */
 void addElement(JsonArray& jsonArray) {                                                                                                   // revisar el &
-
+Serial.println("A-a-a-a-a-a-a-a-a-a-a-a-a-a");
   for (int i = 0; i < 8; i++) {
     for (int e = 0; e < 8; e++) {
-      matriz[i][e] = jsonArray[i][e];                                                                                             // VERIFICAR QUE ESTO SE PUEDE HACER
+      matriz[i][e] = jsonArray[i][e];
+      if(matriz[i][e]%10 == 1){
+        f_now = i;
+        c_now = e;
+      }                                                                                          // VERIFICAR QUE ESTO SE PUEDE HACER
     }
   }
-  copiarMatriz();
-//  Serial.println(matriz[0][0]);
-//  jsonArray.prettyPrintTo(Serial);
+ Serial.println(matriz[5][5]);
 }
 
-void doMove(JsonArray& jsonArray) {
-  for (int r = 0; r < jsonArray.size(); r++) {
-    Serial.println("Contador: "+String(r));
-    if (jsonArray[r] == 1) {
+void loadProce(JsonArray& jsonArrayP){
+    for (int ix = 0; ix < jsonArrayP.size(); ix++) {
+      process[ix]=jsonArrayP[ix];
+      Serial.print(String(process[ix])+" ");
+  }
+}
+
+void doMove(int jsonArray[],int p) {       //Este metodo solo debe hacer solo un paso
+  //for (int r = 0; r < jsonArray.size(); r++) {
+    Serial.println("Contador: "+String(p));
+    if (jsonArray[p] == 1) {
       up();
-    } else if (jsonArray[r] == 2) {
-      //T_Left();
-    } else if (jsonArray[r] == 3) {
-      //T_Right();
-    } else if (jsonArray[r] == 4) {
+    } else if (jsonArray[p] == 2) {
+      T_Left();
+    } else if (jsonArray[p] == 3) {
+      T_Right();
+    } else if (jsonArray[p] == 4) {
       on_offLight();
-    } else if (jsonArray[r] == 5) {
+    } else if (jsonArray[p] == 5) {
       jump_UP();
     } else {
-      Serial.println("Error de codigo de lectura 132131232121");
-    }
-
+      Serial.println("Error de codigo de lectura 13213-ERROR-1232121");
+  //  }
   }
 }
 
 
-void copiarMatriz() {
-  //matrizRespaldo = matriz;
-}
 
 /*
    Metodo para imprimir la matriz en el Monitor Serial
@@ -307,21 +305,25 @@ void start(int fila, int columna) {
 */
 void up() {
   Serial.print("Move to ");
-  prev_now();
-  if (coordenada == 2) { //Norte
+
+  if (coordenada == 0) { //Norte
     Serial.println("Nort");
     f_now = f_now - 1;    //AQUI VERIFICACION DE QUE NO SE SALGA DE LA MATRIZ
-    if (checkL() && checkH() ) {
+    if (checkL() && checkH() ) {  //Limite y altura
+      prev_now();
       move();
       showUP(coordenada);
+
     } else {
       f_now = f_now + 1;
     }
+
   }
   else if (coordenada == 1) { //Este
     Serial.println("East");
     c_now = c_now + 1;   //AQUI VERIFICACION DE QUE NO SE SALGA DE LA MATRIZ
     if (checkL() && checkH() ) {
+      prev_now();
       move();
       showUP(coordenada);
     } else {
@@ -329,10 +331,11 @@ void up() {
     }
 
   }
-  else if (coordenada == 0) { //Sur
+  else if (coordenada == 2) { //Sur
     f_now = f_now + 1;   //AQUI VERIFICACION DE QUE NO SE SALGA DE LA MATRIZ
     Serial.println("South");
     if (checkL() && checkH() ) {
+      prev_now();
       move();
       showUP(coordenada);
     } else {
@@ -344,6 +347,7 @@ void up() {
     c_now = c_now - 1;   //AQUI VERIFICACION DE QUE NO SE SALGA DE LA MATRIZ
     Serial.println("West");
     if (checkL() && checkH() ) {
+      prev_now();
       move();
       showUP(coordenada);
     } else {
@@ -357,8 +361,15 @@ void up() {
 */
 void move() { //Hacer verificaciones del altura........
   Serial.println("Ready move..");
-  matriz[f_prev][c_prev] = (matriz[f_prev][c_prev] / 10) * 10;  // colocamos un 0 al final ###0 ->El Robot ya no esta hay...
-  matriz[f_now][c_now] = (matriz[f_now][c_now] / 10) * 10 + 1;  // colocamos un 1 al final ###1 ->El Robot esta en esta celda dentro de la matriz...
+
+  int n1 = (matriz[f_prev][c_prev] / 10) * 10;
+  int n2 = (matriz[f_now][c_now] / 10) * 10 + 1;
+
+  Serial.println("ANTES-> "+String(n1)+"  DESPUES->"+String(n2));
+
+  matriz[f_prev][c_prev] = n1;  // colocamos un 0 al final ###0 ->El Robot ya no esta hay...
+  matriz[f_now][c_now] = n2;  // colocamos un 1 al final ###1 ->El Robot esta en esta celda dentro de la matriz...
+
 }
 
 /*
@@ -470,6 +481,56 @@ void T_Left() {
     //digitalWrite(coordenada + 2, HIGH);
     //delay(500);
   }
+}
+
+
+
+
+//Metdos graficos para la placa JK
+
+
+void espiral(int vueltas) { //Como posible representacion del que el jugador gano
+  int c = 0;
+  while (c < vueltas) {
+    delay(100);
+    T_Left();
+    up();
+    delay(100);
+    T_Left();
+    delay(100);
+    up();
+    T_Left();
+    delay(100);
+    up();
+    T_Left();
+    delay(100);
+    c++;
+  }
+}
+
+void showUP(int coo) {
+  delay(200);
+  if(coo==0){
+    digitalWrite(D2, LOW);
+    delay(500);
+    digitalWrite(D2, HIGH);
+  }
+  if(coo==1){
+    digitalWrite(D3, LOW);
+    delay(500);
+    digitalWrite(D3, HIGH);
+  }
+  if(coo==2){
+    digitalWrite(D4, LOW);
+    delay(500);
+    digitalWrite(D4, HIGH);
+  }
+  if(coo==3){
+    digitalWrite(D5, LOW);
+    delay(500);
+    digitalWrite(D5, HIGH);
+  }
+
 }
 
 /**

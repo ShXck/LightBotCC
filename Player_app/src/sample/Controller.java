@@ -94,7 +94,7 @@ public class Controller {
 
     static {
         try {
-            s = new Subscriber("m12.cloudmqtt.com:16115","nnsmxwti","37KKt6sf8N6L","java_app","esp/test");
+            s = new Subscriber("m20.cloudmqtt.com:12525","fckzxtel","R3Rs1bph3H4R","java_app","esp/test");
         } catch (MqttException e) {
             e.printStackTrace();
         }
