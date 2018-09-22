@@ -15,8 +15,8 @@
 #define PIN4 D4
 #define PIN5 D5
 
-const char* ssid = "jk";
-const char* password =  "abcdefgh";
+const char* ssid = "LANPrivate";
+const char* password =  "Zh95fp48";
 const char* mqttServer = "m20.cloudmqtt.com";
 const int mqttPort = 12525;
 const char* mqttUser = "fckzxtel";
@@ -64,6 +64,7 @@ int f_prev = 0;
 int c_prev = 0;
 int coordenada = 0; //Inicio hacia el Norte:0   Este:1   Sur:2   Oeste:3
 int contadorDeProcedimiento = 0;
+int cANTIDAD_DE_PASOS=0;
 
 void setup() {
   //start(3,3);
@@ -164,20 +165,25 @@ void reconnect() {
   }
 }
 
+bool WinLost(){
+int numWL1=0;
+int numWL2=0;
+  for (int wL=0; wL<8 ;wL++){ //Fila
+    for (int lW=0; lW<8 ;lW++){ //Columna
+      numWL1 = (matriz[f_now][c_now]  / 100) % 10; //_#__
+      numWL2 = (matriz[f_now][c_now] / 10) % 10; //__#_
 
-
+      if(numWL1==1 && numWL2==0){
+        return false;
+      }
+    }
+  }
+  return true;
+}
 
 //No hay manera de no hacerlo alambrado el tamaño de la matriz a menos de pasar la cantidad de columnas y filas por parámetros, igual no hay problema
 void displayMatrix(int matrixArray[8][8]) {
-String re= "";
-  for (int i = 0; i < 8; i++ ) {
-    for (int j = 0; j < 8; j++) {
-      re= re + String(matrixArray[i][j])+" | ";
-    }
-      re= re +"\n";
-  }
-  Serial.println(re);
-
+  //showMatriz();
   for (int i = 0; i < 8; i++ ) {
     for (int j = 0; j < 8; j++) {
       String item = String(matrixArray[i][j]);//lo hice con string previendo por si hay nivel 0, lo cual no seria un int valido
@@ -207,6 +213,8 @@ void addElement(JsonArray& jsonArray) {
   for (int i = 0; i < 8; i++) {
     for (int e = 0; e < 8; e++) {
       matriz[i][e] = jsonArray[i][e];
+      matrizRespaldo[i][e] = jsonArray[i][e];
+
       if(matriz[i][e]%10 == 1){
         f_now = i;
         c_now = e;
@@ -223,13 +231,14 @@ void loadProce(JsonArray& jsonArrayP){
       process[ix]=jsonArrayP[ix];
       Serial.print(String(process[ix])+" ");
   }
+  cANTIDAD_DE_PASOS=jsonArrayP.size(); //asigno valor limite
 }
 
 /*
 Metodo para hacer un movimiento
 */
 void doMove(int jsonArray[],int p) {       //Este metodo solo debe hacer solo un paso
-    Serial.println("Contador: "+String(p));
+
     if (jsonArray[p] == 1) {
       up();
     } else if (jsonArray[p] == 2) {
@@ -332,14 +341,8 @@ void up() {
    Metodo para realizar un movimiento en la matriz
 */
 void move() { //Hacer verificaciones del altura........
-  Serial.println("Ready move..");
   int n1 = (matriz[f_prev][c_prev] / 10) * 10;
   int n2 = (matriz[f_now][c_now] / 10) * 10 + 1;
-
-  Serial.println("f_prev-> "+String(f_prev)+"  c_prev->"+String(c_prev));
-  Serial.println("f_now-> "+String(f_now)+"  c_now->"+String(c_now));
-
-  Serial.println("ANTES-> "+String(n1)+"  DESPUES->"+String(n2));
 
   matriz[f_prev][c_prev] = n1;  // colocamos un 0 al final ###0 ->El Robot ya no esta hay...
   matriz[f_now][c_now] = n2;  // colocamos un 1 al final ###1 ->El Robot esta en esta celda dentro de la matriz...
@@ -534,14 +537,53 @@ void loop() {
 
 
   if ( String(matriz[7][7]).length()==4){
-    Serial.println("----No vacia------");
+    //Serial.println("----No vacia------");
     int xwx = process[contadorDeProcedimiento];
     if(xwx==1 || xwx==2 || xwx==3|| xwx==4 || xwx==5){
       Serial.println(">>>>>"+String(contadorDeProcedimiento)+"  --- Process:"+String(process[contadorDeProcedimiento]));
       doMove(process,contadorDeProcedimiento);
       contadorDeProcedimiento++;
 
-      //Hacer que no deje el rastro
+      Serial.println("~~~~> "+String(contadorDeProcedimiento)+" : "+String(cANTIDAD_DE_PASOS));
+
+      if(contadorDeProcedimiento==cANTIDAD_DE_PASOS){
+        if(WinLost()){
+          Serial.println("GANOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+
+          int qM[8][8]={
+            {1001,1001,1001,1001,1001,1001,1001,1001},{1001,1000,1000,1001,1001,1000,1000,1001},
+            {1001,1000,1000,1001,1001,1000,1000,1001},{1001,1001,1001,1001,1001,1001,1001,1001},
+            {1001,1000,1001,1001,1001,1001,1000,1001},{1001,1000,1001,1001,1001,1001,1000,1001},
+            {1001,1001,1000,1000,1000,1000,1001,1001},{1001,1001,1001,1001,1001,1001,1001,1001}};
+
+          displayMatrix(qM);
+          delay(5000);
+
+          for(int aa = 0;aa<8;aa++){
+            for(int aaa = 0;aaa<8;aaa++){
+              matriz[aa][aaa]=matrizRespaldo[aa][aaa];
+            }
+          }
+
+        }else{
+        Serial.println("PERDIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        int qM[8][8]={
+          {3000,3000,3000,3000,3000,3000,3000,3000},{3000,1000,1000,3000,3000,1000,1000,3000},
+          {3000,1000,1000,3000,3000,1000,1000,3000},{3000,3000,3000,3000,3000,3000,3000,3000},
+          {3000,3000,1000,1000,1000,1000,3000,3000},{3000,1000,3000,3000,3000,3000,1000,3000},
+          {3000,1000,3000,3000,3000,3000,1000,3000},{3000,3000,3000,3000,3000,3000,3000,3000}};
+
+
+        displayMatrix(qM);
+        delay(5000);
+
+        for(int aa = 0;aa<8;aa++){
+          for(int aaa = 0;aaa<8;aaa++){
+            matriz[aa][aaa]=matrizRespaldo[aa][aaa];
+          }
+        }
+            }
+      }
     }
 
     displayMatrix(matriz);
