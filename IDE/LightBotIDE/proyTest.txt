@@ -1,0 +1,98 @@
+// Variables
+Var iD1;
+Var iD2 = 1;
+Var iD3;
+
+//Programa Principal
+Begin 
+
+//Coloca bloques en todo el tablero
+Set iD2 = 1;
+ChangeDir(RIGHT);
+Set iD1 = 1;
+Call iPut7;
+Set iD1 = 2;
+Call iPut7;
+Set iD1 = 3;
+Call iPut7;
+Set iD1 = 4;
+Call iPut7;
+Set iD1 = 5;
+Call iPut7;
+Set iD1 = 6;
+Call iPut7;
+Set iD1 = 7;
+Pos(iD1, iD2);
+place block 7;
+
+//Coloca bloque nivel 2 en la Fila 1 y Fila 7
+Call iMuralla;
+
+//Coloca par de niveles 3 y luces
+Set iD1=2;
+Set iD2=2;
+Pos(iD1, iD2);
+High Block 3;
+Put Light;
+
+Set iD1=6;
+Set iD2=6;
+Pos(iD1, iD2);
+High Block 3;
+Put Light;
+
+Less+iD2;
+Pos(iD1, iD2);
+High Block 3;
+Put Light;
+
+//Coloca Posición Inicial
+Set iD1=4;
+Set iD2=4;
+Pos(iD1,iD2);
+ChangeDir(LEFT);
+High Block 2;
+Put Light;
+PosStart(iD1, iD2);
+
+//Finaliza programa 
+
+End; 
+
+
+//Procedimientos
+Proc iMuralla
+   Set iD1=1;
+   Set iD2=1;
+
+   Keep
+     Pos(iD1, iD2);
+      High Block;
+      Add+iD1;
+
+       When iD1 = 7 Then
+             When iD2 = 7 Then
+                 Skip;
+             Whend;
+     
+        Set iD2 = 7;
+        Set iD1 = 1;
+
+        Whend;   
+
+   Kend;
+
+End-Proc;
+
+
+Proc iPutBlk     
+      place block;
+End-Proc;
+
+Proc iPut7
+For Id=7 Times
+  Pos(iD1, Id);
+   Call iPutBlk;
+   Add+Id;   // Si el For lo incrementa no colocarlo
+FEnd;
+End-Proc;

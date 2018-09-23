@@ -1,58 +1,89 @@
+//variables
 Var ver= 0;
 Var hor= 0;
 
 Begin
 	Pos(ver,hor);
-	Place Block 5;
-	High Block;
-	Set hor = 4;
-	Pos(ver,hor);
+
 	ChangeDir([DOWN]);
-	For i = 5 Times
-	    High Block 3;
-	FEnd;
-	Put Light;
 
-	// comment
-
-	Var r = 3;
-	Var s = 0;
-	Pos(r,s);
-	ChangeDir([RIGHT]);
-	For j = 3 Times
-        High Block;
+	For g = 2 Times
+	    High Block;
 	FEnd;
 
-    Set r = 6;
-    Set s = 4;
-    Pos(r,s);
-	For k = 2 Times
-	    Call proc2;
-	FEnd;
+	Add+ver;
+	Add+hor;
 
-	Set ver = 7;
-	Set hor = 1;
-	Pos(ver, hor);
+    // some comment
 
-    Call myProc;
+    Var abc*_@ = 1;
+    Pos(abc*_@, hor);
 
-	Var hor_robot = 1;
-	Var ver_robot = 1;
-	Set hor = 22;
-	PosStart(ver_robot, hor_robot);
+    ChangeDir([RIGHT]);
+    For i = 4 Times
+        High Block 3;
+        Put Light;
+    FEnd;
 
-	Set hor = 0;
-	Set ver = 0;
-	Pos(ver,hor);
+    High Block;
+
+    Var svar = 3;
+    Pos(svar, hor);
+
+    Place Block 5;
+
+    Put Light;
+
+    Var k = 4;
+    Pos(k,hor);
+
+    ChangeDir([LEFT]);
+    Place Block 2;
+    Put Light;
+
+    Var new_hor = 5;
+    Pos(k,new_hor);
+
+    ChangeDir([DOWN]);
+
+    For t = 4 Times
+        High Block 3;
+    FEnd;
+
+    Var f = 2;
+    Less-k;
+
+    Pos(k,f);
+
+    ChangeDir([RIGHT]);
+    Call proc2;
+
+    Set ver = 4;
+    Set hor = 4;
+
+    Pos(ver,hor);
+
+    Set ver = 0;
+    Set hor = 7;
+
+    PosStart(ver,hor);
+
 End
 
+//Procedures
 Proc myProc
     For t = 2 Times
         High Block;
-        Call proc2;
     FEnd;
 End-Proc
 
 Proc proc2
-	Put Light;
+	For i = 5 Times
+	    Call high3;
+	FEnd;
 End-Proc
+
+Proc high3
+    High Block 3;
+End-Proc
+
