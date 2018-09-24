@@ -1,0 +1,50 @@
+
+Var ver= 0;
+Var hor= 0;
+
+Begin
+	Pos(ver,hor);
+	Place Block 5;
+	Call proc2;
+	High Block;
+	Set hor = 4;
+	Pos(ver,hor);
+	ChangeDir([DOWN]);
+	For i = 5 Times
+	    High Block 3;
+	FEnd;
+	Put Light;
+
+	// comment
+
+	Var r = 3;
+	Var s = 0;
+	Pos(r,s);
+	ChangeDir([RIGHT]);
+	For j = 3 Times
+        High Block;
+	FEnd;
+
+	Set ver = 7;
+	Set hor = 1;
+	Pos(ver, hor);
+
+	Var hor_robot = 1;
+	Var ver_robot = 1;
+	Set hor = 22;
+	PosStart(ver_robot, hor_robot);
+
+	Set hor = 0;
+	Set ver = 0;
+End
+
+Proc myProc
+    For t = 2 Times
+        High Block;
+
+    FEnd;
+End-Proc
+
+Proc proc2
+	Put Light;
+End-Proc

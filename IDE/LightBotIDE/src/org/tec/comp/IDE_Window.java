@@ -121,7 +121,7 @@ public class IDE_Window implements Runnable, ActionListener {
 					set_console_msg(Message_Handler.build_no_code_err(), Color.RED);
 				} else {
 					save_file();
-					//if(game_board.is_built()) game_board.clean_board(); // TODO: CHECK.
+					game_board.clean_board();
                     LangParser.parse("mycode.txt");
                     if(!LangParser.msg_list.isEmpty() && game_board.get_msg_list().isEmpty()) {
                         set_console_msg(build_console_msg(LangParser.msg_list), Color.RED);
@@ -132,6 +132,7 @@ public class IDE_Window implements Runnable, ActionListener {
                             set_console_msg(Message_Handler.success_build_code(), Color.BLUE);
                             game_board.print_board();
                             game_board.set_built_state(true);
+                            //game_board.check_solution();
                         }
                         else set_console_msg(build_console_msg(game_board.get_msg_list()), Color.RED);
                     }

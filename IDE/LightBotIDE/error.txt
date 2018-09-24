@@ -1,0 +1,19 @@
+Var variable;
+Var Id_@* = 5; Var Id_@*# = 5; Var Identificador; 
+Begin 
+
+Place Bloques;
+Place Block Place Block; 
+Place Block; Place Block; 
+
+Keep
+ ChangeDir(RIGHT);
+Kend; 
+
+
+End 
+Proc identificador 
+Begin 
+Place Block; Place Block; 
+End 
+End-Proc 

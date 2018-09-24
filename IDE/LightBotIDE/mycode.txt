@@ -1,0 +1,56 @@
+Var xpos = 0;
+Var ypos = 0;
+
+Begin
+	Pos(xpos,ypos);
+
+	Call high;
+	
+	Set ypos = 1;
+	Set xpos = 1;
+	
+	Pos(ypos,xpos);
+
+	Put Light;
+
+	Set ypos = 7;
+	Set xpos = 0;
+
+	Pos(ypos,xpos);
+	
+	Call high;
+
+	Var aa = 3;
+	Var bb = 3;
+	
+	Pos(aa,bb);
+	
+	High Block;
+	Put Light;
+
+	Set ypos = 6;
+	Set xpos = 4;
+	
+	Pos(ypos,xpos);
+
+	For i = 2 Times
+		High Block 3;
+		Put Light;
+	FEnd;
+
+	Set ypos = 3;
+	Set xpos = 4;
+
+	PosStart(ypos,xpos);
+	
+End
+
+Proc high
+	For t  = 7 Times
+		High Block;
+	FEnd;
+End-Proc
+
+Proc light
+	Put Light;
+End-Proc

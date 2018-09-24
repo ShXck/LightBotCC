@@ -1,0 +1,21 @@
+Var abcdefghisjdkja = 10;
+Var ab*@_ = 20;
+
+Var a = 0;
+Var b = 0;
+
+Begin
+	Pos(a,b); 
+	PosStart(a,b);
+
+	Add+x;
+
+	Var d;
+	Less-d;
+
+	Put Light;
+End
+
+Proc someProc
+	Put Light;
+End-Proc

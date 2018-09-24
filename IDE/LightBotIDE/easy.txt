@@ -1,0 +1,41 @@
+Var myVar1 = 1;
+Var myVar2 = 1;
+
+Begin
+	Pos(myVar1,myVar2);
+
+	ChangeDir([LEFT]);
+
+
+	
+	For t = 10 Times
+		High Block;
+		Put Light;
+	FEnd;
+
+	Set myVar1 = 3;
+
+	Pos(myVar1,myVar1);
+
+	Put Light;
+
+	// comment
+	
+	Add+myVar1;
+	Add+myVar2;
+
+	Pos(myVar1,myVar2);
+	
+	High Block;
+	Put Light;
+
+	Set myVar1 = 0;
+	Set myVar2 = 5;
+
+	PosStart(myVar1,myVar2);
+
+End
+
+
+	
+	

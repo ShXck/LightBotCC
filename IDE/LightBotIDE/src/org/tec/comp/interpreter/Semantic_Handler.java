@@ -12,7 +12,7 @@ public class Semantic_Handler {
         check_vars();
         check_instruction(Action_Type.POS_START);
         check_instruction(Action_Type.PUT_LIGHT);
-        check_instruction(Action_Type.COMMENT);
+        //check_instruction(Action_Type.COMMENT);
     }
 
     /**

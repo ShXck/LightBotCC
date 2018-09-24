@@ -107,10 +107,51 @@ public class LangParser implements TestConstants {
    * @throws ParseException si no se cumple la sintaxis.
    */
   static final public void Program() throws ParseException {
+    label_1:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case CSLASH:{
+          ;
+          break;
+        }
+        default:
+          jj_la1[0] = jj_gen;
+          break label_1;
+      }
+      Comment();
+    }
     IdField();
+
+    label_2:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case CSLASH:{
+          ;
+          break;
+        }
+        default:
+          jj_la1[1] = jj_gen;
+          break label_2;
+      }
+      Comment();
+    }
     Main();
+    label_3:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case CSLASH:{
+          ;
+          break;
+        }
+        default:
+          jj_la1[2] = jj_gen;
+          break label_3;
+      }
+      Comment();
+    }
     Procedures();
     jj_consume_token(0);
+    code_actions.add(current_pos_proc);
   }
 
   /**
@@ -234,13 +275,14 @@ public class LangParser implements TestConstants {
     Token token_id = jj_consume_token(IDENTIFIER);
     jj_consume_token(SEMICOLON);
 
-    Variable var = find_mod_var(token_id.image);
+    Variable mod_var = find_mod_var(token_id.image);
     Variable unmod_var = find_var(token_id.image);
 
     try {
-      if(!var.is_assigned()) {
+      if(!mod_var.is_assigned()) {
         msg_list.add(Message_Handler.var_no_assigned(token_id.image));
-        var.increment();
+      } else {
+        mod_var.increment();
         if (is_loop_active) {
           current_loop.add_action_to_container(Action_Type.INCR_VAR, unmod_var, null, -1);
         } else if(is_proc_active) {
@@ -586,26 +628,38 @@ public class LangParser implements TestConstants {
    */
   static final public void Comment() throws ParseException {
     jj_consume_token(CSLASH);
-
-    current_pos_proc.add_action(Action_Type.COMMENT, -1);
-
-    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case IDENTIFIER:{
-      jj_consume_token(IDENTIFIER);
-      break;
+    //current_pos_proc.add_action(Action_Type.COMMENT, -1);
+    label_3:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case INTEGER:
+        case PROCNAME:
+        case IDENTIFIER:{
+          ;
+          break;
+        }
+        default:
+          jj_la1[8] = jj_gen;
+          break label_3;
       }
-    case PROCNAME:{
-      jj_consume_token(PROCNAME);
-      break;
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case IDENTIFIER:{
+          jj_consume_token(IDENTIFIER);
+          break;
+        }
+        case PROCNAME:{
+          jj_consume_token(PROCNAME);
+          break;
+        }
+        case INTEGER:{
+          jj_consume_token(INTEGER);
+          break;
+        }
+        default:
+          jj_la1[9] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
       }
-    case INTEGER:{
-      jj_consume_token(INTEGER);
-      break;
-      }
-    default:
-      jj_la1[4] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
     }
   }
 

@@ -16,12 +16,15 @@ public class Game_Board {
     private Direction current_direction;
     private boolean built;
 
+    Backtracking bt;
+
     public Game_Board() {
         game_board = new Block[BOARD_SIZE][BOARD_SIZE];
         msg_list = new LinkedHashSet<>();
         current_direction = Direction.RIGHT;
         set_initial_board();
         built = false;
+        bt = new Backtracking(BOARD_SIZE);
     }
 
     /**
@@ -100,8 +103,15 @@ public class Game_Board {
                                 break;
                             }
                             case HIGH_BLOCK: {
-                                place_block(Block_Type.ROBOT, coords, robot_block.get_height(), 0);
+                                place_block(Block_Type.ROBOT, coords, robot_block.get_height(), current_block.get_height());
                                 break;
+                            }
+                            case BLUE_LIGHT: {
+                                place_block(Block_Type.ROBOT, coords, robot_block.get_height(), current_block.get_height());
+                                break;
+                            }
+                            case NORMAL_BLOCK: {
+                                place_block(Block_Type.ROBOT, coords, robot_block.get_height(), current_block.get_height());
                             }
                         }
                         break;
@@ -197,7 +207,7 @@ public class Game_Board {
         Pair<Integer, Integer> aux_pos = pos;
 
         for (int i = 0; i < data.get_ctr(); i++) {
-            build(pos, loop_actions);
+            build(aux_pos, loop_actions);
             switch (current_direction) {
                 case DOWN: {
                     aux_pos = aux_pos.update_values(aux_pos.first() + 1, aux_pos.second());
@@ -287,6 +297,16 @@ public class Game_Board {
      */
     public void clean_board() {
         game_board = new Block[BOARD_SIZE][BOARD_SIZE];
+        set_initial_board();
+        msg_list.clear();
         built = false;
+        current_direction = Direction.RIGHT;
+    }
+
+    /**
+     * Verifica que el mapa tenga solución.
+     */
+    public void check_solution() {
+        bt.solveMaze(game_board, 0,1, BOARD_SIZE, 1,1);
     }
 }
