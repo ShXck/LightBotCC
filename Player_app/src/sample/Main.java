@@ -14,6 +14,11 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class Main extends Application {
 
+    /**
+     * Metodo para abrir ventana incial (Main)
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));

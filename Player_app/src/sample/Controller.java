@@ -141,6 +141,9 @@ public class Controller {
         fondo.setImage(dark);
     }
 
+    /**
+     * Seleccion del icono
+     */
     public void addIcon(){
         ImageView openView = new ImageView(xImage);
        // openView.setFitWidth(15);
@@ -245,6 +248,7 @@ public class Controller {
     public void passInstructions() throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader();
+
         fxmlLoader.setLocation(getClass().getResource("Instructions.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         Stage stage = new Stage();
@@ -600,47 +604,53 @@ public class Controller {
      */
     public void PLAY_Send() throws MqttException {
         JSONArray array = new JSONArray();
-        for(int rF=0;rF<listMAIN.size();rF++){
-            if (listMAIN.get(rF).equals("P1")){
-                for(int p1=0;p1<listPROC1.size();p1++) {
-                    if(listPROC1.get(p1)=="P2"){
-                        for(int z=0;z<listPROC11.size();z++){
-                            array.add(convertString_int(listPROC11.get(z)));
+
+        if(listMAIN.size()!=0) {
+            for (int rF = 0; rF < listMAIN.size(); rF++) {
+                if (listMAIN.get(rF).equals("P1")) {
+                    for (int p1 = 0; p1 < listPROC1.size(); p1++) {
+                        if (listPROC1.get(p1) == "P2") {
+                            for (int z = 0; z < listPROC11.size(); z++) {
+                                array.add(convertString_int(listPROC11.get(z)));
+                            }
+                        } else {
+                            array.add(convertString_int(listPROC1.get(p1)));
                         }
-                    }else{
-                        array.add(convertString_int(listPROC1.get(p1)));
                     }
+                } else if (listMAIN.get(rF).equals("P2")) {
+                    for (String aListPROC11 : listPROC11) {
+                        array.add(convertString_int(aListPROC11));
+                    }
+                } else {
+                    array.add(convertString_int(listMAIN.get(rF)));
                 }
-            }else if (listMAIN.get(rF).equals("P2")){
-                for (String aListPROC11 : listPROC11) {
-                    array.add(convertString_int(aListPROC11));
-                }
-            }else {
-                array.add(convertString_int(listMAIN.get(rF)));
             }
+            //JACKSON
+            ObjectMapper mapper = new ObjectMapper();//Para poder hacer operaciones JSON
+            Process process = new Process();
+            process.setProcess(array);
+            process.setId("app");
+
+            String jsonInString = null;
+            try {
+                jsonInString = mapper.writeValueAsString(process);
+                System.out.println(jsonInString);//aquí se ve impreso, es lo que eventualmente se envia.
+                System.out.println(jsonInString.length());
+
+
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+
+
+            s.sendMessage(jsonInString);
+        }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText("Please, select a process");
+            alert.setContentText("You need to create a process");
+            alert.showAndWait();
         }
-        //JACKSON
-        ObjectMapper mapper = new ObjectMapper();//Para poder hacer operaciones JSON
-        Process process = new Process();
-        process.setProcess(array);
-        process.setId("app");
-
-        String jsonInString = null;
-        try {
-            jsonInString = mapper.writeValueAsString(process);
-            System.out.println(jsonInString);//aquí se ve impreso, es lo que eventualmente se envia.
-            System.out.println(jsonInString.length());
-
-
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-
-
-        s.sendMessage(jsonInString);
-
     }
 
     /**

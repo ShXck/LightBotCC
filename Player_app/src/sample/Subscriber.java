@@ -12,6 +12,15 @@ public class Subscriber implements MqttCallback {
     private String topic;
     private MqttClient client;
 
+    /**
+     * Constructor
+     * @param server
+     * @param username
+     * @param password
+     * @param clientId
+     * @param topic
+     * @throws MqttException
+     */
     public Subscriber(String server,String username,String password,String clientId,String topic) throws MqttException {
         this.topic=topic;
         server="tcp://"+server;
@@ -26,7 +35,11 @@ public class Subscriber implements MqttCallback {
         this.client.subscribe(this.topic, qos);
     }
 
-
+    /**
+     * Metodo para enviar msj
+     * @param payload
+     * @throws MqttException
+     */
     public void sendMessage(String payload) throws MqttException {
         MqttMessage message = new MqttMessage(payload.getBytes());
         message.setQos(qos);
